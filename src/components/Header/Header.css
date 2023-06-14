@@ -1,6 +1,9 @@
 .header {
-  background-color: #073042;
   width: 100%;
+}
+
+.header_theme_dark {
+  background-color: #073042;
 }
 
 .header__wrapper {
@@ -40,6 +43,7 @@
 .header__links {
   display: flex;
   gap: 30px;
+  list-style: none;
 }
 
 .header__link {
@@ -52,4 +56,56 @@
   background-color: #2be080;
   color: #000;
   border-radius: 3px;
+}
+
+.header__movies-links {
+  display: flex;
+  list-style: none;
+  gap: 16px;
+  padding-left: 44px;
+}
+
+.header__movies-link {
+  text-decoration: none;
+  color: #000;
+}
+
+.header__profile-link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #000;
+}
+
+.header__profile-icon {
+  width: 26px;
+  height: 30px;
+  margin-left: 14px;
+  background: url('../../images/profile-icon.svg') no-repeat #f9f9f9 center/14px
+    12px;
+  border-radius: 4px;
+}
+
+.header__links-container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.header__burger-btn {
+  display: none;
+  width: 44px;
+  height: 44px;
+  background: url('../../images/burger-btn-icon.svg') center;
+  border: none;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 984px) {
+  .header__burger-btn {
+    display: block;
+  }
+  .header__links-container {
+    display: none;
+  }
 }
