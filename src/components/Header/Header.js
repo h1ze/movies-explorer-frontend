@@ -1,6 +1,7 @@
 import { Link, Route, Routes } from 'react-router-dom';
 import logo from '../../images/logo.svg';
 import './Header.css';
+import Navigation from '../Navigation/Navigation';
 
 function Header() {
   return (
@@ -43,33 +44,7 @@ function Header() {
                 <Link to="/">
                   <img src={logo} className="header__logo" alt="Логотип" />
                 </Link>
-                <div className="header__links-container">
-                  <ul className="header__movies-links">
-                    <li>
-                      <Link
-                        to="movies"
-                        className="header__movies-link"
-                        target="_blank"
-                      >
-                        Фильмы
-                      </Link>
-                    </li>
-                    <li>
-                      <Link
-                        to="saved-movies"
-                        className="header__movies-link"
-                        target="_blank"
-                      >
-                        Сохраненные фильмы
-                      </Link>
-                    </li>
-                  </ul>
-                  <Link to="profile" className="header__profile-link">
-                    Аккаунт
-                    <div className="header__profile-icon"></div>
-                  </Link>
-                </div>
-                <button className="header__burger-btn"></button>
+                <Navigation />
               </nav>
             </div>
           </div>

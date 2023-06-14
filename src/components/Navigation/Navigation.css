@@ -1,0 +1,60 @@
+.main-nav {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.main-nav__links {
+  display: flex;
+  list-style: none;
+  gap: 16px;
+  padding-left: 44px;
+}
+
+.main-nav__link {
+  font-family: 'Inter';
+  font-weight: 500;
+  font-style: normal;
+  font-size: 13px;
+  line-height: 18px;
+  color: #000;
+  text-decoration: none;
+}
+
+.main-nav__link_weight_light {
+  font-weight: 400;
+}
+
+.main-nav__profile-link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #000;
+}
+
+.main-nav__profile-icon {
+  width: 26px;
+  height: 30px;
+  margin-left: 14px;
+  background: url('../../images/profile-icon.svg') no-repeat #f9f9f9 center/14px
+    12px;
+  border-radius: 4px;
+}
+
+.main-nav__burger-btn {
+  display: none;
+  width: 44px;
+  height: 44px;
+  background: url('../../images/burger-btn-icon.svg') center;
+  border: none;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 984px) {
+  .main-nav {
+    display: none;
+  }
+  .main-nav__burger-btn {
+    display: block;
+  }
+}
