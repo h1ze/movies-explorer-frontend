@@ -11,6 +11,21 @@
   margin: 0 auto;
 }
 
+@media screen and (max-width: 984px) {
+  .header__wrapper {
+    padding: 18px 30px;
+  }
+}
+
+@media screen and (max-width: 568px) {
+  .header__wrapper {
+    padding: 18px 14px;
+  }
+  .header__links {
+    gap: 14px;
+  }
+}
+
 .header__logo {
   width: 38px;
   height: 38px;
