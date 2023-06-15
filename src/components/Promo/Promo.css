@@ -1,0 +1,33 @@
+.promo {
+  display: flex;
+  width: 100%;
+  background-color: #073042;
+}
+
+.promo__wrapper {
+  box-sizing: border-box;
+  padding: 82px 0 122px;
+  min-width: 320px;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.promo__title {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 50px;
+  line-height: 58px;
+  /* or 116% */
+
+  text-align: center;
+  letter-spacing: -0.04em;
+  color: #ffffff;
+  max-width: 730px;
+  margin: 0;
+}
+
+.promo__background {
+  padding: 102px 0;
+  background: url('../../images/landing-logo.svg') center no-repeat;
+}
