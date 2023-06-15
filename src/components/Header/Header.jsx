@@ -1,9 +1,10 @@
 import { Link, Route, Routes } from 'react-router-dom';
-import logo from '../../images/logo.svg';
 import './Header.css';
+import Logo from '../Logo/Logo';
 import Navigation from '../Navigation/Navigation';
 
 function Header() {
+  const paths = ['movies', 'saved-movies', 'profile'];
   return (
     <Routes>
       <Route
@@ -12,9 +13,7 @@ function Header() {
           <div className="header header_theme_dark">
             <div className="header__wrapper">
               <nav className="header__menu">
-                <Link to="/">
-                  <img src={logo} className="header__logo" alt="Логотип" />
-                </Link>
+                <Logo />
                 <ul className="header__links">
                   <li>
                     <Link className="header__link" to="signup">
@@ -35,21 +34,24 @@ function Header() {
           </div>
         }
       />
-      <Route
-        path="movies"
-        element={
-          <div className="header">
-            <div className="header__wrapper">
-              <nav className="header__menu">
-                <Link to="/">
-                  <img src={logo} className="header__logo" alt="Логотип" />
-                </Link>
-                <Navigation />
-              </nav>
-            </div>
-          </div>
-        }
-      />
+      {paths.map((path, index) => {
+        return (
+          <Route
+            key={index}
+            path={path}
+            element={
+              <div className="header">
+                <div className="header__wrapper">
+                  <nav className="header__menu">
+                    <Logo />
+                    <Navigation />
+                  </nav>
+                </div>
+              </div>
+            }
+          />
+        );
+      })}
     </Routes>
   );
 }
