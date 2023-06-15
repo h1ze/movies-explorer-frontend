@@ -1,10 +1,11 @@
 import React from 'react';
+import SectionHeading from '../SectionHeading/SectionHeading';
 import('./AboutProject.css');
 
 const AboutProject = () => {
   return (
     <section className="about-project">
-      <h2 className="about-project__title">О проекте</h2>
+      <SectionHeading>О проекте</SectionHeading>
       <div className="about-project__content">
         <div className="about-project__chapter">
           <h3 className="about-project__chapter-title">

@@ -1,11 +1,12 @@
 import React from 'react';
+import SectionHeading from '../SectionHeading/SectionHeading';
 import('./Techs.css');
 
 const Techs = () => {
   const techs = ['HTML', 'CSS', 'JS', 'React', 'Git', 'Express.js', 'mongoDB'];
   return (
     <section className="techs">
-      <h2 className="techs__title">Технологии</h2>
+      <SectionHeading>Технологии</SectionHeading>
       <div className="techs__content">
         <h3 className="techs__content-title">7 технологий</h3>
         <p className="techs__content-subtitle">
