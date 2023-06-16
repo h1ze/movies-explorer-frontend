@@ -21,6 +21,8 @@
 }
 
 .header__links {
+  margin: 0;
+  padding: 0;
   display: flex;
   gap: 30px;
   list-style: none;
@@ -46,12 +48,6 @@
 @media screen and (max-width: 984px) {
   .header__wrapper {
     padding: 18px 30px;
-  }
-  .header__burger-btn {
-    display: block;
-  }
-  .header__links-container {
-    display: none;
   }
 }
 
