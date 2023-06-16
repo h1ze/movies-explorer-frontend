@@ -3,7 +3,7 @@
   background-color: #000;
 }
 
-.nav-tab_wrapper {
+.nav-tab__wrapper {
   box-sizing: border-box;
   padding: 24px 0;
   min-width: 320px;
@@ -13,9 +13,10 @@
 
 .nav-tab__links {
   display: flex;
+  margin: 0;
+  padding: 0;
   gap: 40px;
   list-style: none;
-  padding: 0;
   justify-content: center;
   align-items: center;
 }
@@ -29,4 +30,13 @@
   /* or 123% */
 
   color: #fff;
+}
+
+@media screen and (max-width: 568px) {
+  .nav-tab__links {
+    gap: 24px;
+  }
+  .nav-tab__link {
+    font-size: 11px;
+  }
 }
