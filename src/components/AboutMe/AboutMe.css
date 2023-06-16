@@ -4,7 +4,7 @@
 
 .about-me__wrapper {
   box-sizing: border-box;
-  padding: 110px 70px 100px;
+  padding: 110px 70px;
   min-width: 320px;
   max-width: 1280px;
   margin: 0 auto;
@@ -13,6 +13,7 @@
 .about-me__columns {
   display: flex;
   padding-top: 66px;
+  padding-bottom: 101px;
 }
 
 .about-me__text-column {

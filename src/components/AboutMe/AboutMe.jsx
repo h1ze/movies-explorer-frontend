@@ -2,6 +2,7 @@ import React from 'react';
 import SectionHeading from '../SectionHeading/SectionHeading';
 import { Link } from 'react-router-dom';
 import student from '../../images/student.png';
+import Portfolio from '../Portfolio/Portfolio';
 import('./AboutMe.css');
 
 const AboutMe = () => {
@@ -37,6 +38,7 @@ const AboutMe = () => {
             />
           </div>
         </div>
+        <Portfolio />
       </div>
     </section>
   );
