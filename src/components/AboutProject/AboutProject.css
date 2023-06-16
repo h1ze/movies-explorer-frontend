@@ -1,9 +1,13 @@
 .about-project {
+  width: 100%;
+}
+
+.about-project__wrapper {
   box-sizing: border-box;
   padding: 110px 70px;
   min-width: 320px;
   max-width: 1280px;
-  /* margin: 0 auto; */
+  margin: 0 auto;
 }
 
 .about-project__content {
