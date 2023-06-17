@@ -14,15 +14,15 @@ const Techs = () => {
             На курсе веб-разработки мы освоили технологии, которые применили в
             дипломном проекте.
           </p>
-          <div className="techs__blocks">
+          <ul className="techs__blocks">
             {techs.map((tech, index) => {
               return (
-                <div className="techs__block" key={index}>
+                <li className="techs__block" key={index}>
                   {tech}
-                </div>
+                </li>
               );
             })}
-          </div>
+          </ul>
         </div>
       </div>
     </section>
