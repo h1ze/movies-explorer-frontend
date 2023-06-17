@@ -4,7 +4,7 @@
 
 .about-me__wrapper {
   box-sizing: border-box;
-  padding: 110px 70px;
+  padding: 110px 70px 115px;
   min-width: 320px;
   max-width: 1280px;
   margin: 0 auto;
@@ -78,7 +78,7 @@
 
 @media screen and (max-width: 984px) {
   .about-me__wrapper {
-    padding: 90px 50px;
+    padding: 90px 50px 80px;
   }
 
   .about-me__columns {
