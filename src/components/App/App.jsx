@@ -1,22 +1,17 @@
+import { Routes, Route } from 'react-router-dom';
 import './App.css';
+import Main from '../Main/Main';
+import Movies from '../Movies/Movies';
 import Header from '../Header/Header';
-import Promo from '../Promo/Promo';
-import NavTab from '../NavTab/NavTab';
-import AboutProject from '../AboutProject/AboutProject';
-import Techs from '../Techs/Techs';
-import AboutMe from '../AboutMe/AboutMe';
-import Footer from '../Footer/Footer';
 
 function App() {
   return (
     <div className="page">
       <Header />
-      <Promo />
-      <NavTab />
-      <AboutProject />
-      <Techs />
-      <AboutMe />
-      <Footer />
+      <Routes>
+        <Route path="/" element={<Main />} />
+        <Route path="movies" element={<Movies />} />
+      </Routes>
     </div>
   );
 }
