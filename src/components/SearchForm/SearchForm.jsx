@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './SearchForm.css';
+import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 
 const SearchForm = () => {
   const [text, setText] = useState('');
@@ -26,6 +27,7 @@ const SearchForm = () => {
         <button className="form__button" type="submit"></button>
       </form>
       <span className="search-form__stroke"></span>
+      <FilterCheckbox />
     </section>
   );
 };
