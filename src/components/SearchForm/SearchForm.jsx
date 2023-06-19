@@ -12,6 +12,7 @@ const SearchForm = () => {
   return (
     <section className="search-form">
       <form className="form" name="search-form">
+        <div className="form__icon"></div>
         <input
           id="search-input"
           className="form__input"
@@ -25,9 +26,9 @@ const SearchForm = () => {
         />
         <span className="form__error"></span>
         <button className="form__button" type="submit"></button>
+        <div className="form__stroke"></div>
+        <FilterCheckbox />
       </form>
-      <span className="search-form__stroke"></span>
-      <FilterCheckbox />
     </section>
   );
 };

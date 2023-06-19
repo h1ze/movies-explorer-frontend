@@ -36,7 +36,7 @@
   border: 1px solid #fff;
   background-repeat: no-repeat;
   border-radius: 50%;
-  background-color: red;
+  background-color: #f50e0e;
 }
 
 .filter-checkbox__input:checked + .filter-checkbox__tumbler {
