@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
+import './MoviesCard.css';
 
 const MoviesCard = ({ card }) => {
   const [isLiked, setIsLiked] = useState(false);
   const likeClickHandler = () => {
     setIsLiked(!isLiked);
   };
-  const cardLikeButtonClassName = `element__button-like ${
-    isLiked && 'element__button-like_active'
+  const cardLikeButtonClassName = `item__button-like ${
+    isLiked && 'item__button-like_active'
   }`;
 
   return (

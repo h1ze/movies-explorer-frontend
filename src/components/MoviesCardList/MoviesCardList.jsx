@@ -1,11 +1,15 @@
 import React from 'react';
+import movies from '../../utils/movies';
+import MoviesCard from '../MoviesCard/MoviesCard';
 import('./MoviesCardList.css');
 
 const MoviesCardList = () => {
   return (
     <section className="movies-cards">
       <ul className="movies-cards__list">
-        <li className="movies-cards__item"></li>
+        {movies.map((card) => {
+          return <MoviesCard card={card} />;
+        })}
       </ul>
     </section>
   );

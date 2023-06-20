@@ -8,6 +8,7 @@
   list-style: none;
   display: grid;
   grid-template-columns: repeat(auto-fit, 270px);
+  grid-template-rows: repeat(auto-fit, 230px);
   column-gap: 20px;
   row-gap: 38px;
 }
