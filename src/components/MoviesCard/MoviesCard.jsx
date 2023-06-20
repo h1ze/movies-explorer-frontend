@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 const MoviesCard = ({ card }) => {
   const [isLiked, setIsLiked] = useState(false);
   const likeClickHandler = () => {
-    setIsLiked(isLiked);
+    setIsLiked(!isLiked);
   };
   const cardLikeButtonClassName = `element__button-like ${
     isLiked && 'element__button-like_active'
