@@ -24,7 +24,6 @@ const SearchForm = () => {
           required
           onChange={inputHandler}
         />
-        <span className="form__error"></span>
         <button className="form__button" type="submit"></button>
         <div className="form__stroke"></div>
         <FilterCheckbox />

@@ -1,0 +1,16 @@
+.movies__btn-container {
+  padding: 50px 70px 80px;
+}
+
+.movies__btn {
+  padding: 11px 0 9px;
+  width: 100%;
+  background: #f9f9f9;
+  border: none;
+  border-radius: 6px;
+  font-family: 'Inter', 'Arial', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 15px;
+}

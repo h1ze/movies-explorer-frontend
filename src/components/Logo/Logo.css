@@ -3,6 +3,7 @@
 }
 
 .logo-link__img {
+  display: block;
   width: 38px;
   height: 38px;
 }
