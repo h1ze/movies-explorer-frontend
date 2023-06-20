@@ -29,6 +29,7 @@ const SearchForm = () => {
         <div className="form__stroke"></div>
         <FilterCheckbox />
       </form>
+      <div className='search-form__underline'></div>
     </section>
   );
 };

@@ -1,8 +1,9 @@
 .search-form {
-  padding: 70px 70px 80px;
+  padding: 70px 70px 10px;
 }
 
 .form {
+  margin-bottom: 69px;
   padding: 19px 30px 19px 19px;
   display: flex;
   align-items: center;
@@ -48,4 +49,9 @@
   height: 1px;
   background: #cbcbcb;
   transform: rotate(90deg);
+}
+
+.search-form__underline {
+  height: 1px;
+  background-color: #e8e8e8;
 }
