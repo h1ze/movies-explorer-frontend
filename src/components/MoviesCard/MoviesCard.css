@@ -50,3 +50,14 @@
 
   color: #a0a0a0;
 }
+
+@media screen and (max-width: 984px) {
+  .item {
+    grid-template-rows: 190px 59px 19px;
+  }
+
+  .item__panel {
+    margin-bottom: 29px;
+    padding-top: 14px;
+  }
+}

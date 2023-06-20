@@ -57,3 +57,14 @@
   height: 1px;
   background-color: #e8e8e8;
 }
+
+@media screen and (max-width: 984px) {
+  .form {
+    padding-right: 20px;
+    margin-bottom: 109px;
+  }
+
+  .search-form {
+    padding: 80px 30px 10px;
+  }
+}
