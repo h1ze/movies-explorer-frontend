@@ -8,7 +8,7 @@ const MoviesCardList = () => {
     <section className="movies-cards">
       <ul className="movies-cards__list">
         {movies.map((card) => {
-          return <MoviesCard card={card} />;
+          return <MoviesCard card={card} key={card.id} />;
         })}
       </ul>
     </section>

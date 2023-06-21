@@ -46,3 +46,10 @@
 .filter-checkbox__input:checked + .filter-checkbox__tumbler::before {
   background-color: #2be080;
 }
+
+@media screen and (max-width: 568px) {
+  .filter-checkbox {
+    font-size: 11px;
+    gap: 13px;
+  }
+}
