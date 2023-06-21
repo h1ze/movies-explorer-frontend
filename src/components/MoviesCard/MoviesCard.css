@@ -61,3 +61,14 @@
     padding-top: 14px;
   }
 }
+
+@media screen and (max-width: 568px) {
+  .item {
+    grid-template-rows: 168px 59px 19px;
+  }
+
+  .item__panel {
+    margin-bottom: 29px;
+    padding-top: 14px;
+  }
+}

@@ -25,3 +25,16 @@
     row-gap: 30px;
   }
 }
+
+@media screen and (max-width: 568px) {
+  .movies-cards {
+    padding: 40px 10px 10px;
+  }
+
+  .movies-cards__list {
+    grid-template-columns: repeat(auto-fit, 300px);
+    grid-template-rows: repeat(auto-fit, 246px);
+    column-gap: 10px;
+    row-gap: 34px;
+  }
+}
