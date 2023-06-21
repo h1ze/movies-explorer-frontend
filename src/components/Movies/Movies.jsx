@@ -7,7 +7,9 @@ const Movies = () => {
   return (
     <main className="movies">
       <SearchForm />
-      <MoviesCardList />
+      <section className="movies__cards">
+        <MoviesCardList />
+      </section>
       <div className="movies__btn-container">
         <button className="movies__btn" type="button">
           Ещё

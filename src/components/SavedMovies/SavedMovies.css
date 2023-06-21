@@ -1,0 +1,20 @@
+.saved__movies {
+  display: flex;
+  padding: 70px 70px 100px;
+}
+
+.saved__placeholder {
+  height: 100px;
+}
+
+@media screen and (max-width: 984px) {
+  .saved__movies {
+    padding: 70px 30px 10px;
+  }
+}
+
+@media screen and (max-width: 568px) {
+  .saved__movies {
+    padding: 40px 10px 10px;
+  }
+}

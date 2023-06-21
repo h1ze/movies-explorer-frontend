@@ -5,13 +5,11 @@ import('./MoviesCardList.css');
 
 const MoviesCardList = () => {
   return (
-    <section className="movies-cards">
-      <ul className="movies-cards__list">
-        {movies.map((card) => {
-          return <MoviesCard card={card} key={card.id} />;
-        })}
-      </ul>
-    </section>
+    <ul className="items">
+      {movies.map((card) => {
+        return <MoviesCard card={card} key={card.id} />;
+      })}
+    </ul>
   );
 };
 
