@@ -49,6 +49,10 @@
   border: none;
 }
 
+.auth-form__input::placeholder {
+  color: #000;
+}
+
 .auth-form__input_type_error::placeholder {
   color: #ff3055;
 }

@@ -4,7 +4,7 @@ import Main from '../Main/Main';
 import Movies from '../Movies/Movies';
 import Header from '../Header/Header';
 import SavedMovies from '../SavedMovies/SavedMovies';
-import AuthForm from '../AuthForm/AuthForm';
+import Register from '../Register/Register';
 
 function App() {
   return (
@@ -14,7 +14,7 @@ function App() {
         <Route path="/" element={<Main />} />
         <Route path="movies" element={<Movies />} />
         <Route path="saved-movies" element={<SavedMovies />} />
-        <Route path="signin" element={<AuthForm />} />
+        <Route path="signup" element={<Register />} />
       </Routes>
     </div>
   );

@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom';
 import Logo from '../Logo/Logo';
 import './AuthForm.css';
 
-const AuthForm = ({ formData, children }) => {
+const AuthForm = ({ formData }) => {
+  const isRegister = formData.name === 'register';
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -24,27 +25,28 @@ const AuthForm = ({ formData, children }) => {
     <section className="auth-form">
       <div className="auth-form__container">
         <Logo />
-        <h1 className="auth-form__title">Рады видеть!</h1>
+        <h1 className="auth-form__title">{formData.title}</h1>
         <form
           className="auth-form__form"
-          //   name={`${formData.name}-form`}
+          name={`${formData.name}-form`}
           //   onSubmit={formData.onSubmit}
         >
-          {children}
-          <label className="auth-form__label">
-            Имя
-            <input
-              id="profile-name"
-              className="auth-form__input"
-              type="text"
-              value={name}
-              name="name"
-              tabIndex="1"
-              placeholder=""
-              required
-              onChange={inputNameHandler}
-            />
-          </label>
+          {isRegister && (
+            <label className="auth-form__label">
+              Имя
+              <input
+                id="profile-name"
+                className="auth-form__input"
+                type="text"
+                value={name}
+                name="name"
+                tabIndex="1"
+                placeholder="Виталий"
+                required
+                onChange={inputNameHandler}
+              />
+            </label>
+          )}
           <label className="auth-form__label">
             E-mail
             <input
@@ -54,38 +56,62 @@ const AuthForm = ({ formData, children }) => {
               value={email}
               name="email"
               tabIndex="2"
-              placeholder=""
+              placeholder="pochta@yandex.ru|"
               required
               onChange={inputEmailHandler}
             />
           </label>
-          <label className="auth-form__label">
-            Пароль
-            <input
-              id="profile-password"
-              className="auth-form__input auth-form__input_type_error"
-              type="password"
-              value={password}
-              name="password"
-              tabIndex="3"
-              placeholder="••••••••••••••"
-              required
-              onChange={inputPasswordlHandler}
-            />
-            <span className="auth-form__error">Что-то пошло не так...</span>
-          </label>
+          {isRegister ? (
+            <label className="auth-form__label">
+              Пароль
+              <input
+                id="profile-password"
+                className="auth-form__input auth-form__input_type_error"
+                type="password"
+                value={password}
+                name="password"
+                tabIndex="3"
+                placeholder="••••••••••••••"
+                required
+                onChange={inputPasswordlHandler}
+              />
+              <span className="auth-form__error">Что-то пошло не так...</span>
+            </label>
+          ) : (
+            <label className="auth-form__label">
+              Пароль
+              <input
+                id="profile-password"
+                className="auth-form__input"
+                type="password"
+                value={password}
+                name="password"
+                tabIndex="3"
+                required
+                onChange={inputPasswordlHandler}
+              />
+            </label>
+          )}
 
           <button className={`auth-form__button`} type="submit">
-            {/* {formData.buttonTitle} */}
-            Зарегистрироваться
+            {formData.buttonTitle}
           </button>
         </form>
-        <div className="auth-form__link-block">
-          <p className="auth-form__text">Уже зарегистрированы?</p>
-          <Link className="auth-form__link" to="/sign-in">
-            Войти
-          </Link>
-        </div>
+        {isRegister ? (
+          <div className="auth-form__link-block">
+            <p className="auth-form__text">Уже зарегистрированы?</p>
+            <Link className="auth-form__link" to="/signin">
+              Войти
+            </Link>
+          </div>
+        ) : (
+          <div className="auth-form__link-block">
+            <p className="auth-form__text">Ещё не зарегистрированы?</p>
+            <Link className="auth-form__link" to="signup">
+              Регистрация
+            </Link>
+          </div>
+        )}
       </div>
     </section>
   );
