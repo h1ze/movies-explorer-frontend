@@ -7,6 +7,9 @@ const Register = () => {
     name: 'register',
     title: 'Добро пожаловать!',
     buttonTitle: 'Зарегистрироваться',
+    text: 'Уже зарегистрированы?',
+    link: '/signin',
+    linkText: 'Войти',
   };
   return <AuthForm formData={registerFormData} />;
 };

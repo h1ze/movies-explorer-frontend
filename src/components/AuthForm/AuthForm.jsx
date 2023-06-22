@@ -97,21 +97,12 @@ const AuthForm = ({ formData }) => {
             {formData.buttonTitle}
           </button>
         </form>
-        {isRegister ? (
-          <div className="auth-form__link-block">
-            <p className="auth-form__text">Уже зарегистрированы?</p>
-            <Link className="auth-form__link" to="/signin">
-              Войти
-            </Link>
-          </div>
-        ) : (
-          <div className="auth-form__link-block">
-            <p className="auth-form__text">Ещё не зарегистрированы?</p>
-            <Link className="auth-form__link" to="signup">
-              Регистрация
-            </Link>
-          </div>
-        )}
+        <div className="auth-form__link-block">
+          <p className="auth-form__text">{formData.text}</p>
+          <Link className="auth-form__link" to={formData.link}>
+            {formData.linkText}
+          </Link>
+        </div>
       </div>
     </section>
   );
