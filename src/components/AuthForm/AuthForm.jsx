@@ -6,6 +6,7 @@ import './AuthForm.css';
 const AuthForm = ({ formData, children }) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   const inputNameHandler = (evt) => {
     setName(evt.target.value);
@@ -13,6 +14,10 @@ const AuthForm = ({ formData, children }) => {
 
   const inputEmailHandler = (evt) => {
     setEmail(evt.target.value);
+  };
+
+  const inputPasswordlHandler = (evt) => {
+    setPassword(evt.target.value);
   };
 
   return (
@@ -53,6 +58,21 @@ const AuthForm = ({ formData, children }) => {
               required
               onChange={inputEmailHandler}
             />
+          </label>
+          <label className="auth-form__label">
+            Пароль
+            <input
+              id="profile-password"
+              className="auth-form__input auth-form__input_type_error"
+              type="password"
+              value={password}
+              name="password"
+              tabIndex="3"
+              placeholder="••••••••••••••"
+              required
+              onChange={inputPasswordlHandler}
+            />
+            <span className="auth-form__error">Что-то пошло не так...</span>
           </label>
 
           <button className={`auth-form__button`} type="submit">
