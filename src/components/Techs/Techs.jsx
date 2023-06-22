@@ -5,7 +5,7 @@ import('./Techs.css');
 const Techs = () => {
   const techs = ['HTML', 'CSS', 'JS', 'React', 'Git', 'Express.js', 'mongoDB'];
   return (
-    <section className="techs">
+    <section className="techs" id="techs">
       <div className="techs__wrapper">
         <SectionHeading>Технологии</SectionHeading>
         <div className="techs__content">

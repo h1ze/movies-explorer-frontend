@@ -8,13 +8,19 @@ const NavTab = () => {
       <div className="nav-tab__wrapper">
         <ul className="nav-tab__links">
           <li>
-            <Link className="nav-tab__link">О проекте</Link>
+            <a className="nav-tab__link" href="#about-project">
+              О проекте
+            </a>
           </li>
           <li>
-            <Link className="nav-tab__link">Технологии</Link>
+            <a className="nav-tab__link" href="#techs">
+              Технологии
+            </a>
           </li>
           <li>
-            <Link className="nav-tab__link">Студент</Link>
+            <a className="nav-tab__link" href="#about-me">
+              Студент
+            </a>
           </li>
         </ul>
       </div>
