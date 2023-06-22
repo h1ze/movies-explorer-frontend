@@ -26,11 +26,7 @@ const AuthForm = ({ formData }) => {
       <div className="auth-form__container">
         <Logo />
         <h1 className="auth-form__title">{formData.title}</h1>
-        <form
-          className="auth-form__form"
-          name={`${formData.name}-form`}
-          //   onSubmit={formData.onSubmit}
-        >
+        <form className="auth-form__form" name={`${formData.name}-form`}>
           {isRegister && (
             <label className="auth-form__label">
               Имя
@@ -92,8 +88,10 @@ const AuthForm = ({ formData }) => {
               />
             </label>
           )}
-
-          <button className={`auth-form__button`} type="submit">
+          <button
+            className={`auth-form__button auth-form__button_type_${formData.name}`}
+            type="submit"
+          >
             {formData.buttonTitle}
           </button>
         </form>

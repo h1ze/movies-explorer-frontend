@@ -68,7 +68,6 @@
 }
 
 .auth-form__button {
-  margin-top: 48px;
   margin-bottom: 16px;
   width: 396px;
   height: 45px;
@@ -81,6 +80,14 @@
   line-height: 17px;
   /* identical to box height */
   color: #ffffff;
+}
+
+.auth-form__button_type_register {
+  margin-top: 48px;
+}
+
+.auth-form__button_type_login {
+  margin-top: 159px;
 }
 
 .auth-form__link-block {
@@ -124,9 +131,18 @@
   }
 
   .auth-form__button {
+    font-size: 12px;
+    line-height: 15px;
+    width: 260px;
+  }
+
+  .auth-form__button_type_register {
     margin-top: 137px;
     margin-bottom: 14px;
-    width: 260px;
+  }
+
+  .auth-form__button_type_login {
+    margin-top: 245px;
   }
 
   .auth-form__link-block {
