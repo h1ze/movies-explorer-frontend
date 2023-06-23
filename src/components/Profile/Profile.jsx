@@ -1,7 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Profile.css';
 
 const Profile = () => {
+  const [isEdit, setIsEdit] = useState(false);
+  const [isError, setIsError] = useState(false);
+
+  const editHandler = () => {
+    setIsEdit(!isEdit);
+  };
+
+  const errorHandler = () => {
+    setIsError(!isError);
+    resetStates();
+  };
+
+  const resetStates = () => {
+    setTimeout(() => {
+      setIsError(false);
+      setIsEdit(false);
+    }, 5000);
+  };
+
   return (
     <section className="profile">
       <div className="profile__container">
@@ -12,7 +31,7 @@ const Profile = () => {
             <input
               className="profile__input"
               placeholder="Виталий"
-              disabled
+              disabled={isEdit}
             ></input>
           </label>
           <div className="profile__line"></div>
@@ -21,25 +40,44 @@ const Profile = () => {
             <input
               className="profile__input"
               placeholder="pochta@yandex.ru"
-              disabled
+              disabled={isEdit}
             ></input>
           </label>
         </form>
-        <ul className="profile__button-block">
-          <li>
-            <button className="profile__button" type="button">
-              Редактировать
-            </button>
-          </li>
-          <li>
-            <button
-              className="profile__button profile__button_type_exit"
-              type="button"
-            >
-              Выйти из аккаунта
-            </button>
-          </li>
-        </ul>
+        {isError && (
+          <p className="profile__error">
+            При обновлении профиля произошла ошибка.
+          </p>
+        )}
+        {!!isEdit ? (
+          <button
+            className="profile__save"
+            onClick={errorHandler}
+            disabled={isError}
+          >
+            Сохранить
+          </button>
+        ) : (
+          <ul className="profile__button-block">
+            <li>
+              <button
+                className="profile__button"
+                type="button"
+                onClick={editHandler}
+              >
+                Редактировать
+              </button>
+            </li>
+            <li>
+              <button
+                className="profile__button profile__button_type_exit"
+                type="button"
+              >
+                Выйти из аккаунта
+              </button>
+            </li>
+          </ul>
+        )}
       </div>
     </section>
   );

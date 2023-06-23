@@ -1,4 +1,5 @@
 .filter-checkbox {
+  position: relative;
   display: flex;
   gap: 14px;
   font-family: 'Inter', 'Arial', sans-serif;
@@ -30,7 +31,7 @@
 }
 
 .filter-checkbox__tumbler:hover {
-  opacity: 0.6;
+  opacity: 0.8;
   cursor: pointer;
 }
 
