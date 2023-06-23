@@ -25,10 +25,10 @@
 }
 
 .main-nav__link:hover {
-  opacity: 0.6;
+  opacity: 0.7;
 }
 
-.main-nav__link_weight_heavy {
+.main-nav__link_active {
   font-weight: 500;
 }
 
@@ -41,7 +41,7 @@
 }
 
 .main-nav__profile-link:hover {
-  opacity: 0.6;
+  opacity: 0.7;
 }
 
 .main-nav__profile-icon {
@@ -63,7 +63,7 @@
 }
 
 .main-nav__burger-btn:hover {
-  opacity: 0.6;
+  opacity: 0.7;
   cursor: pointer;
 }
 
@@ -71,6 +71,17 @@
   .main-nav {
     display: none;
   }
+
+  .main-nav__link {
+    font-size: 22px;
+    font-weight: 500;
+  }
+
+  .main-nav__link_active {
+    padding-bottom: 8px;
+    border-bottom: 2px solid black;
+  }
+
   .main-nav__burger-btn {
     display: block;
   }

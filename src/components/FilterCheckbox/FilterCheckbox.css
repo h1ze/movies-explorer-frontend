@@ -16,6 +16,7 @@
 }
 
 .filter-checkbox__tumbler {
+  padding: 1px 0;
   display: inline-flex;
   align-items: center;
   user-select: none;
@@ -42,7 +43,7 @@
   border: 1px solid #fff;
   background-repeat: no-repeat;
   border-radius: 50%;
-  background-color: #f50e0e;
+  background-color: #f5f5f5;
 }
 
 .filter-checkbox__input:checked + .filter-checkbox__tumbler {

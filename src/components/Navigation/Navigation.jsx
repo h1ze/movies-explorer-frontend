@@ -10,9 +10,7 @@ function Navigation() {
             <NavLink
               to="/movies"
               className={({ isActive }) =>
-                `main-nav__link ${
-                  isActive ? 'main-nav__link_weight_heavy' : ''
-                }`
+                `main-nav__link ${isActive ? 'main-nav__link_active' : ''}`
               }
             >
               Фильмы
@@ -22,16 +20,14 @@ function Navigation() {
             <NavLink
               to="/saved-movies"
               className={({ isActive }) =>
-                `main-nav__link ${
-                  isActive ? 'main-nav__link_weight_heavy' : ''
-                }`
+                `main-nav__link ${isActive ? 'main-nav__link_active' : ''}`
               }
             >
               Сохраненные фильмы
             </NavLink>
           </li>
         </ul>
-        <Link to="profile" className="main-nav__profile-link">
+        <Link to="/profile" className="main-nav__profile-link">
           Аккаунт
           <div className="main-nav__profile-icon"></div>
         </Link>
