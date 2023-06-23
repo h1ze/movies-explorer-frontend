@@ -20,6 +20,15 @@
   line-height: 15px;
 }
 
+.movies__btn:hover {
+  opacity: 0.6;
+  cursor: pointer;
+}
+
+.movies__btn:focus {
+  box-shadow: 0 0 0 3px #2be080;
+}
+
 @media screen and (max-width: 984px) {
   .movies__cards {
     padding: 70px 30px 10px;

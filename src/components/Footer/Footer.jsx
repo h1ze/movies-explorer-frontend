@@ -10,7 +10,7 @@ const Footer = () => {
           Учебный проект Яндекс.Практикум х BeatFilm.
         </h3>
         <div className="footer__info">
-          <p className="footer__copyright">&copy;&nbsp;2020</p>
+          <p className="footer__copyright">&copy;&nbsp;2023</p>
           <ul className="footer__links">
             <li>
               <Link
