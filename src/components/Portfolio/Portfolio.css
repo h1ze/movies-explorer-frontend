@@ -4,7 +4,7 @@
 
 .portfolio__title {
   margin: 0 0 50px;
-  font-family: 'Inter';
+  font-family: 'Inter', 'Arial', sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 18px;
@@ -36,7 +36,7 @@
 .portfolio__link {
   display: flex;
   justify-content: space-between;
-  font-family: 'Inter';
+  font-family: 'Inter', 'Arial', sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 30px;

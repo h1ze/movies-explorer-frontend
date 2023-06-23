@@ -29,7 +29,7 @@
   border: none;
   width: 100%;
   flex-shrink: 1;
-  font-family: 'Inter';
+  font-family: 'Inter', 'Arial', sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 18px;

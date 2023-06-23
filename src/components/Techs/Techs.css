@@ -20,7 +20,7 @@
 
 .techs__content-title {
   margin: 0 0 26px;
-  font-family: 'Inter';
+  font-family: 'Inter', 'Arial', sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 50px;
@@ -33,7 +33,7 @@
 .techs__content-subtitle {
   max-width: 460px;
   margin: 0 0 100px;
-  font-family: 'Inter';
+  font-family: 'Inter', 'Arial', sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
@@ -62,7 +62,7 @@
   height: 60px;
   background-color: #e8e8e8;
   border-radius: 10px;
-  font-family: 'Inter';
+  font-family: 'Inter', 'Arial', sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
