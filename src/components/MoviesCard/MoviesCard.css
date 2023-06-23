@@ -31,6 +31,12 @@
   border-radius: 36px;
   border: none;
   background: url('../../images/like.svg') no-repeat center #f9f9f9;
+  transition: 0.5s;
+}
+
+.item__button-like:hover {
+  background-color: #e8e8e8;
+  cursor: pointer;
 }
 
 .item__button-like_active {
