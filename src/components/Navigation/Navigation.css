@@ -38,6 +38,10 @@
   text-decoration: none;
   color: #000;
   transition: 0.5s;
+  font-family: 'Inter', 'Arial', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 16px;
 }
 
 .main-nav__profile-link:hover {
@@ -48,8 +52,8 @@
   width: 26px;
   height: 30px;
   margin-left: 14px;
-  background: url('../../images/profile-icon.svg') no-repeat #f9f9f9 center/14px
-    12px;
+  background: url('../../images/profile-icon.svg') no-repeat #f9f9f9
+    center/11.5px 14px;
   border-radius: 4px;
 }
 
@@ -57,7 +61,7 @@
   display: none;
   width: 44px;
   height: 44px;
-  background: url('../../images/burger-btn-icon.svg') center;
+  background: url('../../images/burger-btn-icon.svg') no-repeat center;
   border: none;
   transition: 0.5s;
 }
@@ -72,17 +76,38 @@
     display: none;
   }
 
+  .main-nav_type__menu {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .main-nav__links {
+    flex-direction: column;
+    gap: 28px;
+    margin-bottom: 620px;
+  }
+
   .main-nav__link {
-    font-size: 22px;
+    font-size: 18px;
     font-weight: 500;
+    text-decoration: underline;
   }
 
   .main-nav__link_active {
-    padding-bottom: 8px;
+    padding-bottom: 4px;
     border-bottom: 2px solid black;
+  }
+
+  .main-nav__profile-link {
+    margin: 0 auto;
+    text-decoration-line: underline;
   }
 
   .main-nav__burger-btn {
     display: block;
+  }
+
+  .main-nav__burger-btn_type__menu {
+    display: none;
   }
 }

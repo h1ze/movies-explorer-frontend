@@ -1,11 +1,23 @@
 import { Link, NavLink } from 'react-router-dom';
 import './Navigation.css';
 
-function Navigation() {
+function Navigation({ isMenu }) {
   return (
     <>
-      <div className="main-nav">
+      <div className={`main-nav ${isMenu ? 'main-nav_type__menu' : ''}`}>
         <ul className="main-nav__links">
+          {isMenu && (
+            <li>
+              <NavLink
+                to="/"
+                className={({ isActive }) =>
+                  `main-nav__link ${isActive ? 'main-nav__link_active' : ''}`
+                }
+              >
+                Главная
+              </NavLink>
+            </li>
+          )}
           <li>
             <NavLink
               to="/movies"
@@ -32,7 +44,9 @@ function Navigation() {
           <div className="main-nav__profile-icon"></div>
         </Link>
       </div>
-      <button className="main-nav__burger-btn" type="button"></button>
+      {!isMenu && (
+        <button className="main-nav__burger-btn" type="button"></button>
+      )}
     </>
   );
 }

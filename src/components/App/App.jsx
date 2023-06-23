@@ -8,6 +8,7 @@ import Register from '../Register/Register';
 import Login from '../Login/Login';
 import Profile from '../Profile/Profile';
 import NotFound from '../NotFound/NotFound';
+import Menu from '../Menu/Menu';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path="signin" element={<Login />} />
         <Route path="profile" element={<Profile />} />
         <Route path="*" element={<NotFound />} />
+        <Route path="menu" element={<Menu />} />
       </Routes>
     </div>
   );
