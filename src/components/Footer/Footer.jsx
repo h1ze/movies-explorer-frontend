@@ -13,10 +13,22 @@ const Footer = () => {
           <p className="footer__copyright">&copy;&nbsp;2020</p>
           <ul className="footer__links">
             <li>
-              <Link className="footer__link">Яндекс.Практикум</Link>
+              <Link
+                className="footer__link"
+                to="https://practicum.yandex.ru/"
+                target="_blank"
+              >
+                Яндекс.Практикум
+              </Link>
             </li>
             <li>
-              <Link className="footer__link">Github</Link>
+              <Link
+                className="footer__link"
+                to="https://github.com/"
+                target="_blank"
+              >
+                Github
+              </Link>
             </li>
           </ul>
         </div>
