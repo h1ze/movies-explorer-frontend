@@ -25,17 +25,21 @@ const Profile = () => {
             ></input>
           </label>
         </form>
-        <div className="profile__button-block">
-          <button className="profile__button" type="button">
-            Редактировать
-          </button>
-          <button
-            className="profile__button profile__button_type_exit"
-            type="button"
-          >
-            Выйти из аккаунта
-          </button>
-        </div>
+        <ul className="profile__button-block">
+          <li>
+            <button className="profile__button" type="button">
+              Редактировать
+            </button>
+          </li>
+          <li>
+            <button
+              className="profile__button profile__button_type_exit"
+              type="button"
+            >
+              Выйти из аккаунта
+            </button>
+          </li>
+        </ul>
       </div>
     </section>
   );

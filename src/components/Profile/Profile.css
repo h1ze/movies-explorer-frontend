@@ -54,12 +54,16 @@
 }
 
 .profile__button-block {
+  margin: 0;
+  padding: 0;
   display: flex;
   flex-direction: column;
   gap: 16px;
+  list-style: none;
 }
 
 .profile__button {
+  padding: 0;
   cursor: pointer;
   border: none;
   background: #fff;
