@@ -76,6 +76,10 @@
   color: #000;
 }
 
+.about-me__link:hover {
+  opacity: 0.6;
+}
+
 @media screen and (max-width: 984px) {
   .about-me__wrapper {
     padding: 90px 50px 80px;

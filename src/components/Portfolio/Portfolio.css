@@ -48,6 +48,11 @@
   color: #000;
 }
 
+.portfolio__link:hover {
+  opacity: 0.6;
+  cursor: pointer;
+}
+
 .portfolio__link-icon {
   width: 29px;
   height: 60px;

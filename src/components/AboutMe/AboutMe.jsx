@@ -24,7 +24,7 @@ const AboutMe = () => {
             </p>
             <Link
               className="about-me__link"
-              to="https://github.com/"
+              to="https://github.com/h1ze"
               target="_blank"
             >
               Github
