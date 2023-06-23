@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import './Navigation.css';
 
 function Navigation() {
@@ -7,17 +7,28 @@ function Navigation() {
       <div className="main-nav">
         <ul className="main-nav__links">
           <li>
-            <Link
-              to="movies"
-              className="main-nav__link main-nav__link_weight_heavy"
+            <NavLink
+              to="/movies"
+              className={({ isActive }) =>
+                `main-nav__link ${
+                  isActive ? 'main-nav__link_weight_heavy' : ''
+                }`
+              }
             >
               Фильмы
-            </Link>
+            </NavLink>
           </li>
           <li>
-            <Link to="saved-movies" className="main-nav__link main-nav__link">
+            <NavLink
+              to="/saved-movies"
+              className={({ isActive }) =>
+                `main-nav__link ${
+                  isActive ? 'main-nav__link_weight_heavy' : ''
+                }`
+              }
+            >
               Сохраненные фильмы
-            </Link>
+            </NavLink>
           </li>
         </ul>
         <Link to="profile" className="main-nav__profile-link">

@@ -24,12 +24,12 @@
   transition: 0.5s;
 }
 
-.main-nav__link_weight_heavy {
-  font-weight: 500;
-}
-
 .main-nav__link:hover {
   opacity: 0.6;
+}
+
+.main-nav__link_weight_heavy {
+  font-weight: 500;
 }
 
 .main-nav__profile-link {
