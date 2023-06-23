@@ -16,7 +16,7 @@
 
 .main-nav__link {
   font-family: 'Inter';
-  font-weight: 500;
+
   font-style: normal;
   font-size: 13px;
   line-height: 18px;
@@ -24,8 +24,12 @@
   text-decoration: none;
 }
 
-.main-nav__link_weight_light {
-  font-weight: 400;
+.main-nav__link_weight_heavy {
+  font-weight: 500;
+}
+
+.main-nav__link:hover {
+  opacity: 0.6;
 }
 
 .main-nav__profile-link {
@@ -33,6 +37,10 @@
   align-items: center;
   text-decoration: none;
   color: #000;
+}
+
+.main-nav__profile-link:hover {
+  opacity: 0.6;
 }
 
 .main-nav__profile-icon {

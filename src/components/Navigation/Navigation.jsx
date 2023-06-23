@@ -7,15 +7,15 @@ function Navigation() {
       <div className="main-nav">
         <ul className="main-nav__links">
           <li>
-            <Link to="movies" className="main-nav__link">
+            <Link
+              to="movies"
+              className="main-nav__link main-nav__link_weight_heavy"
+            >
               Фильмы
             </Link>
           </li>
           <li>
-            <Link
-              to="saved-movies"
-              className="main-nav__link main-nav__link_weight_light"
-            >
+            <Link to="saved-movies" className="main-nav__link main-nav__link">
               Сохраненные фильмы
             </Link>
           </li>

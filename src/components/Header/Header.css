@@ -38,6 +38,10 @@
   text-decoration: none;
 }
 
+.header__link:hover {
+  opacity: 0.6;
+}
+
 .header__link_type_button {
   padding: 8px 20px;
   background-color: #2be080;
