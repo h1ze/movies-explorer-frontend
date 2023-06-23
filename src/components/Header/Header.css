@@ -36,6 +36,7 @@
   line-height: 16px;
   color: #fff;
   text-decoration: none;
+  transition: 0.5s;
 }
 
 .header__link:hover {

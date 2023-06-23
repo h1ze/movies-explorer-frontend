@@ -46,6 +46,7 @@
   letter-spacing: -0.04em;
   text-decoration: none;
   color: #000;
+  transition: 0.5s;
 }
 
 .portfolio__link:hover {

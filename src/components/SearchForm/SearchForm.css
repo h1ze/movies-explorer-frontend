@@ -48,6 +48,12 @@
   background: url('../../images/search-button-icon.svg') no-repeat center/22px
     #3456f3;
   border-radius: 48px;
+  transition: 0.5s;
+}
+
+.form__button:hover {
+  opacity: 0.6;
+  cursor: pointer;
 }
 
 .form__stroke {

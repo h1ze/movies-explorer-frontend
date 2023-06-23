@@ -18,15 +18,12 @@
   font-weight: 500;
   font-size: 12px;
   line-height: 15px;
+  transition: 0.5s;
 }
 
 .movies__btn:hover {
   opacity: 0.6;
   cursor: pointer;
-}
-
-.movies__btn:focus {
-  box-shadow: 0 0 0 3px #2be080;
 }
 
 @media screen and (max-width: 984px) {

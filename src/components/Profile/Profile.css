@@ -64,11 +64,16 @@
 
 .profile__button {
   padding: 0;
-  cursor: pointer;
   border: none;
   background: #fff;
   font-family: 'Inter', 'Arial', sans-serif;
   font-size: 13px;
+  transition: 0.5s;
+}
+
+.profile__button:hover {
+  opacity: 0.6;
+  cursor: pointer;
 }
 
 .profile__button_type_exit {

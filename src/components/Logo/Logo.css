@@ -1,5 +1,6 @@
 .logo-link {
   text-decoration: none;
+  transition: 0.5s;
 }
 
 .logo-link:hover {

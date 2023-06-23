@@ -16,12 +16,12 @@
 
 .main-nav__link {
   font-family: 'Inter';
-
   font-style: normal;
   font-size: 13px;
   line-height: 18px;
   color: #000;
   text-decoration: none;
+  transition: 0.5s;
 }
 
 .main-nav__link_weight_heavy {
@@ -37,6 +37,7 @@
   align-items: center;
   text-decoration: none;
   color: #000;
+  transition: 0.5s;
 }
 
 .main-nav__profile-link:hover {
@@ -58,6 +59,11 @@
   height: 44px;
   background: url('../../images/burger-btn-icon.svg') center;
   border: none;
+  transition: 0.5s;
+}
+
+.main-nav__burger-btn:hover {
+  opacity: 0.6;
   cursor: pointer;
 }
 

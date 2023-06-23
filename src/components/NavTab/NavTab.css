@@ -28,8 +28,8 @@
   font-size: 13px;
   line-height: 16px;
   /* or 123% */
-
   color: #fff;
+  transition: 0.5s;
 }
 
 .nav-tab__link:hover {
