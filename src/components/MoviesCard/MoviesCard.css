@@ -43,6 +43,20 @@
   background-image: url('../../images/like_active.svg');
 }
 
+.item__button-delete {
+  opacity: 0;
+  width: 24px;
+  height: 24px;
+  border-radius: 36px;
+  border: none;
+  background: url('../../images/close.svg') no-repeat center/20px #f9f9f9;
+  transition: 0.5s;
+}
+
+.item__button-delete:hover {
+  opacity: 1;
+}
+
 .item__duration {
   padding-top: 6px;
   border-top: 1px solid #e8e8e8;

@@ -1,12 +1,11 @@
 import React from 'react';
-import movies from '../../utils/movies';
 import MoviesCard from '../MoviesCard/MoviesCard';
 import('./MoviesCardList.css');
 
-const MoviesCardList = () => {
+const MoviesCardList = ({ cards }) => {
   return (
     <ul className="items">
-      {movies.map((card) => {
+      {cards.map((card) => {
         return <MoviesCard card={card} key={card.id} />;
       })}
     </ul>

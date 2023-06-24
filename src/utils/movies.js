@@ -30,7 +30,13 @@ const movies = [
     name: 'В погоне за Бенкси',
     duration: '1ч 42м',
   },
-  { id: 7, link: img1, name: '33 слова о дизайне', duration: '1ч 42м' },
+  {
+    id: 7,
+    link: img1,
+    name: '33 слова о дизайне',
+    duration: '1ч 42м',
+    saved: true,
+  },
   { id: 8, link: img4, name: 'Баския: Взрыв реальности', duration: '1ч 42м' },
   { id: 9, link: img4, name: 'Баския: Взрыв реальности', duration: '1ч 42м' },
   {
@@ -44,9 +50,16 @@ const movies = [
     link: img3,
     name: 'В погоне за Бенкси',
     duration: '1ч 42м',
+    saved: true,
   },
   { id: 12, link: img1, name: '33 слова о дизайне', duration: '1ч 42м' },
-  { id: 13, link: img4, name: 'Баския: Взрыв реальности', duration: '1ч 42м' },
+  {
+    id: 13,
+    link: img4,
+    name: 'Баския: Взрыв реальности',
+    duration: '1ч 42м',
+    saved: true,
+  },
   { id: 14, link: img1, name: '33 слова о дизайне', duration: '1ч 42м' },
   {
     id: 15,
@@ -56,5 +69,7 @@ const movies = [
   },
   { id: 16, link: img4, name: 'Баския: Взрыв реальности', duration: '1ч 42м' },
 ];
+
+
 
 export default movies;

@@ -15,12 +15,20 @@ const MoviesCard = ({ card }) => {
       <img className="item__image" src={card.link} alt={card.name} />
       <div className="item__panel">
         <h2 className="item__title">{card.name}</h2>
-        <button
-          className={cardLikeButtonClassName}
-          type="button"
-          aria-label="Лайкнуть"
-          onClick={likeClickHandler}
-        ></button>
+        {!!card.saved ? (
+          <button
+            className="item__button-delete"
+            type="button"
+            aria-label="Удалить"
+          ></button>
+        ) : (
+          <button
+            className={cardLikeButtonClassName}
+            type="button"
+            aria-label="Лайкнуть"
+            onClick={likeClickHandler}
+          ></button>
+        )}
       </div>
       <span className="item__duration">{card.duration}</span>
     </li>
