@@ -6,12 +6,11 @@
 
 .main-nav__links {
   margin: 0;
-  padding: 0;
+  padding: 0 0 0 44px;
   display: flex;
   align-items: center;
   list-style: none;
   gap: 16px;
-  padding-left: 44px;
 }
 
 .main-nav__link {
@@ -82,6 +81,7 @@
   }
 
   .main-nav__links {
+    padding: 0;
     flex-direction: column;
     gap: 28px;
     margin-bottom: 620px;
@@ -109,5 +109,20 @@
 
   .main-nav__burger-btn_type__menu {
     display: none;
+  }
+}
+
+@media screen and (max-width: 568px) {
+  .main-nav__link {
+    text-decoration: none;
+  }
+
+  .main-nav__links {
+    gap: 24px;
+    margin-bottom: 444px;
+  }
+
+  .main-nav__link_active {
+    padding-bottom: 7px;
   }
 }
