@@ -70,6 +70,4 @@ const movies = [
   { id: 16, link: img4, name: 'Баския: Взрыв реальности', duration: '1ч 42м' },
 ];
 
-
-
 export default movies;

@@ -1,7 +1,7 @@
 import { Link, NavLink } from 'react-router-dom';
 import './Navigation.css';
 
-function Navigation({ isMenu }) {
+function Navigation({ isMenu, onMenuClick }) {
   return (
     <>
       <div className={`main-nav ${isMenu ? 'main-nav_type__menu' : ''}`}>
@@ -45,7 +45,11 @@ function Navigation({ isMenu }) {
         </Link>
       </div>
       {!isMenu && (
-        <button className="main-nav__burger-btn" type="button"></button>
+        <button
+          className="main-nav__burger-btn"
+          type="button"
+          onClick={onMenuClick}
+        ></button>
       )}
     </>
   );

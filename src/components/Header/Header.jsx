@@ -3,7 +3,7 @@ import './Header.css';
 import Logo from '../Logo/Logo';
 import Navigation from '../Navigation/Navigation';
 
-function Header() {
+function Header({ onMenuClick }) {
   const paths = ['movies', 'saved-movies', 'profile'];
   return (
     <Routes>
@@ -44,7 +44,7 @@ function Header() {
                 <div className="header__wrapper">
                   <nav className="header__menu">
                     <Logo />
-                    <Navigation />
+                    <Navigation onMenuClick={onMenuClick} />
                   </nav>
                 </div>
               </div>

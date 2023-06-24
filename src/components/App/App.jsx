@@ -10,22 +10,31 @@ import Profile from '../Profile/Profile';
 import NotFound from '../NotFound/NotFound';
 import Layout from '../Layout/Layout';
 import movies from '../../utils/movies';
+import savedMovies from '../../utils/savedMovies';
+import Menu from '../Menu/Menu';
 
 function App() {
-  const savedMovies = [...movies].filter((el) => el.saved);
-
   const [cards, setCards] = useState([]);
   const [savedCards, setSavedCards] = useState([]);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const menuOpenHandler = () => {
+    setIsMenuOpen(true);
+  };
+
+  const menuCloseHandler = () => {
+    setIsMenuOpen(false);
+  };
 
   useEffect(() => {
     setCards(movies);
     setSavedCards(savedMovies);
-  }, [savedMovies]);
+  }, []);
 
   return (
     <div className="page">
       <Routes>
-        <Route path="/" element={<Layout />}>
+        <Route path="/" element={<Layout onMenuClick={menuOpenHandler} />}>
           <Route index element={<Main />} />
           <Route path="movies" element={<Movies cards={cards} />} />
           <Route
@@ -38,6 +47,7 @@ function App() {
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
+      <Menu isOpen={isMenuOpen} onClose={menuCloseHandler} />
     </div>
   );
 }
