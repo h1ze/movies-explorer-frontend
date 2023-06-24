@@ -68,6 +68,7 @@
 }
 
 .auth-form__button {
+  border: none;
   margin-bottom: 16px;
   width: 396px;
   height: 45px;

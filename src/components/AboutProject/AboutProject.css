@@ -12,6 +12,7 @@
 
 .about-project__content {
   display: flex;
+  gap: 40px;
   padding: 70px 0 110px;
 }
 
@@ -54,10 +55,12 @@
 }
 
 .about-project__scale-column_size_b {
-  flex-grow: 4;
+  flex-grow: 5;
 }
 
 .about-project__scale-part {
+  box-sizing: border-box;
+  padding: 9px 0;
   background-color: #2be080;
   font-family: 'Inter', 'Arial', sans-serif;
   font-style: normal;

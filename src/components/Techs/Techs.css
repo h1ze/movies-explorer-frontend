@@ -51,7 +51,7 @@
   width: 100%;
   grid-template-columns: repeat(auto-fit, 90px);
   justify-content: center;
-  gap: 36px;
+  gap: 10px;
 }
 
 .techs__block {
