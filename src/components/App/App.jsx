@@ -12,11 +12,13 @@ import Layout from '../Layout/Layout';
 import movies from '../../utils/movies';
 import savedMovies from '../../utils/savedMovies';
 import Menu from '../Menu/Menu';
+import Preloader from '../Preloader/Preloader';
 
 function App() {
   const [cards, setCards] = useState([]);
   const [savedCards, setSavedCards] = useState([]);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   const menuOpenHandler = () => {
     setIsMenuOpen(true);
@@ -29,6 +31,7 @@ function App() {
   useEffect(() => {
     setCards(movies);
     setSavedCards(savedMovies);
+    setIsLoading(false);
   }, []);
 
   return (
@@ -48,6 +51,7 @@ function App() {
         </Route>
       </Routes>
       <Menu isOpen={isMenuOpen} onClose={menuCloseHandler} />
+      {isLoading && <Preloader />}
     </div>
   );
 }
