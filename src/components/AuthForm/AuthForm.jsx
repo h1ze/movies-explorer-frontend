@@ -95,6 +95,10 @@ const AuthForm = ({ formData }) => {
             {formData.buttonTitle}
           </button>
         </form>
+        {/* При получении ошибки от сервера текст ошибки будет передаваться в ReqError
+          {isError && (
+          <ReqError></ReqError>
+        )} */}
         <div className="auth-form__link-block">
           <p className="auth-form__text">{formData.text}</p>
           <Link className="auth-form__link" to={formData.link}>

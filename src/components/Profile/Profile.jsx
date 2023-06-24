@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './Profile.css';
+import ReqError from '../ReqError/ReqError';
 
 const Profile = () => {
   const [isEdit, setIsEdit] = useState(false);
@@ -45,9 +46,7 @@ const Profile = () => {
           </label>
         </form>
         {isError && (
-          <p className="profile__error">
-            При обновлении профиля произошла ошибка.
-          </p>
+          <ReqError>При обновлении профиля произошла ошибка.</ReqError>
         )}
         {!!isEdit ? (
           <button
