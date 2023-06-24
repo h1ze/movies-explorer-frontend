@@ -10,7 +10,7 @@ function Header({ onMenuClick }) {
       <Route
         path="/"
         element={
-          <div className="header header_theme_dark">
+          <header className="header header_theme_dark">
             <div className="header__wrapper">
               <nav className="header__menu">
                 <Logo />
@@ -31,7 +31,7 @@ function Header({ onMenuClick }) {
                 </ul>
               </nav>
             </div>
-          </div>
+          </header>
         }
       />
       {paths.map((path, index) => {
@@ -40,14 +40,14 @@ function Header({ onMenuClick }) {
             key={index}
             path={path}
             element={
-              <div className="header">
+              <header className="header">
                 <div className="header__wrapper">
                   <nav className="header__menu">
                     <Logo />
                     <Navigation onMenuClick={onMenuClick} />
                   </nav>
                 </div>
-              </div>
+              </header>
             }
           />
         );

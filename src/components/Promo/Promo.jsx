@@ -3,7 +3,7 @@ import './Promo.css';
 
 const Promo = () => {
   return (
-    <div className="promo">
+    <section className="promo">
       <div className="promo__wrapper">
         <div className="promo__background">
           <h1 className="promo__title">
@@ -11,7 +11,7 @@ const Promo = () => {
           </h1>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

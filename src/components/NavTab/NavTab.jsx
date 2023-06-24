@@ -3,7 +3,7 @@ import './NavTab.css';
 
 const NavTab = () => {
   return (
-    <div className="nav-tab">
+    <nav className="nav-tab">
       <div className="nav-tab__wrapper">
         <ul className="nav-tab__links">
           <li>
@@ -23,7 +23,7 @@ const NavTab = () => {
           </li>
         </ul>
       </div>
-    </div>
+    </nav>
   );
 };
 

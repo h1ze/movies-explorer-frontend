@@ -22,7 +22,7 @@ const AuthForm = ({ formData }) => {
   };
 
   return (
-    <section className="auth-form">
+    <main className="auth-form">
       <div className="auth-form__container">
         <Logo />
         <h1 className="auth-form__title">{formData.title}</h1>
@@ -106,7 +106,7 @@ const AuthForm = ({ formData }) => {
           </Link>
         </div>
       </div>
-    </section>
+    </main>
   );
 };
 
