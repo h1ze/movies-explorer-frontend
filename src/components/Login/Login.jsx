@@ -1,6 +1,5 @@
 import React from 'react';
 import AuthForm from '../AuthForm/AuthForm';
-import './Login.css';
 
 const Login = () => {
   const loginFormData = {
