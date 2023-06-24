@@ -46,7 +46,7 @@ function Navigation({ isMenu, onMenuClick }) {
       </div>
       {!isMenu && (
         <button
-          className="main-nav__burger-btn"
+          className="menu-button"
           type="button"
           onClick={onMenuClick}
         ></button>
