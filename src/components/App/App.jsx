@@ -8,21 +8,21 @@ import Register from '../Register/Register';
 import Login from '../Login/Login';
 import Profile from '../Profile/Profile';
 import NotFound from '../NotFound/NotFound';
-import Menu from '../Menu/Menu';
+import Layout from '../Layout/Layout';
 
 function App() {
   return (
     <div className="page">
-      <Header />
       <Routes>
-        <Route path="/" element={<Main />} />
-        <Route path="movies" element={<Movies />} />
-        <Route path="saved-movies" element={<SavedMovies />} />
-        <Route path="signup" element={<Register />} />
-        <Route path="signin" element={<Login />} />
-        <Route path="profile" element={<Profile />} />
-        <Route path="*" element={<NotFound />} />
-        <Route path="menu" element={<Menu />} />
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Main />} />
+          <Route path="movies" element={<Movies />} />
+          <Route path="saved-movies" element={<SavedMovies />} />
+          <Route path="signup" element={<Register />} />
+          <Route path="signin" element={<Login />} />
+          <Route path="profile" element={<Profile />} />
+          <Route path="*" element={<NotFound />} />
+        </Route>
       </Routes>
     </div>
   );
