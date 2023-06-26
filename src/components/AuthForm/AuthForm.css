@@ -81,6 +81,12 @@
   line-height: 17px;
   /* identical to box height */
   color: #ffffff;
+  transition: 0.5s;
+}
+
+.auth-form__button:hover {
+  cursor: pointer;
+  opacity: 0.8;
 }
 
 .auth-form__button_type_register {
@@ -110,6 +116,11 @@
 .auth-form__link {
   color: #3456f3;
   text-decoration: none;
+  transition: 0.5s;
+}
+
+.auth-form__link:hover {
+  opacity: 0.7;
 }
 
 @media screen and (max-width: 984px) {

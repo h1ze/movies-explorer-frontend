@@ -15,8 +15,10 @@ export function registerUserApi(registerData) {
     method: 'POST',
     headers: REQUEST_HEADERS,
     body: JSON.stringify({
-      password: registerData.password, // Здесь нужно забрать пароль пользователя из формы регистрации
-      email: registerData.email, // Здесь нужно забрать почту пользователя из формы регистрации
+      // Забираем данные пользователя из формы регистрации
+      password: registerData.password,
+      email: registerData.email,
+      name: registerData.name,
     }),
   }).then((response) => checkResponse(response));
 }

@@ -47,6 +47,7 @@ function App() {
     registerUserApi(registerData)
       .then((responseUserData) => {
         // Здесь мы получаем данные зарегистрированного пользователя
+        console.log(responseUserData.data);
         setCurrentUser(responseUserData.data);
         navigate('/movies', { replace: true });
       })
@@ -73,7 +74,10 @@ function App() {
               path="saved-movies"
               element={<SavedMovies cards={savedCards} />}
             />
-            <Route path="signup" element={<Register />} />
+            <Route
+              path="signup"
+              element={<Register onRegister={handleRegisterSubmit} />}
+            />
             <Route path="signin" element={<Login />} />
             <Route path="profile" element={<Profile />} />
             <Route path="*" element={<NotFound />} />

@@ -3,30 +3,38 @@ import { Link } from 'react-router-dom';
 import Logo from '../Logo/Logo';
 import './AuthForm.css';
 
-const AuthForm = ({ formData }) => {
+const AuthForm = ({ formData, onSubmit }) => {
   const isRegister = formData.name === 'register';
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
 
-  const inputNameHandler = (evt) => {
-    setName(evt.target.value);
+  const [authFormInputsData, setAuthFormInputsData] = useState({
+    name: '',
+    email: '',
+    password: '',
+  });
+
+  const handleInputs = (evt) => {
+    setAuthFormInputsData({
+      ...authFormInputsData,
+      [evt.target.name]: evt.target.value,
+    });
   };
 
-  const inputEmailHandler = (evt) => {
-    setEmail(evt.target.value);
-  };
+  function handleSubmit(evt) {
+    evt.preventDefault();
 
-  const inputPasswordlHandler = (evt) => {
-    setPassword(evt.target.value);
-  };
+    onSubmit(authFormInputsData);
+  }
 
   return (
     <main className="auth-form">
       <div className="auth-form__container">
         <Logo />
         <h1 className="auth-form__title">{formData.title}</h1>
-        <form className="auth-form__form" name={`${formData.name}-form`}>
+        <form
+          className="auth-form__form"
+          name={`${formData.name}-form`}
+          onSubmit={handleSubmit}
+        >
           {isRegister && (
             <label className="auth-form__label">
               Имя
@@ -34,12 +42,12 @@ const AuthForm = ({ formData }) => {
                 id="profile-name"
                 className="auth-form__input"
                 type="text"
-                value={name}
+                value={authFormInputsData.name}
                 name="name"
                 tabIndex="1"
                 placeholder="Виталий"
                 required
-                onChange={inputNameHandler}
+                onChange={handleInputs}
               />
             </label>
           )}
@@ -49,12 +57,12 @@ const AuthForm = ({ formData }) => {
               id="profile-email"
               className="auth-form__input"
               type="email"
-              value={email}
+              value={authFormInputsData.email}
               name="email"
               tabIndex="2"
               placeholder="pochta@yandex.ru|"
               required
-              onChange={inputEmailHandler}
+              onChange={handleInputs}
             />
           </label>
           {isRegister ? (
@@ -64,12 +72,12 @@ const AuthForm = ({ formData }) => {
                 id="profile-password"
                 className="auth-form__input auth-form__input_type_error"
                 type="password"
-                value={password}
+                value={authFormInputsData.password}
                 name="password"
                 tabIndex="3"
                 placeholder="••••••••••••••"
                 required
-                onChange={inputPasswordlHandler}
+                onChange={handleInputs}
               />
               <span className="auth-form__error">Что-то пошло не так...</span>
             </label>
@@ -80,11 +88,11 @@ const AuthForm = ({ formData }) => {
                 id="profile-password"
                 className="auth-form__input"
                 type="password"
-                value={password}
+                value={authFormInputsData.password}
                 name="password"
                 tabIndex="3"
                 required
-                onChange={inputPasswordlHandler}
+                onChange={authFormInputsData.password}
               />
             </label>
           )}
