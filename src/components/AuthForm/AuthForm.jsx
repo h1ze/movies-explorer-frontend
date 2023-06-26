@@ -5,6 +5,7 @@ import './AuthForm.css';
 
 const AuthForm = ({ formData, onSubmit }) => {
   const isRegister = formData.name === 'register';
+  const [hasErrorInput, setHasErrorInput] = useState(false);
 
   const [authFormInputsData, setAuthFormInputsData] = useState({
     name: '',
@@ -40,62 +41,60 @@ const AuthForm = ({ formData, onSubmit }) => {
               Имя
               <input
                 id="profile-name"
-                className="auth-form__input"
+                className={`auth-form__input ${
+                  hasErrorInput ? 'auth-form__input_type_error' : ''
+                } `}
                 type="text"
                 value={authFormInputsData.name}
                 name="name"
                 tabIndex="1"
-                placeholder="Виталий"
+                placeholder="Введите имя"
                 required
                 onChange={handleInputs}
               />
+              {hasErrorInput && (
+                <span className="auth-form__error">Что-то пошло не так...</span>
+              )}
             </label>
           )}
           <label className="auth-form__label">
             E-mail
             <input
               id="profile-email"
-              className="auth-form__input"
+              className={`auth-form__input ${
+                hasErrorInput ? 'auth-form__input_type_error' : ''
+              } `}
               type="email"
               value={authFormInputsData.email}
               name="email"
               tabIndex="2"
-              placeholder="pochta@yandex.ru|"
+              placeholder="Введите почту"
               required
               onChange={handleInputs}
             />
-          </label>
-          {isRegister ? (
-            <label className="auth-form__label">
-              Пароль
-              <input
-                id="profile-password"
-                className="auth-form__input auth-form__input_type_error"
-                type="password"
-                value={authFormInputsData.password}
-                name="password"
-                tabIndex="3"
-                placeholder="••••••••••••••"
-                required
-                onChange={handleInputs}
-              />
+            {hasErrorInput && (
               <span className="auth-form__error">Что-то пошло не так...</span>
-            </label>
-          ) : (
-            <label className="auth-form__label">
-              Пароль
-              <input
-                id="profile-password"
-                className="auth-form__input"
-                type="password"
-                value={authFormInputsData.password}
-                name="password"
-                tabIndex="3"
-                required
-                onChange={authFormInputsData.password}
-              />
-            </label>
-          )}
+            )}
+          </label>
+          <label className="auth-form__label">
+            Пароль
+            <input
+              id="profile-password"
+              className={`auth-form__input ${
+                hasErrorInput ? 'auth-form__input_type_error' : ''
+              } `}
+              type="password"
+              value={authFormInputsData.password}
+              name="password"
+              tabIndex="3"
+              placeholder="Введите пароль"
+              required
+              onChange={handleInputs}
+            />
+            {hasErrorInput && (
+              <span className="auth-form__error">Что-то пошло не так...</span>
+            )}
+          </label>
           <button
             className={`auth-form__button auth-form__button_type_${formData.name}`}
             type="submit"
