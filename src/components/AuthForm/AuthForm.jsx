@@ -1,24 +1,38 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Logo from '../Logo/Logo';
 import './AuthForm.css';
 
 const AuthForm = ({ formData, onSubmit }) => {
   const isRegister = formData.name === 'register';
-  const [hasErrorInput, setHasErrorInput] = useState(false);
-
   const [authFormInputsData, setAuthFormInputsData] = useState({
     name: '',
     email: '',
     password: '',
   });
+  const [errors, setErrors] = React.useState({});
+  const [isValid, setIsValid] = useState(false);
 
   const handleInputs = (evt) => {
     setAuthFormInputsData({
       ...authFormInputsData,
       [evt.target.name]: evt.target.value,
     });
+    setErrors({
+      ...errors,
+      [evt.target.name]: evt.target.validationMessage,
+    });
+    setIsValid(evt.target.closest('form').checkValidity());
   };
+
+  const resetForm = useCallback(
+    (newValues = {}, newErrors = {}, newIsValid = false) => {
+      setAuthFormInputsData(newValues);
+      setErrors(newErrors);
+      setIsValid(newIsValid);
+    },
+    [setAuthFormInputsData, setErrors, setIsValid]
+  );
 
   function handleSubmit(evt) {
     evt.preventDefault();
@@ -42,7 +56,7 @@ const AuthForm = ({ formData, onSubmit }) => {
               <input
                 id="profile-name"
                 className={`auth-form__input ${
-                  hasErrorInput ? 'auth-form__input_type_error' : ''
+                  !!errors.name ? 'auth-form__input_type_error' : ''
                 } `}
                 type="text"
                 value={authFormInputsData.name}
@@ -52,8 +66,8 @@ const AuthForm = ({ formData, onSubmit }) => {
                 required
                 onChange={handleInputs}
               />
-              {hasErrorInput && (
-                <span className="auth-form__error">Что-то пошло не так...</span>
+              {!!errors.name && (
+                <span className="auth-form__error">{errors.name}</span>
               )}
             </label>
           )}
@@ -62,7 +76,7 @@ const AuthForm = ({ formData, onSubmit }) => {
             <input
               id="profile-email"
               className={`auth-form__input ${
-                hasErrorInput ? 'auth-form__input_type_error' : ''
+                !!errors.email ? 'auth-form__input_type_error' : ''
               } `}
               type="email"
               value={authFormInputsData.email}
@@ -72,8 +86,8 @@ const AuthForm = ({ formData, onSubmit }) => {
               required
               onChange={handleInputs}
             />
-            {hasErrorInput && (
-              <span className="auth-form__error">Что-то пошло не так...</span>
+            {!!errors.email && (
+              <span className="auth-form__error">{errors.email}</span>
             )}
           </label>
           <label className="auth-form__label">
@@ -81,7 +95,7 @@ const AuthForm = ({ formData, onSubmit }) => {
             <input
               id="profile-password"
               className={`auth-form__input ${
-                hasErrorInput ? 'auth-form__input_type_error' : ''
+                !!errors.password ? 'auth-form__input_type_error' : ''
               } `}
               type="password"
               value={authFormInputsData.password}
@@ -91,8 +105,8 @@ const AuthForm = ({ formData, onSubmit }) => {
               required
               onChange={handleInputs}
             />
-            {hasErrorInput && (
-              <span className="auth-form__error">Что-то пошло не так...</span>
+            {!!errors.password && (
+              <span className="auth-form__error">{errors.password}</span>
             )}
           </label>
           <button
