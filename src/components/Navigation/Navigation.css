@@ -1,0 +1,124 @@
+.main-nav {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.main-nav__links {
+  margin: 0;
+  padding: 0 0 0 44px;
+  display: flex;
+  align-items: center;
+  list-style: none;
+  gap: 16px;
+}
+
+.main-nav__link {
+  font-family: 'Inter', 'Arial', sans-serif;
+  font-style: normal;
+  font-size: 13px;
+  line-height: 18px;
+  color: #000;
+  text-decoration: none;
+  transition: 0.5s;
+}
+
+.main-nav__link:hover {
+  opacity: 0.7;
+}
+
+.main-nav__link_active {
+  font-weight: 500;
+}
+
+.main-nav__profile-link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #000;
+  transition: 0.5s;
+  font-family: 'Inter', 'Arial', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 16px;
+}
+
+.main-nav__profile-link:hover {
+  opacity: 0.7;
+}
+
+.main-nav__profile-icon {
+  width: 26px;
+  height: 30px;
+  margin-left: 14px;
+  background: url('../../images/profile-icon.svg') no-repeat #f9f9f9
+    center/11.5px 14px;
+  border-radius: 4px;
+}
+
+.menu-button {
+  display: none;
+  width: 44px;
+  height: 44px;
+  background: url('../../images/burger-btn-icon.svg') no-repeat center;
+  border: none;
+  transition: 0.5s;
+}
+
+.menu-button:hover {
+  opacity: 0.7;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 984px) {
+  .main-nav {
+    display: none;
+  }
+
+  .main-nav_type__menu {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .main-nav__links {
+    padding: 0;
+    flex-direction: column;
+    gap: 28px;
+    margin-bottom: 620px;
+  }
+
+  .main-nav__link {
+    font-size: 18px;
+    font-weight: 500;
+    text-decoration: underline;
+  }
+
+  .main-nav__link_active {
+    padding-bottom: 4px;
+    border-bottom: 2px solid black;
+  }
+
+  .main-nav__profile-link {
+    margin: 0 auto;
+    text-decoration-line: underline;
+  }
+
+  .menu-button {
+    display: block;
+  }
+}
+
+@media screen and (max-width: 568px) {
+  .main-nav__link {
+    text-decoration: none;
+  }
+
+  .main-nav__links {
+    gap: 24px;
+    margin-bottom: 444px;
+  }
+
+  .main-nav__link_active {
+    padding-bottom: 7px;
+  }
+}

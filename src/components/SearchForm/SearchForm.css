@@ -1,0 +1,123 @@
+.search-form {
+  padding: 70px 70px 10px;
+}
+
+.form {
+  padding: 19px 30px 19px 19px;
+  margin-bottom: 69px;
+  display: flex;
+  align-items: center;
+  background: #fdfdfd;
+  box-shadow: 0px 3px 14px rgba(0, 0, 0, 0.08);
+  border-radius: 9px;
+}
+
+.form__search-panel {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.form__icon {
+  width: 34px;
+  height: 34px;
+  background: url('../../images/search-icon.svg') no-repeat center/cover;
+  margin-right: 10px;
+}
+
+.form__input {
+  border: none;
+  width: 100%;
+  flex-shrink: 1;
+  font-family: 'Inter', 'Arial', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 20px;
+  /* or 111% */
+
+  color: #a0a0a0;
+}
+
+.form__button {
+  padding: 0;
+  border: none;
+  flex-shrink: 0;
+  width: 80px;
+  height: 34px;
+  background: url('../../images/search-button-icon.svg') no-repeat center/22px
+    #3456f3;
+  border-radius: 48px;
+  transition: 0.5s;
+}
+
+.form__button:hover {
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+.form__stroke {
+  flex-shrink: 0;
+  margin-right: 10px;
+  width: 40px;
+  height: 1px;
+  background: #cbcbcb;
+  transform: rotate(90deg);
+}
+
+.search-form__underline {
+  height: 1px;
+  background-color: #e8e8e8;
+}
+
+@media screen and (max-width: 984px) {
+  .search-form {
+    padding: 80px 30px 10px;
+  }
+
+  .form {
+    padding-right: 20px;
+    margin-bottom: 109px;
+  }
+}
+
+@media screen and (max-width: 568px) {
+  .search-form {
+    padding: 80px 10px 10px;
+  }
+
+  .form {
+    margin-bottom: 44px;
+    padding: 0;
+    flex-direction: column;
+    background: #fff;
+    box-shadow: none;
+    border-radius: 0;
+  }
+
+  .form__search-panel {
+    padding: 16px 0 19px;
+    margin-bottom: 45px;
+    background: #fdfdfd;
+    box-shadow: 0px 3px 14px rgba(0, 0, 0, 0.08);
+    border-radius: 9px;
+    width: auto;
+  }
+
+  .form__icon {
+    display: none;
+  }
+
+  .form__input {
+    margin-left: 17px;
+    font-size: 14px;
+  }
+
+  .form__button {
+    margin-right: 19px;
+  }
+
+  .form__stroke {
+    display: none;
+  }
+}

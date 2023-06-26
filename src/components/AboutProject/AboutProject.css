@@ -1,0 +1,152 @@
+.about-project {
+  width: 100%;
+}
+
+.about-project__wrapper {
+  box-sizing: border-box;
+  padding: 110px 70px;
+  min-width: 320px;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.about-project__content {
+  display: flex;
+  gap: 40px;
+  padding: 70px 0 110px;
+}
+
+.about-project__chapter {
+  max-width: 550px;
+}
+
+.about-project__chapter-title {
+  font-family: 'Inter', 'Arial', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24px;
+  letter-spacing: -0.04em;
+  margin: 0 0 26px;
+}
+
+.about-project__chapter-text {
+  font-family: 'Inter', 'Arial', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  /* or 143% */
+  margin: 0;
+}
+
+.about-project__scale-container {
+  display: flex;
+  width: 100%;
+}
+
+.about-project__scale-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.about-project__scale-column_size_s {
+  flex-grow: 1;
+}
+
+.about-project__scale-column_size_b {
+  flex-grow: 5;
+}
+
+.about-project__scale-part {
+  box-sizing: border-box;
+  padding: 9px 0;
+  background-color: #2be080;
+  font-family: 'Inter', 'Arial', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: center;
+  vertical-align: center;
+}
+
+.about-project__scale-part_type_frontend {
+  background-color: #f2f2f2;
+}
+
+.about-project__scale-caption {
+  margin-top: 14px;
+  font-family: 'Inter', 'Arial', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  /* identical to box height, or 121% */
+
+  text-align: center;
+
+  color: #a0a0a0;
+}
+
+@media screen and (max-width: 984px) {
+  .about-project__wrapper {
+    padding: 90px 50px;
+  }
+
+  .about-project__content {
+    padding-bottom: 93px;
+    gap: 30px;
+  }
+
+  .about-project__chapter {
+    max-width: 319px;
+  }
+
+  .about-project__chapter-title {
+    margin-bottom: 22px;
+  }
+
+  .about-project__chapter-text {
+    font-size: 12px;
+    line-height: 18px;
+    /* or 150% */
+  }
+}
+
+@media screen and (max-width: 568px) {
+  .about-project__wrapper {
+    padding: 70px 18px;
+  }
+
+  .about-project__content {
+    padding: 60px 0;
+    flex-direction: column;
+    gap: 56px;
+  }
+
+  .about-project__chapter {
+    max-width: 284px;
+  }
+
+  .about-project__chapter-title {
+    margin-bottom: 16px;
+    font-size: 18px;
+    line-height: 22px;
+  }
+
+  .about-project__chapter-text {
+    font-size: 11px;
+    line-height: 16px;
+  }
+
+  .about-project__scale-part {
+    font-size: 11px;
+    line-height: 13px;
+  }
+
+  .about-project__scale-caption {
+    font-size: 11px;
+    line-height: 13px;
+  }
+}

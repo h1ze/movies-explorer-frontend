@@ -1,0 +1,135 @@
+.profile {
+  padding: 75px 0 70px;
+  display: flex;
+  justify-content: center;
+}
+
+.profile__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.profile__title {
+  margin: 0 0 123px 0;
+  font-family: 'Inter', 'Arial', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+}
+
+.profile__form {
+  width: 410px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.profile__label {
+  display: flex;
+  justify-content: space-between;
+  font-family: 'Inter', 'Arial', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 11px;
+}
+
+.profile__line {
+  height: 1px;
+  background-color: #e8e8e8;
+}
+
+.profile__input {
+  font-family: 'Inter', 'Arial', sans-serif;
+  font-size: 11px;
+  border: none;
+  background: #fff;
+}
+
+.profile__input::placeholder {
+  color: #000;
+  text-align: right;
+}
+
+.profile__button-block {
+  margin: 220px 0 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  list-style: none;
+}
+
+.profile__button {
+  padding: 0;
+  border: none;
+  background: #fff;
+  font-family: 'Inter', 'Arial', sans-serif;
+  font-size: 13px;
+  transition: 0.5s;
+}
+
+.profile__button:hover {
+  opacity: 0.7;
+  cursor: pointer;
+}
+
+.profile__button_type_exit {
+  font-weight: 500;
+  color: #ff3055;
+}
+
+.profile__save {
+  margin-top: 223px;
+  padding: 13px 0 15px;
+  width: 100%;
+  border: none;
+  border-radius: 3px;
+  background: #3456f3;
+  font-family: 'Inter', 'Arial', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: #fff;
+  transition: opacity 0.5s;
+}
+
+.profile__save {
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+.profile__save:disabled {
+  margin-top: 0;
+  background: #f8f8f8;
+  color: #c2c2c2;
+}
+
+@media screen and (max-width: 984px) {
+  .profile {
+    padding: 234px 0 269px;
+  }
+
+  .profile__title {
+    margin-bottom: 96px;
+  }
+
+  .profile__form {
+    margin: 0 0 210px 0;
+  }
+}
+
+@media screen and (max-width: 568px) {
+  .profile {
+    padding: 70px 0 40px;
+  }
+
+  .profile__title {
+    margin-bottom: 80px;
+  }
+
+  .profile__form {
+    width: 260px;
+    margin: 0 0 379px 0;
+  }
+}
