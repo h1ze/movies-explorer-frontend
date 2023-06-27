@@ -46,9 +46,13 @@ const AuthForm = ({ formData, onSubmit }) => {
                 pattern={REGEX_CHECK_NAME}
                 onChange={handleChange}
               />
-              {!!errors.name && (
-                <span className="auth-form__error">{errors.name}</span>
-              )}
+              <span
+                className={`auth-form__error ${
+                  !!errors.name ? 'auth-form__error_active' : ''
+                } `}
+              >
+                {errors.name}
+              </span>
             </label>
           )}
           <label className="auth-form__label">
@@ -66,9 +70,13 @@ const AuthForm = ({ formData, onSubmit }) => {
               required
               onChange={handleChange}
             />
-            {!!errors.email && (
-              <span className="auth-form__error">{errors.email}</span>
-            )}
+            <span
+              className={`auth-form__error ${
+                !!errors.email ? 'auth-form__error_active' : ''
+              } `}
+            >
+              {errors.email}
+            </span>
           </label>
           <label className="auth-form__label">
             Пароль
@@ -87,9 +95,13 @@ const AuthForm = ({ formData, onSubmit }) => {
               required
               onChange={handleChange}
             />
-            {!!errors.password && (
-              <span className="auth-form__error">{errors.password}</span>
-            )}
+            <span
+              className={`auth-form__error ${
+                !!errors.password ? 'auth-form__error_active' : ''
+              } `}
+            >
+              {errors.password}
+            </span>
           </label>
           <button
             className={`auth-form__button auth-form__button_type_${formData.name}`}

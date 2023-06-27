@@ -22,7 +22,6 @@
 .auth-form__form {
   display: flex;
   flex-direction: column;
-  gap: 20px;
 }
 
 .auth-form__label {
@@ -67,8 +66,14 @@
   font-style: normal;
   font-weight: 400;
   font-size: 10px;
-  line-height: 12px;
   color: #ff3055;
+  visibility: hidden;
+  min-height: 10px;
+  line-height: 10px;
+}
+
+.auth-form__error_active {
+  visibility: visible;
 }
 
 .auth-form__button {
@@ -94,7 +99,7 @@
 }
 
 .auth-form__button_type_register {
-  margin-top: 48px;
+  margin-top: 71px;
 }
 
 .auth-form__button_type_login {

@@ -27,6 +27,7 @@
 }
 
 .profile__label {
+  position: relative;
   display: flex;
   justify-content: space-between;
   font-family: 'Inter', 'Arial', sans-serif;
@@ -61,6 +62,9 @@
 }
 
 .profile-input__error {
+  position: absolute;
+  top: 15px;
+  right: 0;
   display: block;
   font-family: 'Inter', 'Arial', sans-serif;
   font-style: normal;
