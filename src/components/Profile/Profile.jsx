@@ -1,25 +1,22 @@
 import React, { useState } from 'react';
 import './Profile.css';
 import ReqError from '../ReqError/ReqError';
+import { useFormWithValidation } from '../../utils/useFormWithValidation';
+import { REGEX_CHECK_NAME } from '../../utils/constants';
 
 const Profile = () => {
-  const [isEdit, setIsEdit] = useState(false);
+  const { values, handleChange, errors, isValid, resetForm } =
+    useFormWithValidation();
+
+  const [isDisable, setIsDisable] = useState(true);
   const [isError, setIsError] = useState(false);
 
-  const editHandler = () => {
-    setIsEdit(!isEdit);
+  const handleEdit = () => {
+    setIsDisable(!isDisable);
   };
 
-  const errorHandler = () => {
-    setIsError(!isError);
-    resetStates();
-  };
-
-  const resetStates = () => {
-    setTimeout(() => {
-      setIsError(false);
-      setIsEdit(false);
-    }, 5000);
+  const handleSubmit = () => {
+    console.log('Сабмит профиля');
   };
 
   return (
@@ -30,28 +27,45 @@ const Profile = () => {
           <label className="profile__label">
             Имя
             <input
-              className="profile__input"
+              className={`profile__input ${
+                !!errors.name ? 'profile__input_type_error' : ''
+              } `}
+              name="name"
+              value={values.name}
               placeholder="Виталий"
-              disabled={isEdit}
+              disabled={isDisable}
+              onChange={handleChange}
+              pattern={REGEX_CHECK_NAME}
             ></input>
+            {!!errors.name && (
+              <span className="profile-input__error">{errors.name}</span>
+            )}
           </label>
           <div className="profile__line"></div>
           <label className="profile__label">
             E-mail
             <input
-              className="profile__input"
+              className={`profile__input ${
+                !!errors.email ? 'profile__input_type_error' : ''
+              } `}
+              name="email"
+              value={values.email}
               placeholder="pochta@yandex.ru"
-              disabled={isEdit}
+              disabled={isDisable}
+              onChange={handleChange}
             ></input>
+            {!!errors.email && (
+              <span className="profile-input__error">{errors.email}</span>
+            )}
           </label>
         </form>
         {isError && (
           <ReqError>При обновлении профиля произошла ошибка.</ReqError>
         )}
-        {!!isEdit ? (
+        {!isDisable ? (
           <button
             className="profile__save"
-            onClick={errorHandler}
+            onClick={handleSubmit}
             disabled={isError}
           >
             Сохранить
@@ -62,7 +76,7 @@ const Profile = () => {
               <button
                 className="profile__button"
                 type="button"
-                onClick={editHandler}
+                onClick={handleEdit}
               >
                 Редактировать
               </button>

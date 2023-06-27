@@ -1,9 +1,9 @@
-import React, { useCallback, useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 
 import Logo from '../Logo/Logo';
 import './AuthForm.css';
-import { REGEX_CHECK_NAME_INPUT } from '../../utils/constants';
+import { REGEX_CHECK_NAME } from '../../utils/constants';
 import { useFormWithValidation } from '../../utils/useFormWithValidation';
 
 const AuthForm = ({ formData, onSubmit }) => {
@@ -43,7 +43,7 @@ const AuthForm = ({ formData, onSubmit }) => {
                 tabIndex="1"
                 placeholder="Введите имя"
                 required
-                pattern={REGEX_CHECK_NAME_INPUT}
+                pattern={REGEX_CHECK_NAME}
                 onChange={handleChange}
               />
               {!!errors.name && (
