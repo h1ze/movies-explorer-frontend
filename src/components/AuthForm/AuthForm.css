@@ -98,6 +98,11 @@
   opacity: 0.8;
 }
 
+.auth-form__button:disabled {
+  background: #f8f8f8;
+  color: #c2c2c2;
+}
+
 .auth-form__button_type_register {
   margin-top: 71px;
 }

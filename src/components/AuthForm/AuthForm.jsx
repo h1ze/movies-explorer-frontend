@@ -106,6 +106,7 @@ const AuthForm = ({ formData, onSubmit }) => {
           <button
             className={`auth-form__button auth-form__button_type_${formData.name}`}
             type="submit"
+            disabled={!isValid}
           >
             {formData.buttonTitle}
           </button>
