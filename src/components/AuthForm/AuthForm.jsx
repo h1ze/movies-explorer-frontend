@@ -1,50 +1,15 @@
 import React, { useCallback, useState } from 'react';
 import { Link } from 'react-router-dom';
-import isEmail from 'validator/lib/isEmail';
+
 import Logo from '../Logo/Logo';
 import './AuthForm.css';
 import { REGEX_CHECK_NAME_INPUT } from '../../utils/constants';
+import { useFormWithValidation } from '../../utils/useFormWithValidation';
 
 const AuthForm = ({ formData, onSubmit }) => {
   const isRegister = formData.name === 'register';
-  const [values, setValues] = useState({});
-  const [errors, setErrors] = React.useState({});
-  const [isValid, setIsValid] = useState(false);
-
-  const handleInputs = (evt) => {
-    setValues({
-      ...values,
-      [evt.target.name]: evt.target.value,
-    });
-
-    if (evt.target.name === 'email' && !isEmail(evt.target.value)) {
-      setErrors({
-        ...errors,
-        email: 'Поле email должно соответствовать шаблону электронной почты',
-      });
-    } else if (evt.target.validity.patternMismatch) {
-      setErrors({
-        ...errors,
-        name: 'Поле name должно содержать только латиницу, кириллицу, пробел или дефис.',
-      });
-    } else {
-      setErrors({
-        ...errors,
-        [evt.target.name]: evt.target.validationMessage,
-      });
-    }
-
-    setIsValid(evt.target.closest('form').checkValidity());
-  };
-
-  const resetForm = useCallback(
-    (newValues = {}, newErrors = {}, newIsValid = false) => {
-      setValues(newValues);
-      setErrors(newErrors);
-      setIsValid(newIsValid);
-    },
-    [setValues, setErrors, setIsValid]
-  );
+  const { values, handleChange, errors, isValid, resetForm } =
+    useFormWithValidation();
 
   function handleSubmit(evt) {
     evt.preventDefault();
@@ -79,7 +44,7 @@ const AuthForm = ({ formData, onSubmit }) => {
                 placeholder="Введите имя"
                 required
                 pattern={REGEX_CHECK_NAME_INPUT}
-                onChange={handleInputs}
+                onChange={handleChange}
               />
               {!!errors.name && (
                 <span className="auth-form__error">{errors.name}</span>
@@ -99,7 +64,7 @@ const AuthForm = ({ formData, onSubmit }) => {
               tabIndex="2"
               placeholder="Введите почту"
               required
-              onChange={handleInputs}
+              onChange={handleChange}
             />
             {!!errors.email && (
               <span className="auth-form__error">{errors.email}</span>
@@ -120,7 +85,7 @@ const AuthForm = ({ formData, onSubmit }) => {
               tabIndex="3"
               placeholder="Введите пароль"
               required
-              onChange={handleInputs}
+              onChange={handleChange}
             />
             {!!errors.password && (
               <span className="auth-form__error">{errors.password}</span>
