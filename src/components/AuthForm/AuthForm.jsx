@@ -3,16 +3,17 @@ import { Link } from 'react-router-dom';
 import isEmail from 'validator/lib/isEmail';
 import Logo from '../Logo/Logo';
 import './AuthForm.css';
+import { REGEX_CHECK_NAME_INPUT } from '../../utils/constants';
 
 const AuthForm = ({ formData, onSubmit }) => {
   const isRegister = formData.name === 'register';
-  const [authFormInputsData, setAuthFormInputsData] = useState({});
+  const [values, setValues] = useState({});
   const [errors, setErrors] = React.useState({});
   const [isValid, setIsValid] = useState(false);
 
   const handleInputs = (evt) => {
-    setAuthFormInputsData({
-      ...authFormInputsData,
+    setValues({
+      ...values,
       [evt.target.name]: evt.target.value,
     });
     setErrors({
@@ -26,22 +27,27 @@ const AuthForm = ({ formData, onSubmit }) => {
         ...errors,
         email: 'Поле email должно соответствовать шаблону электронной почты',
       });
+    } else if (evt.target.validity.patternMismatch) {
+      setErrors({
+        ...errors,
+        name: 'Поле name должно содержать только латиницу, кириллицу, пробел или дефис.',
+      });
     }
   };
 
   const resetForm = useCallback(
     (newValues = {}, newErrors = {}, newIsValid = false) => {
-      setAuthFormInputsData(newValues);
+      setValues(newValues);
       setErrors(newErrors);
       setIsValid(newIsValid);
     },
-    [setAuthFormInputsData, setErrors, setIsValid]
+    [setValues, setErrors, setIsValid]
   );
 
   function handleSubmit(evt) {
     evt.preventDefault();
 
-    onSubmit(authFormInputsData);
+    onSubmit(values);
   }
 
   return (
@@ -65,11 +71,12 @@ const AuthForm = ({ formData, onSubmit }) => {
                 type="text"
                 minLength="2"
                 maxLength="30"
-                value={authFormInputsData.name || ''}
+                value={values.name || ''}
                 name="name"
                 tabIndex="1"
                 placeholder="Введите имя"
                 required
+                pattern={REGEX_CHECK_NAME_INPUT}
                 onChange={handleInputs}
               />
               {!!errors.name && (
@@ -85,7 +92,7 @@ const AuthForm = ({ formData, onSubmit }) => {
                 !!errors.email ? 'auth-form__input_type_error' : ''
               } `}
               type="email"
-              value={authFormInputsData.email || ''}
+              value={values.email || ''}
               name="email"
               tabIndex="2"
               placeholder="Введите почту"
@@ -106,7 +113,7 @@ const AuthForm = ({ formData, onSubmit }) => {
               type="password"
               minLength="2"
               maxLength="30"
-              value={authFormInputsData.password || ''}
+              value={values.password || ''}
               name="password"
               tabIndex="3"
               placeholder="Введите пароль"
