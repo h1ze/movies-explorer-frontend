@@ -1,15 +1,12 @@
 import React, { useCallback, useState } from 'react';
 import { Link } from 'react-router-dom';
+import isEmail from 'validator/lib/isEmail';
 import Logo from '../Logo/Logo';
 import './AuthForm.css';
 
 const AuthForm = ({ formData, onSubmit }) => {
   const isRegister = formData.name === 'register';
-  const [authFormInputsData, setAuthFormInputsData] = useState({
-    name: '',
-    email: '',
-    password: '',
-  });
+  const [authFormInputsData, setAuthFormInputsData] = useState({});
   const [errors, setErrors] = React.useState({});
   const [isValid, setIsValid] = useState(false);
 
@@ -23,6 +20,13 @@ const AuthForm = ({ formData, onSubmit }) => {
       [evt.target.name]: evt.target.validationMessage,
     });
     setIsValid(evt.target.closest('form').checkValidity());
+
+    if (evt.target.name === 'email' && !isEmail(evt.target.value)) {
+      setErrors({
+        ...errors,
+        email: 'Поле email должно соответствовать шаблону электронной почты',
+      });
+    }
   };
 
   const resetForm = useCallback(
@@ -59,7 +63,9 @@ const AuthForm = ({ formData, onSubmit }) => {
                   !!errors.name ? 'auth-form__input_type_error' : ''
                 } `}
                 type="text"
-                value={authFormInputsData.name}
+                minLength="2"
+                maxLength="30"
+                value={authFormInputsData.name || ''}
                 name="name"
                 tabIndex="1"
                 placeholder="Введите имя"
@@ -79,7 +85,7 @@ const AuthForm = ({ formData, onSubmit }) => {
                 !!errors.email ? 'auth-form__input_type_error' : ''
               } `}
               type="email"
-              value={authFormInputsData.email}
+              value={authFormInputsData.email || ''}
               name="email"
               tabIndex="2"
               placeholder="Введите почту"
@@ -98,7 +104,9 @@ const AuthForm = ({ formData, onSubmit }) => {
                 !!errors.password ? 'auth-form__input_type_error' : ''
               } `}
               type="password"
-              value={authFormInputsData.password}
+              minLength="2"
+              maxLength="30"
+              value={authFormInputsData.password || ''}
               name="password"
               tabIndex="3"
               placeholder="Введите пароль"
