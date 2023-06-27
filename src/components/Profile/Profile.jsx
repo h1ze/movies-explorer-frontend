@@ -9,7 +9,7 @@ const Profile = () => {
     useFormWithValidation();
 
   const [isDisable, setIsDisable] = useState(true);
-  const [isError, setIsError] = useState(false);
+  const [isReqError, setIsReqError] = useState(false);
 
   const handleEdit = () => {
     setIsDisable(!isDisable);
@@ -27,14 +27,19 @@ const Profile = () => {
           <label className="profile__label">
             Имя
             <input
+              id="profile-name"
               className={`profile__input ${
                 !!errors.name ? 'profile__input_type_error' : ''
               } `}
+              type="text"
+              minLength="2"
+              maxLength="30"
               name="name"
-              value={values.name}
+              value={values.name || ''}
               placeholder="Виталий"
               disabled={isDisable}
               onChange={handleChange}
+              required
               pattern={REGEX_CHECK_NAME}
             ></input>
             {!!errors.name && (
@@ -45,28 +50,30 @@ const Profile = () => {
           <label className="profile__label">
             E-mail
             <input
+              id="profile-email"
               className={`profile__input ${
                 !!errors.email ? 'profile__input_type_error' : ''
               } `}
               name="email"
-              value={values.email}
+              value={values.email || ''}
               placeholder="pochta@yandex.ru"
               disabled={isDisable}
               onChange={handleChange}
+              required
             ></input>
             {!!errors.email && (
               <span className="profile-input__error">{errors.email}</span>
             )}
           </label>
         </form>
-        {isError && (
-          <ReqError>При обновлении профиля произошла ошибка.</ReqError>
-        )}
+        <ReqError isReqError={isReqError}>
+          При обновлении профиля произошла ошибка.
+        </ReqError>
         {!isDisable ? (
           <button
             className="profile__save"
             onClick={handleSubmit}
-            disabled={isError}
+            disabled={isReqError || !isValid}
           >
             Сохранить
           </button>

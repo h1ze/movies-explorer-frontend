@@ -31,7 +31,7 @@ const AuthForm = ({ formData, onSubmit }) => {
             <label className="auth-form__label">
               Имя
               <input
-                id="profile-name"
+                id="auth-name"
                 className={`auth-form__input ${
                   !!errors.name ? 'auth-form__input_type_error' : ''
                 } `}
@@ -58,7 +58,7 @@ const AuthForm = ({ formData, onSubmit }) => {
           <label className="auth-form__label">
             E-mail
             <input
-              id="profile-email"
+              id="auth-email"
               className={`auth-form__input ${
                 !!errors.email ? 'auth-form__input_type_error' : ''
               } `}
@@ -81,7 +81,7 @@ const AuthForm = ({ formData, onSubmit }) => {
           <label className="auth-form__label">
             Пароль
             <input
-              id="profile-password"
+              id="auth-password"
               className={`auth-form__input ${
                 !!errors.password ? 'auth-form__input_type_error' : ''
               } `}

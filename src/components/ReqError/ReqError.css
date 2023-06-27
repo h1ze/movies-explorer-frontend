@@ -3,4 +3,10 @@
   font-family: 'Inter', 'Arial', sans-serif;
   color: #ff004c;
   font-size: 11px;
+  min-height: 14px;
+  visibility: hidden;
+}
+
+.request-error_active {
+  visibility: visible;
 }

@@ -5,4 +5,4 @@ export const REQUEST_HEADERS = {
   credentials: 'include', // отправляем куки вместе с запросом
 };
 
-export const REGEX_CHECK_NAME = '[a-zа-яA-ZА-ЯёЁ\\s\\-]+';
+export const REGEX_CHECK_NAME = '^[a-zа-яA-ZА-ЯёЁ\\s\\-]+';
