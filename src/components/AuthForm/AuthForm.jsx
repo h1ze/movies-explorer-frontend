@@ -16,11 +16,6 @@ const AuthForm = ({ formData, onSubmit }) => {
       ...values,
       [evt.target.name]: evt.target.value,
     });
-    setErrors({
-      ...errors,
-      [evt.target.name]: evt.target.validationMessage,
-    });
-    setIsValid(evt.target.closest('form').checkValidity());
 
     if (evt.target.name === 'email' && !isEmail(evt.target.value)) {
       setErrors({
@@ -32,7 +27,14 @@ const AuthForm = ({ formData, onSubmit }) => {
         ...errors,
         name: 'Поле name должно содержать только латиницу, кириллицу, пробел или дефис.',
       });
+    } else {
+      setErrors({
+        ...errors,
+        [evt.target.name]: evt.target.validationMessage,
+      });
     }
+
+    setIsValid(evt.target.closest('form').checkValidity());
   };
 
   const resetForm = useCallback(
