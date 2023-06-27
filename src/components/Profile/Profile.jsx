@@ -67,7 +67,8 @@ const Profile = () => {
           </label>
         </form>
         <ReqError isReqError={isReqError}>
-          При обновлении профиля произошла ошибка.
+          При авторизации профиля произошла ошибка, токен не передан или передан
+          не в том формате
         </ReqError>
         {!isDisable ? (
           <button
