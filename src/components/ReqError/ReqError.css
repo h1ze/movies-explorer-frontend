@@ -1,8 +1,9 @@
 .request-error {
-  margin: 169px 0 20px 0;
+  margin: 0 0 20px;
   font-family: 'Inter', 'Arial', sans-serif;
   color: #ff004c;
   font-size: 11px;
+  text-align: center;
   min-height: 28px;
   max-width: 410px;
   visibility: hidden;
