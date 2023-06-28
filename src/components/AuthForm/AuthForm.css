@@ -40,6 +40,10 @@
   margin-bottom: 23px;
 }
 
+.auth-form__label_type_login {
+  margin-bottom: 111px;
+}
+
 .auth-form__input {
   padding: 15px;
   background: #f9f9f9;
@@ -150,6 +154,10 @@
 
   .auth-form__label_type_register {
     margin-bottom: 99px;
+  }
+
+  .auth-form__label_type_login {
+    margin-bottom: 186px;
   }
 
   .auth-form__title {
