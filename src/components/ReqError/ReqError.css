@@ -12,3 +12,9 @@
 .request-error_active {
   visibility: visible;
 }
+
+@media screen and (max-width: 568px) {
+  .request-error {
+    max-width: 260px;
+  }
+}

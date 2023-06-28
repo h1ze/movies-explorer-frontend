@@ -36,6 +36,10 @@
   color: #a0a0a0;
 }
 
+.auth-form__label_type_register {
+  margin-bottom: 23px;
+}
+
 .auth-form__input {
   padding: 15px;
   background: #f9f9f9;
@@ -103,14 +107,6 @@
   color: #c2c2c2;
 }
 
-.auth-form__button_type_register {
-  margin-top: 71px;
-}
-
-.auth-form__button_type_login {
-  margin-top: 159px;
-}
-
 .auth-form__link-block {
   display: flex;
   justify-content: center;
@@ -152,6 +148,10 @@
     align-items: center;
   }
 
+  .auth-form__label_type_register {
+    margin-bottom: 99px;
+  }
+
   .auth-form__title {
     margin: 50px 0 80px;
   }
@@ -160,15 +160,6 @@
     font-size: 12px;
     line-height: 15px;
     width: 260px;
-  }
-
-  .auth-form__button_type_register {
-    margin-top: 137px;
-    margin-bottom: 14px;
-  }
-
-  .auth-form__button_type_login {
-    margin-top: 245px;
   }
 
   .auth-form__link-block {
