@@ -15,6 +15,7 @@ import Menu from '../Menu/Menu';
 import Preloader from '../Preloader/Preloader';
 import { getUserApi, registerUserApi } from '../../utils/MainApi';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
+import ProtectedRouteElement from '../ProtectedRoute/ProtectedRoute';
 
 function App() {
   const [currentUser, setCurrentUser] = useState({});
@@ -69,7 +70,16 @@ function App() {
         <Routes>
           <Route path="/" element={<Layout onMenuClick={toggleMenu} />}>
             <Route index element={<Main />} />
-            <Route path="movies" element={<Movies cards={cards} />} />
+            <Route
+              path="movies"
+              element={
+                <ProtectedRouteElement
+                  element={Movies}
+                  isLoggedin={loggedIn}
+                  cards={cards}
+                />
+              }
+            />
             <Route
               path="saved-movies"
               element={<SavedMovies cards={savedCards} />}
