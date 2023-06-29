@@ -13,7 +13,7 @@ import movies from '../../utils/movies';
 import savedMovies from '../../utils/savedMovies';
 import Menu from '../Menu/Menu';
 import Preloader from '../Preloader/Preloader';
-import { getUserApi, registerUserApi } from '../../utils/MainApi';
+import { getUserApi, loginApi, registerUserApi } from '../../utils/MainApi';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import ProtectedRouteElement from '../ProtectedRoute/ProtectedRoute';
 
@@ -50,6 +50,19 @@ function App() {
         // Здесь мы получаем данные зарегистрированного пользователя
         console.log(responseUserData.data);
         setCurrentUser(responseUserData.data);
+        // Передаем данные в апи логина
+        handleLogin(registerData);
+      })
+      .catch((err) => {
+        console.log(err); // выведем ошибку в консоль
+        setIsErrorResponse(err.message);
+      });
+  }
+
+  function handleLogin(loginData) {
+    loginApi(loginData)
+      .then(() => {
+        setLoggedIn(true);
         navigate('/movies', { replace: true });
       })
       .catch((err) => {
@@ -75,21 +88,48 @@ function App() {
               element={
                 <ProtectedRouteElement
                   element={Movies}
-                  isLoggedin={loggedIn}
+                  isloggedIn={loggedIn}
                   cards={cards}
                 />
               }
             />
             <Route
               path="saved-movies"
-              element={<SavedMovies cards={savedCards} />}
+              element={
+                <ProtectedRouteElement
+                  element={SavedMovies}
+                  isloggedIn={loggedIn}
+                  cards={savedCards}
+                />
+              }
+            />
+            <Route
+              path="profile"
+              element={
+                <ProtectedRouteElement
+                  element={Profile}
+                  isloggedIn={loggedIn}
+                />
+              }
             />
             <Route
               path="signup"
-              element={<Register onRegister={handleRegisterSubmit} />}
+              element={
+                <Register
+                  onRegister={handleRegisterSubmit}
+                  isErrorResponse={isErrorResponse}
+                />
+              }
             />
-            <Route path="signin" element={<Login />} />
-            <Route path="profile" element={<Profile />} />
+            <Route
+              path="signin"
+              element={
+                <Login
+                  onLogin={handleLogin}
+                  isErrorResponse={isErrorResponse}
+                />
+              }
+            />
             <Route path="*" element={<NotFound />} />
           </Route>
         </Routes>

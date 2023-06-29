@@ -7,7 +7,7 @@ import { REGEX_CHECK_NAME } from '../../utils/constants';
 import { useFormWithValidation } from '../../utils/useFormWithValidation';
 import ReqError from '../ReqError/ReqError';
 
-const AuthForm = ({ formData, onSubmit }) => {
+const AuthForm = ({ formData, onSubmit, isErrorResponse }) => {
   const [isReqError, setIsReqError] = useState(false);
 
   const isRegister = formData.name === 'register';
@@ -108,7 +108,7 @@ const AuthForm = ({ formData, onSubmit }) => {
               {errors.password}
             </span>
           </label>
-          <ReqError isReqError={isReqError}>
+          <ReqError isReqError={isErrorResponse}>
             При авторизации профиля произошла ошибка, токен не передан или
             передан не в том формате
           </ReqError>
