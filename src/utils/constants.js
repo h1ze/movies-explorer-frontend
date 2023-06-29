@@ -5,3 +5,6 @@ export const REQUEST_HEADERS = {
 };
 
 export const REGEX_CHECK_NAME = '^[a-zа-яA-ZА-ЯёЁ\\s\\-]+';
+
+export const HEADER_PATHS = ['/', '/movies', '/saved-movies', '/profile'];
+export const FOOTER_PATHS = ['/', '/movies', '/saved-movies'];

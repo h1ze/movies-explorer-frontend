@@ -2,18 +2,17 @@ import React from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
+import { FOOTER_PATHS, HEADER_PATHS } from '../../utils/constants';
 
 const Layout = ({ onMenuClick, isloggedIn }) => {
   const { pathname } = useLocation();
-  const headerPaths = ['/', '/movies', '/saved-movies', '/profile'];
-  const footerPaths = ['/', '/movies', '/saved-movies'];
   return (
     <>
-      {headerPaths.includes(pathname) && (
+      {HEADER_PATHS.includes(pathname) && (
         <Header onMenuClick={onMenuClick} isloggedIn={isloggedIn} />
       )}
       <Outlet />
-      {footerPaths.includes(pathname) && <Footer />}
+      {FOOTER_PATHS.includes(pathname) && <Footer />}
     </>
   );
 };

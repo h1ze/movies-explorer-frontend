@@ -4,7 +4,6 @@ import Logo from '../Logo/Logo';
 import Navigation from '../Navigation/Navigation';
 
 function Header({ onMenuClick, isloggedIn }) {
-  const paths = ['movies', 'saved-movies', 'profile'];
   return (
     <header className={`header ${isloggedIn} "": ? : "header_theme_dark"`}>
       <div className="header__wrapper">
