@@ -36,3 +36,11 @@ export function loginApi(loginData) {
     }),
   }).then((response) => checkResponse(response));
 }
+
+export function logoutApi() {
+  return fetch(`${MAIN_API_BASE_URL}/signout`, {
+    method: 'POST',
+    credentials: 'include', // отправляем куки вместе с запросом
+    headers: REQUEST_HEADERS,
+  }).then((response) => checkResponse(response));
+}

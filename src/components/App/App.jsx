@@ -13,7 +13,12 @@ import movies from '../../utils/movies';
 import savedMovies from '../../utils/savedMovies';
 import Menu from '../Menu/Menu';
 import Preloader from '../Preloader/Preloader';
-import { getUserApi, loginApi, registerUserApi } from '../../utils/MainApi';
+import {
+  getUserApi,
+  loginApi,
+  logoutApi,
+  registerUserApi,
+} from '../../utils/MainApi';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import ProtectedRouteElement from '../ProtectedRoute/ProtectedRoute';
 
@@ -46,7 +51,7 @@ function App() {
     setIsMenuOpen(!isMenuOpen);
   };
 
-  function handleRegisterSubmit(registerData) {
+  function handleRegister(registerData) {
     registerUserApi(registerData)
       .then((responseUserData) => {
         // Здесь мы получаем данные зарегистрированного пользователя
@@ -66,6 +71,18 @@ function App() {
       .then(() => {
         setLoggedIn(true);
         navigate('/movies', { replace: true });
+      })
+      .catch((err) => {
+        console.log(err); // выведем ошибку в консоль
+        setIsErrorResponse(err.message);
+      });
+  }
+
+  function handleLogout() {
+    logoutApi()
+      .then(() => {
+        setLoggedIn(false);
+        navigate('/', { replace: true });
       })
       .catch((err) => {
         console.log(err); // выведем ошибку в консоль
@@ -118,6 +135,7 @@ function App() {
                   <ProtectedRouteElement
                     element={Profile}
                     isloggedIn={loggedIn}
+                    onSignout={handleLogout}
                   />
                 }
               />
@@ -125,7 +143,7 @@ function App() {
                 path="signup"
                 element={
                   <Register
-                    onRegister={handleRegisterSubmit}
+                    onRegister={handleRegister}
                     isErrorResponse={isErrorResponse}
                   />
                 }

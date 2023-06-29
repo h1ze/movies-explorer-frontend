@@ -4,7 +4,7 @@ import ReqError from '../ReqError/ReqError';
 import { useFormWithValidation } from '../../utils/useFormWithValidation';
 import { REGEX_CHECK_NAME } from '../../utils/constants';
 
-const Profile = () => {
+const Profile = ({ onSignout }) => {
   const { values, handleChange, errors, isValid, resetForm } =
     useFormWithValidation();
 
@@ -93,6 +93,7 @@ const Profile = () => {
               <button
                 className="profile__button profile__button_type_exit"
                 type="button"
+                onClick={onSignout}
               >
                 Выйти из аккаунта
               </button>
