@@ -1,10 +1,14 @@
 import React from 'react';
 import './ReqError.css';
 
-const ReqError = ({ isError, children }) => {
+const ReqError = ({ isErrorResponse, children }) => {
   return (
-    <p className={`request-error ${isError ? 'request-error_active' : ''}`}>
-      {children}
+    <p
+      className={`request-error ${
+        isErrorResponse ? 'request-error_active' : ''
+      }`}
+    >
+      {isErrorResponse}
     </p>
   );
 };

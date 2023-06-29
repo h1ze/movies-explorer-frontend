@@ -8,8 +8,6 @@ import { useFormWithValidation } from '../../utils/useFormWithValidation';
 import ReqError from '../ReqError/ReqError';
 
 const AuthForm = ({ formData, onSubmit, isErrorResponse }) => {
-  const [isReqError, setIsReqError] = useState(false);
-
   const isRegister = formData.name === 'register';
   const { values, handleChange, errors, isValid, resetForm } =
     useFormWithValidation();
@@ -108,10 +106,7 @@ const AuthForm = ({ formData, onSubmit, isErrorResponse }) => {
               {errors.password}
             </span>
           </label>
-          <ReqError isReqError={isErrorResponse}>
-            При авторизации профиля произошла ошибка, токен не передан или
-            передан не в том формате
-          </ReqError>
+          <ReqError isErrorResponse={isErrorResponse}></ReqError>
           <button
             className="auth-form__button"
             type="submit"

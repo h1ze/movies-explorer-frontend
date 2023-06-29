@@ -62,7 +62,8 @@ function App() {
       })
       .catch((err) => {
         console.log(err); // выведем ошибку в консоль
-        setIsErrorResponse(err.message);
+        setIsErrorResponse(err);
+        console.log(isErrorResponse);
       });
   }
 

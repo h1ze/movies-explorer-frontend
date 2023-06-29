@@ -1,7 +1,7 @@
 import React from 'react';
 import AuthForm from '../AuthForm/AuthForm';
 
-const Register = ({ onRegister }) => {
+const Register = ({ onRegister, isErrorResponse }) => {
   const registerFormData = {
     name: 'register',
     title: 'Добро пожаловать!',
@@ -10,7 +10,13 @@ const Register = ({ onRegister }) => {
     link: '/signin',
     linkText: 'Войти',
   };
-  return <AuthForm formData={registerFormData} onSubmit={onRegister} />;
+  return (
+    <AuthForm
+      formData={registerFormData}
+      onSubmit={onRegister}
+      isErrorResponse={isErrorResponse}
+    />
+  );
 };
 
 export default Register;
