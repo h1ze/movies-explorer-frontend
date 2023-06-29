@@ -33,12 +33,11 @@ function App() {
       .then((responseUserData) => {
         setCurrentUser(responseUserData.data);
         setLoggedIn(true);
-        navigate('/movies', { replace: true });
       })
       .catch((err) => {
         console.log(err); // выведем ошибку в консоль
       });
-  }, [navigate]);
+  }, []);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -82,7 +81,7 @@ function App() {
       <div className="page">
         <Routes>
           <Route path="/" element={<Layout onMenuClick={toggleMenu} />}>
-            <Route index element={<Main />} />
+            <Route index element={<Main isloggedIn={loggedIn} />} />
             <Route
               path="movies"
               element={
