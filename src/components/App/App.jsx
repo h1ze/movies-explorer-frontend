@@ -29,7 +29,6 @@ function App() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    setLoading(true);
     getUserApi()
       .then((responseUserData) => {
         setCurrentUser(responseUserData.data);
@@ -74,18 +73,17 @@ function App() {
       });
   }
 
-  useEffect(() => {
-    setCards(movies);
-    setSavedCards(savedMovies);
-    setLoading(false);
-  }, []);
+  // useEffect(() => {
+  //   setCards(movies);
+  //   setSavedCards(savedMovies);
+  // }, []);
 
   return (
-    <CurrentUserContext.Provider value={currentUser}>
+    <div className="page">
       {loading ? (
         <Preloader />
       ) : (
-        <div className="page">
+        <CurrentUserContext.Provider value={currentUser}>
           <Routes>
             <Route
               path="/"
@@ -145,10 +143,9 @@ function App() {
             </Route>
           </Routes>
           <Menu isOpen={isMenuOpen} onClose={toggleMenu} />
-          {loading && <Preloader />}
-        </div>
+        </CurrentUserContext.Provider>
       )}
-    </CurrentUserContext.Provider>
+    </div>
   );
 }
 

@@ -5,10 +5,13 @@ import Footer from '../Footer/Footer';
 
 const Layout = ({ onMenuClick, isloggedIn }) => {
   const { pathname } = useLocation();
+  const headerPaths = ['/', '/movies', '/saved-movies', '/profile'];
   const footerPaths = ['/', '/movies', '/saved-movies'];
   return (
     <>
-      <Header onMenuClick={onMenuClick} isloggedIn={isloggedIn} />
+      {headerPaths.includes(pathname) && (
+        <Header onMenuClick={onMenuClick} isloggedIn={isloggedIn} />
+      )}
       <Outlet />
       {footerPaths.includes(pathname) && <Footer />}
     </>
