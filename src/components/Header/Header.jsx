@@ -1,11 +1,11 @@
-import { Link, Route, Routes } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import './Header.css';
 import Logo from '../Logo/Logo';
 import Navigation from '../Navigation/Navigation';
 
 function Header({ onMenuClick, isloggedIn }) {
   return (
-    <header className={`header ${isloggedIn} "": ? : "header_theme_dark"`}>
+    <header className={`header ${isloggedIn ? '' : 'header_theme_dark'}`}>
       <div className="header__wrapper">
         <nav className="header__menu">
           <Logo />
@@ -14,7 +14,12 @@ function Header({ onMenuClick, isloggedIn }) {
           ) : (
             <ul className="header__links">
               <li>
-                <Link className="header__link" to="signup">
+                <Link
+                  className={`header__link ${
+                    isloggedIn ? 'header__link_color_black' : ''
+                  }`}
+                  to="signup"
+                >
                   Регистрация
                 </Link>
               </li>
