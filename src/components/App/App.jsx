@@ -23,12 +23,13 @@ function App() {
   const [cards, setCards] = useState([]);
   const [savedCards, setSavedCards] = useState([]);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
   const [isErrorResponse, setIsErrorResponse] = useState('');
 
   const navigate = useNavigate();
 
   useEffect(() => {
+    setLoading(true);
     getUserApi()
       .then((responseUserData) => {
         setCurrentUser(responseUserData.data);
@@ -36,6 +37,9 @@ function App() {
       })
       .catch((err) => {
         console.log(err); // выведем ошибку в консоль
+      })
+      .finally(() => {
+        setLoading(false);
       });
   }, []);
 
@@ -73,68 +77,77 @@ function App() {
   useEffect(() => {
     setCards(movies);
     setSavedCards(savedMovies);
-    setIsLoading(false);
+    setLoading(false);
   }, []);
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
-      <div className="page">
-        <Routes>
-          <Route path="/" element={<Layout onMenuClick={toggleMenu} />}>
-            <Route index element={<Main isloggedIn={loggedIn} />} />
+      {loading ? (
+        <Preloader />
+      ) : (
+        <div className="page">
+          <Routes>
             <Route
-              path="movies"
+              path="/"
               element={
-                <ProtectedRouteElement
-                  element={Movies}
-                  isloggedIn={loggedIn}
-                  cards={cards}
-                />
+                <Layout onMenuClick={toggleMenu} isloggedIn={loggedIn} />
               }
-            />
-            <Route
-              path="saved-movies"
-              element={
-                <ProtectedRouteElement
-                  element={SavedMovies}
-                  isloggedIn={loggedIn}
-                  cards={savedCards}
-                />
-              }
-            />
-            <Route
-              path="profile"
-              element={
-                <ProtectedRouteElement
-                  element={Profile}
-                  isloggedIn={loggedIn}
-                />
-              }
-            />
-            <Route
-              path="signup"
-              element={
-                <Register
-                  onRegister={handleRegisterSubmit}
-                  isErrorResponse={isErrorResponse}
-                />
-              }
-            />
-            <Route
-              path="signin"
-              element={
-                <Login
-                  onLogin={handleLogin}
-                  isErrorResponse={isErrorResponse}
-                />
-              }
-            />
-            <Route path="*" element={<NotFound />} />
-          </Route>
-        </Routes>
-        <Menu isOpen={isMenuOpen} onClose={toggleMenu} />
-        {isLoading && <Preloader />}
-      </div>
+            >
+              <Route index element={<Main isloggedIn={loggedIn} />} />
+              <Route
+                path="movies"
+                element={
+                  <ProtectedRouteElement
+                    element={Movies}
+                    isloggedIn={loggedIn}
+                    cards={cards}
+                  />
+                }
+              />
+              <Route
+                path="saved-movies"
+                element={
+                  <ProtectedRouteElement
+                    element={SavedMovies}
+                    isloggedIn={loggedIn}
+                    cards={savedCards}
+                  />
+                }
+              />
+              <Route
+                path="profile"
+                element={
+                  <ProtectedRouteElement
+                    element={Profile}
+                    isloggedIn={loggedIn}
+                  />
+                }
+              />
+              <Route
+                path="signup"
+                element={
+                  <Register
+                    onRegister={handleRegisterSubmit}
+                    isErrorResponse={isErrorResponse}
+                  />
+                }
+              />
+              <Route
+                path="signin"
+                element={
+                  <Login
+                    onLogin={handleLogin}
+                    isErrorResponse={isErrorResponse}
+                  />
+                }
+              />
+              <Route path="*" element={<NotFound />} />
+            </Route>
+          </Routes>
+          <Menu isOpen={isMenuOpen} onClose={toggleMenu} />
+          {loading && <Preloader />}
+        </div>
+      )}
     </CurrentUserContext.Provider>
   );
 }

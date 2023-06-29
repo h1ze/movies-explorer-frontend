@@ -4,17 +4,8 @@ import NavTab from '../NavTab/NavTab';
 import AboutProject from '../AboutProject/AboutProject';
 import Techs from '../Techs/Techs';
 import AboutMe from '../AboutMe/AboutMe';
-import { useNavigate } from 'react-router-dom';
 
-const Main = ({ isloggedIn }) => {
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    if (isloggedIn) {
-      navigate('/movies', { replace: true });
-    }
-  }, [isloggedIn, navigate]);
-
+const Main = ({ isLoading }) => {
   return (
     <main>
       <Promo />

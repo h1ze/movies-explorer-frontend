@@ -3,32 +3,38 @@ import './Header.css';
 import Logo from '../Logo/Logo';
 import Navigation from '../Navigation/Navigation';
 
-function Header({ onMenuClick }) {
+function Header({ onMenuClick, isloggedIn }) {
   const paths = ['movies', 'saved-movies', 'profile'];
   return (
     <Routes>
       <Route
         path="/"
         element={
-          <header className="header header_theme_dark">
+          <header
+            className={`header ${isloggedIn} "": ? : "header_theme_dark"`}
+          >
             <div className="header__wrapper">
               <nav className="header__menu">
                 <Logo />
-                <ul className="header__links">
-                  <li>
-                    <Link className="header__link" to="signup">
-                      Регистрация
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      className="header__link header__link_type_button"
-                      to="signin"
-                    >
-                      Войти
-                    </Link>
-                  </li>
-                </ul>
+                {isloggedIn ? (
+                  <Navigation onMenuClick={onMenuClick} />
+                ) : (
+                  <ul className="header__links">
+                    <li>
+                      <Link className="header__link" to="signup">
+                        Регистрация
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        className="header__link header__link_type_button"
+                        to="signin"
+                      >
+                        Войти
+                      </Link>
+                    </li>
+                  </ul>
+                )}
               </nav>
             </div>
           </header>
