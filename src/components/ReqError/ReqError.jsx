@@ -1,7 +1,7 @@
 import React from 'react';
 import './ReqError.css';
 
-const ReqError = ({ isErrorResponse, children }) => {
+const ReqError = ({ isErrorResponse }) => {
   return (
     <p
       className={`request-error ${

@@ -4,13 +4,12 @@ import ReqError from '../ReqError/ReqError';
 import { useFormWithValidation } from '../../utils/useFormWithValidation';
 import { REGEX_CHECK_NAME } from '../../utils/constants';
 
-const Profile = ({ onSignout }) => {
+const Profile = ({ onSignout, isErrorResponse }) => {
   const { values, handleChange, errors, isValid, resetForm } =
     useFormWithValidation();
 
   const [isDisable, setIsDisable] = useState(true);
-  const [isReqError, setIsReqError] = useState(false);
-
+ 
   const handleEdit = () => {
     setIsDisable(!isDisable);
   };
@@ -66,15 +65,12 @@ const Profile = ({ onSignout }) => {
             )}
           </label>
         </form>
-        <ReqError isReqError={isReqError}>
-          При авторизации профиля произошла ошибка, токен не передан или передан
-          не в том формате
-        </ReqError>
+        <ReqError isErrorResponse={isErrorResponse}></ReqError>
         {!isDisable ? (
           <button
             className="profile__save"
             onClick={handleSubmit}
-            disabled={isReqError || !isValid}
+            disabled={isErrorResponse || !isValid}
           >
             Сохранить
           </button>

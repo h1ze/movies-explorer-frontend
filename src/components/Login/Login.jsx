@@ -1,7 +1,7 @@
 import React from 'react';
 import AuthForm from '../AuthForm/AuthForm';
 
-const Login = ({ onLogin }) => {
+const Login = ({ onLogin, isErrorResponse }) => {
   const loginFormData = {
     name: 'login',
     title: 'Рады видеть!',
@@ -10,7 +10,13 @@ const Login = ({ onLogin }) => {
     link: '/signup',
     linkText: 'Регистрация',
   };
-  return <AuthForm formData={loginFormData} onSubmit={onLogin} />;
+  return (
+    <AuthForm
+      formData={loginFormData}
+      onSubmit={onLogin}
+      isErrorResponse={isErrorResponse}
+    />
+  );
 };
 
 export default Login;

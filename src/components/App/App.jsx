@@ -75,7 +75,7 @@ function App() {
       })
       .catch((err) => {
         console.log(err); // выведем ошибку в консоль
-        setIsErrorResponse(err.message);
+        setIsErrorResponse(err);
       });
   }
 
@@ -137,6 +137,7 @@ function App() {
                     element={Profile}
                     isloggedIn={loggedIn}
                     onSignout={handleLogout}
+                    isErrorResponse={isErrorResponse}
                   />
                 }
               />
