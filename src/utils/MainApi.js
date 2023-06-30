@@ -46,7 +46,7 @@ export function logoutApi() {
 }
 
 export function updateUserApi(userData) {
-  return fetch(`${MAIN_API_BASE_URL}//users/me`, {
+  return fetch(`${MAIN_API_BASE_URL}/users/me`, {
     method: 'PATCH',
     credentials: 'include', // отправляем куки вместе с запросом
     headers: REQUEST_HEADERS,

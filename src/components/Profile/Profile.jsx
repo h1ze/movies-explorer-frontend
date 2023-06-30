@@ -6,30 +6,32 @@ import { REGEX_CHECK_NAME } from '../../utils/constants';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
 const Profile = ({ OnUpdateUser, onSignout, isErrorResponse }) => {
-  const [profileData, setProfileData] = useState({});
   const [isDisable, setIsDisable] = useState(true);
   const currentUser = React.useContext(CurrentUserContext);
 
   const handleEdit = () => {
     setIsDisable(!isDisable);
+    resetForm();
   };
 
-  const { values, handleChange, errors, isValid, resetForm } =
+  const { values, handleChange, errors, isValid, resetForm, setValues } =
     useFormWithValidation();
 
   const handleSubmit = () => {
     OnUpdateUser(values);
+    if (!isErrorResponse) {
+      handleEdit();
+    }
   };
 
   React.useEffect(() => {
-    setProfileData({ name: currentUser.name, email: currentUser.email });
-    console.log(currentUser);
-  }, [currentUser]);
+    setValues({ name: currentUser.name, email: currentUser.email });
+  }, [currentUser, setValues]);
 
   return (
     <main className="profile">
       <div className="profile__container">
-        <h1 className="profile__title">{`Привет, ${profileData.name}!`}</h1>
+        <h1 className="profile__title">{`Привет, ${currentUser.name}!`}</h1>
         <form className="profile__form" name="profile-form">
           <label className="profile__label">
             Имя
@@ -42,7 +44,7 @@ const Profile = ({ OnUpdateUser, onSignout, isErrorResponse }) => {
               minLength="2"
               maxLength="30"
               name="name"
-              value={values.name || profileData.name}
+              value={values.name || ''}
               placeholder="Укажите имя"
               disabled={isDisable}
               onChange={handleChange}
@@ -63,7 +65,7 @@ const Profile = ({ OnUpdateUser, onSignout, isErrorResponse }) => {
                 !!errors.email ? 'profile__input_type_error' : ''
               } `}
               name="email"
-              value={values.email || profileData.email}
+              value={values.email || ''}
               placeholder="Укажите почту"
               disabled={isDisable}
               onChange={handleChange}
