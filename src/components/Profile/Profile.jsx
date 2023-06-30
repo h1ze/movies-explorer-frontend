@@ -42,7 +42,7 @@ const Profile = ({ onSignout, isErrorResponse }) => {
               onChange={handleChange}
               required
               pattern={REGEX_CHECK_NAME}
-              autocomplete="off"
+              autoComplete="off"
             ></input>
             {!!errors.name && (
               <span className="profile-input__error">{errors.name}</span>
@@ -62,7 +62,7 @@ const Profile = ({ onSignout, isErrorResponse }) => {
               disabled={isDisable}
               onChange={handleChange}
               required
-              autocomplete="off"
+              autoComplete="off"
             ></input>
             {!!errors.email && (
               <span className="profile-input__error">{errors.email}</span>

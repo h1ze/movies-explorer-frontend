@@ -46,6 +46,7 @@ const AuthForm = ({ formData, onSubmit, isErrorResponse }) => {
                 required
                 pattern={REGEX_CHECK_NAME}
                 onChange={handleChange}
+                autoComplete="off"
               />
               <span
                 className={`auth-form__error ${
@@ -70,6 +71,7 @@ const AuthForm = ({ formData, onSubmit, isErrorResponse }) => {
               placeholder="Введите почту"
               required
               onChange={handleChange}
+              autoComplete="off"
             />
             <span
               className={`auth-form__error ${

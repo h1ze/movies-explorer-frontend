@@ -44,3 +44,16 @@ export function logoutApi() {
     headers: REQUEST_HEADERS,
   }).then((response) => checkResponse(response));
 }
+
+export function updateUserApi(userData) {
+  return fetch(`${MAIN_API_BASE_URL}//users/me`, {
+    method: 'PATCH',
+    credentials: 'include', // отправляем куки вместе с запросом
+    headers: REQUEST_HEADERS,
+    body: JSON.stringify({
+      // Забираем данные пользователя из формы профиля
+      name: userData.name,
+      email: userData.email,
+    }),
+  }).then((response) => checkResponse(response));
+}
