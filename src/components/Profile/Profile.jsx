@@ -5,7 +5,8 @@ import { useFormWithValidation } from '../../utils/useFormWithValidation';
 import { REGEX_CHECK_NAME } from '../../utils/constants';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
-const Profile = ({ onSignout, isErrorResponse }) => {
+const Profile = ({ OnUpdateUser, onSignout, isErrorResponse }) => {
+  const [profileData, setProfileData] = useState({});
   const [isDisable, setIsDisable] = useState(true);
   const currentUser = React.useContext(CurrentUserContext);
 
@@ -17,13 +18,18 @@ const Profile = ({ onSignout, isErrorResponse }) => {
     useFormWithValidation();
 
   const handleSubmit = () => {
-    console.log('Сабмит профиля');
+    OnUpdateUser(values);
   };
+
+  React.useEffect(() => {
+    setProfileData({ name: currentUser.name, email: currentUser.email });
+    console.log(currentUser);
+  }, [currentUser]);
 
   return (
     <main className="profile">
       <div className="profile__container">
-        <h1 className="profile__title">{`Привет, ${currentUser.name}!`}</h1>
+        <h1 className="profile__title">{`Привет, ${profileData.name}!`}</h1>
         <form className="profile__form" name="profile-form">
           <label className="profile__label">
             Имя
@@ -36,7 +42,7 @@ const Profile = ({ onSignout, isErrorResponse }) => {
               minLength="2"
               maxLength="30"
               name="name"
-              value={values.name || currentUser.name}
+              value={values.name || profileData.name}
               placeholder="Укажите имя"
               disabled={isDisable}
               onChange={handleChange}
@@ -57,7 +63,7 @@ const Profile = ({ onSignout, isErrorResponse }) => {
                 !!errors.email ? 'profile__input_type_error' : ''
               } `}
               name="email"
-              value={values.email || currentUser.email}
+              value={values.email || profileData.email}
               placeholder="Укажите почту"
               disabled={isDisable}
               onChange={handleChange}

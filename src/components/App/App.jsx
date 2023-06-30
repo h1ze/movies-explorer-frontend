@@ -18,6 +18,7 @@ import {
   loginApi,
   logoutApi,
   registerUserApi,
+  updateUserApi,
 } from '../../utils/MainApi';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import ProtectedRouteElement from '../ProtectedRoute/ProtectedRoute';
@@ -34,6 +35,14 @@ function App() {
   const navigate = useNavigate();
 
   useEffect(() => {
+    getUser();
+  }, []);
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
+  function getUser() {
     getUserApi()
       .then((responseUserData) => {
         setCurrentUser(responseUserData.data);
@@ -45,11 +54,7 @@ function App() {
       .finally(() => {
         setLoading(false);
       });
-  }, []);
-
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
+  }
 
   function handleRegister(registerData) {
     registerUserApi(registerData)
@@ -66,14 +71,24 @@ function App() {
         console.log(isErrorResponse);
       });
   }
-
   function handleLogin(loginData) {
     loginApi(loginData)
-      .then((responseUserData) => {
-        console.log(responseUserData.data);
-        setCurrentUser(responseUserData.data);
+      .then(() => {
+        getUser();
         setLoggedIn(true);
         navigate('/movies', { replace: true });
+      })
+      .catch((err) => {
+        console.log(err); // выведем ошибку в консоль
+        setIsErrorResponse(err);
+      });
+  }
+
+  function handleUpdateUser(userData) {
+    updateUserApi(userData)
+      .then((responseUserData) => {
+        console.log(responseUserData);
+        setCurrentUser(responseUserData.data);
       })
       .catch((err) => {
         console.log(err); // выведем ошибку в консоль
@@ -140,6 +155,7 @@ function App() {
                     isloggedIn={loggedIn}
                     onSignout={handleLogout}
                     isErrorResponse={isErrorResponse}
+                    OnUpdateUser={handleUpdateUser}
                   />
                 }
               />
