@@ -14,12 +14,7 @@ function Header({ onMenuClick, isloggedIn }) {
           ) : (
             <ul className="header__links">
               <li>
-                <Link
-                  className={`header__link ${
-                    isloggedIn ? 'header__link_color_black' : ''
-                  }`}
-                  to="signup"
-                >
+                <Link className="header__link" to="signup">
                   Регистрация
                 </Link>
               </li>

@@ -69,7 +69,9 @@ function App() {
 
   function handleLogin(loginData) {
     loginApi(loginData)
-      .then(() => {
+      .then((responseUserData) => {
+        console.log(responseUserData.data);
+        setCurrentUser(responseUserData.data);
         setLoggedIn(true);
         navigate('/movies', { replace: true });
       })

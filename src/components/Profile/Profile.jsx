@@ -3,16 +3,18 @@ import './Profile.css';
 import ReqError from '../ReqError/ReqError';
 import { useFormWithValidation } from '../../utils/useFormWithValidation';
 import { REGEX_CHECK_NAME } from '../../utils/constants';
+import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
 const Profile = ({ onSignout, isErrorResponse }) => {
-  const { values, handleChange, errors, isValid, resetForm } =
-    useFormWithValidation();
-
   const [isDisable, setIsDisable] = useState(true);
- 
+  const currentUser = React.useContext(CurrentUserContext);
+
   const handleEdit = () => {
     setIsDisable(!isDisable);
   };
+
+  const { values, handleChange, errors, isValid, resetForm } =
+    useFormWithValidation();
 
   const handleSubmit = () => {
     console.log('Сабмит профиля');
@@ -21,7 +23,7 @@ const Profile = ({ onSignout, isErrorResponse }) => {
   return (
     <main className="profile">
       <div className="profile__container">
-        <h1 className="profile__title">Привет, Виталий!</h1>
+        <h1 className="profile__title">{`Привет, ${currentUser.name}!`}</h1>
         <form className="profile__form" name="profile-form">
           <label className="profile__label">
             Имя
@@ -34,12 +36,13 @@ const Profile = ({ onSignout, isErrorResponse }) => {
               minLength="2"
               maxLength="30"
               name="name"
-              value={values.name || ''}
-              placeholder="Виталий"
+              value={values.name || currentUser.name}
+              placeholder="Укажите имя"
               disabled={isDisable}
               onChange={handleChange}
               required
               pattern={REGEX_CHECK_NAME}
+              autocomplete="off"
             ></input>
             {!!errors.name && (
               <span className="profile-input__error">{errors.name}</span>
@@ -54,11 +57,12 @@ const Profile = ({ onSignout, isErrorResponse }) => {
                 !!errors.email ? 'profile__input_type_error' : ''
               } `}
               name="email"
-              value={values.email || ''}
-              placeholder="pochta@yandex.ru"
+              value={values.email || currentUser.email}
+              placeholder="Укажите почту"
               disabled={isDisable}
               onChange={handleChange}
               required
+              autocomplete="off"
             ></input>
             {!!errors.email && (
               <span className="profile-input__error">{errors.email}</span>
