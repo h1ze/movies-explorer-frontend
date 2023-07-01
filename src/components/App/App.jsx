@@ -33,6 +33,7 @@ function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [loading, setLoading] = useState(true);
   const [isErrorResponse, setIsErrorResponse] = useState('');
+  const [shortsMovies, setShortsMovies] = useState(false);
 
   const navigate = useNavigate();
 
@@ -117,6 +118,21 @@ function App() {
     });
   }
 
+  function toggleDuration() {
+    setShortsMovies(!shortsMovies);
+    console.log(shortsMovies);
+  }
+
+  function setDurationLocal() {
+    localStorage.setItem('isShorts', shortsMovies);
+  }
+
+  // useEffect(() => {
+  //   toggleDuration();
+  //   setDurationLocal();
+  //   console.log(localStorage.getItem('isShorts'));
+  // }, []);
+
   return (
     <div className="page">
       {loading ? (
@@ -139,6 +155,7 @@ function App() {
                     isloggedIn={loggedIn}
                     cards={cards}
                     onSearch={getMovies}
+                    onFilterDuration={toggleDuration}
                   />
                 }
               />
