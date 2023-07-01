@@ -3,10 +3,10 @@ import './Movies.css';
 import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 
-const Movies = ({ cards }) => {
+const Movies = ({ cards, onSearch }) => {
   return (
     <main className="movies">
-      <SearchForm />
+      <SearchForm onSearch={onSearch} />
       <section className="movies__cards">
         <MoviesCardList cards={cards} />
       </section>

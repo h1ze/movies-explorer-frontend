@@ -2,11 +2,16 @@ import React, { useState } from 'react';
 import './SearchForm.css';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 
-const SearchForm = () => {
+const SearchForm = ({ onSearch }) => {
   const [text, setText] = useState('');
 
   const inputHandler = (evt) => {
     setText(evt.target.value);
+  };
+
+  const handleSearch = (evt) => {
+    evt.preventDefault();
+    onSearch(text);
   };
 
   return (
@@ -25,7 +30,11 @@ const SearchForm = () => {
             required
             onChange={inputHandler}
           />
-          <button className="form__button" type="submit"></button>
+          <button
+            className="form__button"
+            type="submit"
+            onClick={handleSearch}
+          ></button>
           <div className="form__stroke"></div>
         </div>
         <FilterCheckbox />

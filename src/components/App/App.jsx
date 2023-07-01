@@ -22,10 +22,12 @@ import {
 } from '../../utils/MainApi';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import ProtectedRouteElement from '../ProtectedRoute/ProtectedRoute';
+import { getMoviesApi } from '../../utils/MoviesApi';
 
 function App() {
   const [currentUser, setCurrentUser] = useState({});
   const [loggedIn, setLoggedIn] = useState(false);
+  const [movies, setMovies] = useState([]);
   const [cards, setCards] = useState([]);
   const [savedCards, setSavedCards] = useState([]);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -108,10 +110,12 @@ function App() {
       });
   }
 
-  // useEffect(() => {
-  //   setCards(movies);
-  //   setSavedCards(savedMovies);
-  // }, []);
+  function getMovies() {
+    getMoviesApi().then((resMovies) => {
+      localStorage.setItem('movies', JSON.stringify(resMovies));
+      console.log(JSON.parse(localStorage.getItem('movies')));
+    });
+  }
 
   return (
     <div className="page">
@@ -134,6 +138,7 @@ function App() {
                     element={Movies}
                     isloggedIn={loggedIn}
                     cards={cards}
+                    onSearch={getMovies}
                   />
                 }
               />
