@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './SearchForm.css';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 
-const SearchForm = ({ onSearch, onFilterDuration }) => {
+const SearchForm = ({ onSearch, onFilterDuration, isShortsMovies }) => {
   const [text, setText] = useState('');
 
   const inputHandler = (evt) => {
@@ -37,7 +37,10 @@ const SearchForm = ({ onSearch, onFilterDuration }) => {
           ></button>
           <div className="form__stroke"></div>
         </div>
-        <FilterCheckbox onClick={onFilterDuration} />
+        <FilterCheckbox
+          onChange={onFilterDuration}
+          isChecked={isShortsMovies}
+        />
       </form>
       <div className="search-form__underline"></div>
     </section>

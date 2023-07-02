@@ -114,8 +114,18 @@ function App() {
   function getMovies() {
     getMoviesApi().then((resMovies) => {
       localStorage.setItem('movies', JSON.stringify(resMovies));
-      console.log(JSON.parse(localStorage.getItem('movies')));
+      // setMovies(JSON.parse(localStorage.getItem('movies')));
+      setMovies(resMovies);
     });
+  }
+  async function searchMovies(search) {
+    await getMovies();
+    await setCards(
+      movies.filter((el) => {
+        el.nameRU.toLowerCase().includes(search.toLowerCase);
+      })
+    );
+    localStorage.setItem('cards', cards);
   }
 
   function toggleDuration() {
@@ -124,7 +134,7 @@ function App() {
   }
 
   function setDurationLocal() {
-    localStorage.setItem('isShorts', shortsMovies);
+    localStorage.setItem('isShortsMovies', shortsMovies);
   }
 
   // useEffect(() => {
@@ -132,6 +142,12 @@ function App() {
   //   setDurationLocal();
   //   console.log(localStorage.getItem('isShorts'));
   // }, []);
+
+  useEffect(() => {
+    if ('movies' in localStorage) {
+      setMovies(JSON.parse(localStorage.getItem('movies')));
+    }
+  }, []);
 
   return (
     <div className="page">
@@ -154,8 +170,9 @@ function App() {
                     element={Movies}
                     isloggedIn={loggedIn}
                     cards={cards}
-                    onSearch={getMovies}
+                    onSearch={searchMovies}
                     onFilterDuration={toggleDuration}
+                    isShortsMovies={shortsMovies}
                   />
                 }
               />

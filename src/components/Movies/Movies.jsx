@@ -3,10 +3,14 @@ import './Movies.css';
 import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 
-const Movies = ({ cards, onSearch, onFilterDuration }) => {
+const Movies = ({ cards, onSearch, onFilterDuration, isShortsMovies }) => {
   return (
     <main className="movies">
-      <SearchForm onSearch={onSearch} onFilterDuration={onFilterDuration} />
+      <SearchForm
+        onSearch={onSearch}
+        onFilterDuration={onFilterDuration}
+        isShortsMovies={isShortsMovies}
+      />
       <section className="movies__cards">
         <MoviesCardList cards={cards} />
       </section>
