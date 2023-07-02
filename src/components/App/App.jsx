@@ -134,34 +134,72 @@ function App() {
 
   // }
 
+  // const handleSearchMovies = useCallback(
+  //   (searchText) => {
+  //     const searched = movies.filter((el) =>
+  //       el.nameRU.toLowerCase().includes(searchText.toLowerCase())
+  //     );
+  //     setFindedMovies(searched);
+  //     localStorage.setItem('findedMovies', JSON.stringify(searched));
+  //     console.log(searched);
+  //     if (isShortsMovies) {
+  //       const filteredMovies = searched.filter((el) => el.duration <= 40);
+  //       console.log(filteredMovies);
+  //       setCards(filteredMovies);
+  //       localStorage.setItem('cards', JSON.stringify(filteredMovies));
+  //     } else {
+  //       setCards(searched);
+  //       localStorage.setItem('cards', JSON.stringify(searched));
+  //     }
+  //   },
+  //   [movies, isShortsMovies]
+  // );
+
+  const setRenderedCards = useCallback((elements) => {
+    if (localStorage.getItem('isShortsMovies') === 'true') {
+      const filtered = elements.filter((el) => el.duration <= 40);
+      setCards(filtered);
+    } else {
+      setCards(elements);
+    }
+  }, []);
+
   const handleSearchMovies = useCallback(
     (searchText) => {
       const searched = movies.filter((el) =>
         el.nameRU.toLowerCase().includes(searchText.toLowerCase())
       );
-      setFindedMovies(searched);
-      console.log(searched);
-      if (isShortsMovies) {
-        const filteredMovies = searched.filter((el) => el.duration <= 40);
-        console.log(filteredMovies);
-        setCards(filteredMovies);
-        localStorage.setItem('cards', JSON.stringify(filteredMovies));
-      } else {
-        setCards(searched);
-        localStorage.setItem('cards', JSON.stringify(searched));
-      }
+      localStorage.setItem('findedMovies', JSON.stringify(searched));
+      setRenderedCards(searched);
     },
-    [movies, isShortsMovies]
+    [movies, setRenderedCards]
   );
 
-  // const toggleDuration = useCallback(() => {
-  //   setIsShortsMovies(!isShortsMovies);
-  // }, [isShortsMovies]);
-
-  const toggleDuration = () => {
+  const toggleDuration = useCallback(() => {
     setIsShortsMovies(!isShortsMovies);
     localStorage.setItem('isShortsMovies', !isShortsMovies);
-  };
+
+    if ('findedMovies' in localStorage) {
+      setRenderedCards(JSON.parse(localStorage.getItem('findedMovies')));
+    }
+  }, [isShortsMovies, setRenderedCards]);
+
+  // const toggleDuration = () => {
+  //   setIsShortsMovies(!isShortsMovies);
+  // localStorage.setItem('isShortsMovies', !isShortsMovies);
+
+  // if ('findedMovies' in localStorage) {
+  //   const searched = JSON.parse(localStorage.getItem('findedMovies'));
+  //   console.log(searched);
+  //   const filtered = searched.filter((el) => el.duration <= 40);
+  //   console.log(filtered);
+  //   if (isShortsMovies) {
+  //     setCards(filtered);
+  //   } else {
+  //     setCards(searched);
+  //   }
+  // }
+  // };
 
   useEffect(() => {
     // toggleDuration();
@@ -179,11 +217,10 @@ function App() {
       setIsShortsMovies(true);
     }
 
-    if ('cards' in localStorage) {
-      setCards(JSON.parse(localStorage.getItem('cards')));
-    }
-    
-  }, []);
+    // if ('cards' in localStorage) {
+    //   setCards(JSON.parse(localStorage.getItem('cards')));
+    // }
+  }, [isShortsMovies]);
 
   return (
     <div className="page">
