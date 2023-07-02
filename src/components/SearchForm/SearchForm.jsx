@@ -12,6 +12,7 @@ const SearchForm = ({ onSearch, onFilterDuration, isShortsMovies }) => {
   const handleSearch = (evt) => {
     evt.preventDefault();
     onSearch(text, isShortsMovies);
+    localStorage.setItem('text', text);
   };
 
   return (
