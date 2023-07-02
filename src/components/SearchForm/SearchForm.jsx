@@ -11,7 +11,7 @@ const SearchForm = ({ onSearch, onFilterDuration, isShortsMovies }) => {
 
   const handleSearch = (evt) => {
     evt.preventDefault();
-    onSearch(text);
+    onSearch(text, isShortsMovies);
   };
 
   return (

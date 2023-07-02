@@ -9,8 +9,6 @@ import Login from '../Login/Login';
 import Profile from '../Profile/Profile';
 import NotFound from '../NotFound/NotFound';
 import Layout from '../Layout/Layout';
-import movies from '../../utils/movies';
-import savedMovies from '../../utils/savedMovies';
 import Menu from '../Menu/Menu';
 import Preloader from '../Preloader/Preloader';
 import {
@@ -118,13 +116,17 @@ function App() {
       setMovies(resMovies);
     });
   }
-  async function searchMovies(search) {
-    await getMovies();
-    await setCards(
-      movies.filter((el) => {
-        el.nameRU.toLowerCase().includes(search.toLowerCase);
-      })
+  
+  function searchMovies(searchText, isShorts) {
+    const findedByName = movies.filter((el) =>
+      el.nameRU.toLowerCase().includes(searchText.toLowerCase())
     );
+    setCards(findedByName);
+    if (isShorts) {
+      const sortedByDuration = findedByName.filter((el) => el.duration <= 40);
+      setCards(sortedByDuration);
+    }
+
     localStorage.setItem('cards', cards);
   }
 
