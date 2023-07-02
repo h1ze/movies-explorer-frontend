@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import { Routes, Route, useNavigate } from 'react-router-dom';
+import { useCallback, useEffect, useState } from 'react';
+import { Routes, Route, useNavigate, json } from 'react-router-dom';
 import './App.css';
 import Main from '../Main/Main';
 import Movies from '../Movies/Movies';
@@ -26,12 +26,13 @@ function App() {
   const [currentUser, setCurrentUser] = useState({});
   const [loggedIn, setLoggedIn] = useState(false);
   const [movies, setMovies] = useState([]);
+  const [findedMovies, setFindedMovies] = useState([]);
   const [cards, setCards] = useState([]);
   const [savedCards, setSavedCards] = useState([]);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [loading, setLoading] = useState(true);
   const [isErrorResponse, setIsErrorResponse] = useState('');
-  const [shortsMovies, setShortsMovies] = useState(false);
+  const [isShortsMovies, setIsShortsMovies] = useState(false);
 
   const navigate = useNavigate();
 
@@ -72,6 +73,7 @@ function App() {
         console.log(isErrorResponse);
       });
   }
+
   function handleLogin(loginData) {
     loginApi(loginData)
       .then(() => {
@@ -116,39 +118,71 @@ function App() {
       setMovies(resMovies);
     });
   }
-  
-  function searchMovies(searchText, isShorts) {
-    const findedByName = movies.filter((el) =>
-      el.nameRU.toLowerCase().includes(searchText.toLowerCase())
-    );
-    setCards(findedByName);
-    if (isShorts) {
-      const sortedByDuration = findedByName.filter((el) => el.duration <= 40);
-      setCards(sortedByDuration);
-    }
 
-    localStorage.setItem('cards', cards);
-  }
+  // function searchMovies(searchText) {
+  //   const handleSearchMovies = useCallback(() => {
+  //     setCards(
+  //       movies.filter((el) =>
+  //         el.nameRU.toLowerCase().includes(searchText.toLowerCase())
+  //       )
+  //     );
+  //   }, []);
 
-  function toggleDuration() {
-    setShortsMovies(!shortsMovies);
-    console.log(shortsMovies);
-  }
+  // } else {
+  //   setCards(allFindedMovies);
+  // }
 
-  function setDurationLocal() {
-    localStorage.setItem('isShortsMovies', shortsMovies);
-  }
+  // }
 
-  // useEffect(() => {
-  //   toggleDuration();
-  //   setDurationLocal();
-  //   console.log(localStorage.getItem('isShorts'));
-  // }, []);
+  const handleSearchMovies = useCallback(
+    (searchText) => {
+      const searched = movies.filter((el) =>
+        el.nameRU.toLowerCase().includes(searchText.toLowerCase())
+      );
+      setFindedMovies(searched);
+      console.log(searched);
+      if (isShortsMovies) {
+        const filteredMovies = searched.filter((el) => el.duration <= 40);
+        console.log(filteredMovies);
+        setCards(filteredMovies);
+        localStorage.setItem('cards', JSON.stringify(filteredMovies));
+      } else {
+        setCards(searched);
+        localStorage.setItem('cards', JSON.stringify(searched));
+      }
+    },
+    [movies, isShortsMovies]
+  );
+
+  // const toggleDuration = useCallback(() => {
+  //   setIsShortsMovies(!isShortsMovies);
+  // }, [isShortsMovies]);
+
+  const toggleDuration = () => {
+    setIsShortsMovies(!isShortsMovies);
+    localStorage.setItem('isShortsMovies', !isShortsMovies);
+  };
+
+  useEffect(() => {
+    // toggleDuration();
+    // setDurationLocal();
+    // console.log(localStorage.getItem('isShorts'));
+  }, []);
 
   useEffect(() => {
     if ('movies' in localStorage) {
       setMovies(JSON.parse(localStorage.getItem('movies')));
     }
+
+    if (localStorage.getItem('isShortsMovies') === 'true') {
+      // toggleDuration();
+      setIsShortsMovies(true);
+    }
+
+    if ('cards' in localStorage) {
+      setCards(JSON.parse(localStorage.getItem('cards')));
+    }
+    
   }, []);
 
   return (
@@ -172,9 +206,9 @@ function App() {
                     element={Movies}
                     isloggedIn={loggedIn}
                     cards={cards}
-                    onSearch={searchMovies}
+                    onSearch={handleSearchMovies}
                     onFilterDuration={toggleDuration}
-                    isShortsMovies={shortsMovies}
+                    isShortsMovies={isShortsMovies}
                   />
                 }
               />
