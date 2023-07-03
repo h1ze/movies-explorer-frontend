@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
-import { Routes, Route, useNavigate, json } from 'react-router-dom';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 import './App.css';
 import Main from '../Main/Main';
 import Movies from '../Movies/Movies';
@@ -25,6 +25,7 @@ import { getMoviesApi } from '../../utils/MoviesApi';
 function App() {
   const [currentUser, setCurrentUser] = useState({});
   const [loggedIn, setLoggedIn] = useState(false);
+  const [searchText, setSearchText] = useState(false);
   const [movies, setMovies] = useState([]);
   const [findedMovies, setFindedMovies] = useState([]);
   const [cards, setCards] = useState([]);
@@ -114,113 +115,48 @@ function App() {
   function getMovies() {
     getMoviesApi().then((resMovies) => {
       localStorage.setItem('movies', JSON.stringify(resMovies));
-      // setMovies(JSON.parse(localStorage.getItem('movies')));
       setMovies(resMovies);
     });
   }
 
-  // function searchMovies(searchText) {
-  //   const handleSearchMovies = useCallback(() => {
-  //     setCards(
-  //       movies.filter((el) =>
-  //         el.nameRU.toLowerCase().includes(searchText.toLowerCase())
-  //       )
-  //     );
-  //   }, []);
 
-  // } else {
-  //   setCards(allFindedMovies);
-  // }
-
-  // }
-
-  // const handleSearchMovies = useCallback(
-  //   (searchText) => {
-  //     const searched = movies.filter((el) =>
-  //       el.nameRU.toLowerCase().includes(searchText.toLowerCase())
-  //     );
-  //     setFindedMovies(searched);
-  //     localStorage.setItem('findedMovies', JSON.stringify(searched));
-  //     console.log(searched);
-  //     if (isShortsMovies) {
-  //       const filteredMovies = searched.filter((el) => el.duration <= 40);
-  //       console.log(filteredMovies);
-  //       setCards(filteredMovies);
-  //       localStorage.setItem('cards', JSON.stringify(filteredMovies));
-  //     } else {
-  //       setCards(searched);
-  //       localStorage.setItem('cards', JSON.stringify(searched));
-  //     }
-  //   },
-  //   [movies, isShortsMovies]
-  // );
-
-  const setRenderedCards = useCallback((elements) => {
-    if (localStorage.getItem('isShortsMovies') === 'true') {
-      const filtered = elements.filter((el) => el.duration <= 40);
-      setCards(filtered);
+  const setRenderedCards = useCallback(() => {
+    const search = localStorage.getItem('searchText');
+    const finded = movies.filter((el) =>
+      el.nameRU.toLowerCase().includes(search.toLowerCase())
+    );
+    setFindedMovies(finded);
+    localStorage.setItem('findedMovies', JSON.stringify(finded));
+    if (isShortsMovies) {
+      const filteredMovies = finded.filter((el) => el.duration <= 40);
+      setCards(filteredMovies);
+      localStorage.setItem('cards', JSON.stringify(filteredMovies));
     } else {
-      setCards(elements);
+      setCards(finded);
+      localStorage.setItem('cards', JSON.stringify(finded));
     }
-  }, []);
+  }, [movies, isShortsMovies]);
 
-  const handleSearchMovies = useCallback(
-    (searchText) => {
-      const searched = movies.filter((el) =>
-        el.nameRU.toLowerCase().includes(searchText.toLowerCase())
-      );
-      localStorage.setItem('findedMovies', JSON.stringify(searched));
-      setRenderedCards(searched);
-    },
-    [movies, setRenderedCards]
-  );
 
-  const toggleDuration = useCallback(() => {
+
+  const toggleDuration = () => {
     setIsShortsMovies(!isShortsMovies);
     localStorage.setItem('isShortsMovies', !isShortsMovies);
-
-    if ('findedMovies' in localStorage) {
-      setRenderedCards(JSON.parse(localStorage.getItem('findedMovies')));
-    }
-  }, [isShortsMovies, setRenderedCards]);
-
-  // const toggleDuration = () => {
-  //   setIsShortsMovies(!isShortsMovies);
-  // localStorage.setItem('isShortsMovies', !isShortsMovies);
-
-  // if ('findedMovies' in localStorage) {
-  //   const searched = JSON.parse(localStorage.getItem('findedMovies'));
-  //   console.log(searched);
-  //   const filtered = searched.filter((el) => el.duration <= 40);
-  //   console.log(filtered);
-  //   if (isShortsMovies) {
-  //     setCards(filtered);
-  //   } else {
-  //     setCards(searched);
-  //   }
-  // }
-  // };
-
-  useEffect(() => {
-    // toggleDuration();
-    // setDurationLocal();
-    // console.log(localStorage.getItem('isShorts'));
-  }, []);
+  };
 
   useEffect(() => {
     if ('movies' in localStorage) {
       setMovies(JSON.parse(localStorage.getItem('movies')));
     }
+  }, []);
 
+  useEffect(() => {
     if (localStorage.getItem('isShortsMovies') === 'true') {
-      // toggleDuration();
       setIsShortsMovies(true);
     }
 
-    // if ('cards' in localStorage) {
-    //   setCards(JSON.parse(localStorage.getItem('cards')));
-    // }
-  }, [isShortsMovies]);
+    setRenderedCards();
+  }, [isShortsMovies, setRenderedCards]);
 
   return (
     <div className="page">
@@ -243,7 +179,8 @@ function App() {
                     element={Movies}
                     isloggedIn={loggedIn}
                     cards={cards}
-                    onSearch={handleSearchMovies}
+                    setSearchText={setSearchText}
+                    onSearch={getMovies}
                     onFilterDuration={toggleDuration}
                     isShortsMovies={isShortsMovies}
                   />

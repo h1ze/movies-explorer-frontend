@@ -3,7 +3,12 @@ import './Movies.css';
 import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 
-const Movies = ({ cards, onSearch, onFilterDuration, isShortsMovies }) => {
+const Movies = ({
+  cards,
+  onSearch,
+  onFilterDuration,
+  isShortsMovies,
+}) => {
   return (
     <main className="movies">
       <SearchForm

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './SearchForm.css';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 
@@ -11,9 +11,15 @@ const SearchForm = ({ onSearch, onFilterDuration, isShortsMovies }) => {
 
   const handleSearch = (evt) => {
     evt.preventDefault();
-    onSearch(text, isShortsMovies);
-    localStorage.setItem('text', text);
+    localStorage.setItem('searchText', text);
+    onSearch();
   };
+
+  useEffect(() => {
+    if ('searchText' in localStorage) {
+      setText(localStorage.getItem('searchText'));
+    }
+  }, []);
 
   return (
     <section className="search-form">
