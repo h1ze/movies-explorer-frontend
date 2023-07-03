@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import './App.css';
 import Main from '../Main/Main';
@@ -25,14 +25,10 @@ import { getMoviesApi } from '../../utils/MoviesApi';
 function App() {
   const [currentUser, setCurrentUser] = useState({});
   const [loggedIn, setLoggedIn] = useState(false);
-  const [movies, setMovies] = useState([]);
-  const [findedMovies, setFindedMovies] = useState([]);
-  const [cards, setCards] = useState([]);
   const [savedCards, setSavedCards] = useState([]);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [loading, setLoading] = useState(true);
   const [isErrorResponse, setIsErrorResponse] = useState('');
-  const [isShortsMovies, setIsShortsMovies] = useState(false);
 
   const navigate = useNavigate();
 
@@ -62,7 +58,6 @@ function App() {
     registerUserApi(registerData)
       .then((responseUserData) => {
         // Здесь мы получаем данные зарегистрированного пользователя
-        console.log(responseUserData.data);
         setCurrentUser(responseUserData.data);
         // Передаем данные в апи логина
         handleLogin(registerData);
@@ -70,7 +65,6 @@ function App() {
       .catch((err) => {
         console.log(err); // выведем ошибку в консоль
         setIsErrorResponse(err);
-        console.log(isErrorResponse);
       });
   }
 
@@ -111,49 +105,6 @@ function App() {
       });
   }
 
-  function getMovies() {
-    getMoviesApi().then((resMovies) => {
-      localStorage.setItem('movies', JSON.stringify(resMovies));
-      setMovies(resMovies);
-    });
-  }
-
-  const setRenderedCards = useCallback(() => {
-    const search = localStorage.getItem('searchText');
-    const finded = movies.filter((el) =>
-      el.nameRU.toLowerCase().includes(search.toLowerCase())
-    );
-    setFindedMovies(finded);
-    localStorage.setItem('findedMovies', JSON.stringify(finded));
-    if (isShortsMovies) {
-      const filteredMovies = finded.filter((el) => el.duration <= 40);
-      setCards(filteredMovies);
-      localStorage.setItem('cards', JSON.stringify(filteredMovies));
-    } else {
-      setCards(finded);
-      localStorage.setItem('cards', JSON.stringify(finded));
-    }
-  }, [movies, isShortsMovies]);
-
-  const toggleDuration = () => {
-    setIsShortsMovies(!isShortsMovies);
-    localStorage.setItem('isShortsMovies', !isShortsMovies);
-  };
-
-  useEffect(() => {
-    if ('movies' in localStorage) {
-      setMovies(JSON.parse(localStorage.getItem('movies')));
-    }
-  }, []);
-
-  useEffect(() => {
-    if (localStorage.getItem('isShortsMovies') === 'true') {
-      setIsShortsMovies(true);
-    }
-
-    setRenderedCards();
-  }, [isShortsMovies, setRenderedCards]);
-
   return (
     <div className="page">
       {loading ? (
@@ -174,10 +125,6 @@ function App() {
                   <ProtectedRouteElement
                     element={Movies}
                     isloggedIn={loggedIn}
-                    cards={cards}
-                    onSearch={getMovies}
-                    onFilterDuration={toggleDuration}
-                    isShortsMovies={isShortsMovies}
                   />
                 }
               />

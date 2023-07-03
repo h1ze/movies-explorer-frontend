@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom';
 import './SearchForm.css';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 
-const SearchForm = ({ onSearch, onFilterDuration, isShortsMovies }) => {
+const SearchForm = ({ onSearch, onChangeFilter, isShorts }) => {
   const { pathname } = useLocation();
   const [text, setText] = useState('');
 
@@ -55,8 +55,8 @@ const SearchForm = ({ onSearch, onFilterDuration, isShortsMovies }) => {
           <div className="form__stroke"></div>
         </div>
         <FilterCheckbox
-          onChange={onFilterDuration}
-          isChecked={isShortsMovies}
+          onChange={onChangeFilter}
+          isChecked={isShorts}
         />
       </form>
       <div className="search-form__underline"></div>
