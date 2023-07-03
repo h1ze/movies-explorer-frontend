@@ -140,7 +140,6 @@ function App() {
     localStorage.setItem('isShortsMovies', !isShortsMovies);
   };
 
-
   useEffect(() => {
     if ('movies' in localStorage) {
       setMovies(JSON.parse(localStorage.getItem('movies')));
@@ -176,7 +175,6 @@ function App() {
                     element={Movies}
                     isloggedIn={loggedIn}
                     cards={cards}
-                    setSearchText={setSearchText}
                     onSearch={getMovies}
                     onFilterDuration={toggleDuration}
                     isShortsMovies={isShortsMovies}
