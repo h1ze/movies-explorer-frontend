@@ -21,7 +21,6 @@ import {
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import ProtectedRouteElement from '../ProtectedRoute/ProtectedRoute';
 
-
 function App() {
   const [currentUser, setCurrentUser] = useState({});
   const [loggedIn, setLoggedIn] = useState(false);
@@ -31,10 +30,6 @@ function App() {
   const [isErrorResponse, setIsErrorResponse] = useState('');
 
   const navigate = useNavigate();
-
-  useEffect(() => {
-    getUser();
-  }, []);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -104,6 +99,10 @@ function App() {
         setIsErrorResponse(err.message);
       });
   }
+
+  useEffect(() => {
+    getUser();
+  }, []);
 
   return (
     <div className="page">

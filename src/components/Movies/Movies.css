@@ -3,6 +3,14 @@
   padding: 70px 70px 10px;
 }
 
+.movies__not-found {
+  margin: 0 auto;
+  font-family: 'Inter', 'Arial', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+}
+
 .movies__btn-container {
   padding: 50px 70px 80px;
 }
@@ -39,6 +47,10 @@
 @media screen and (max-width: 568px) {
   .movies__cards {
     padding: 40px 10px 10px;
+  }
+
+  .movies__not-found {
+    font-size: 16px;
   }
 
   .movies__btn-container {

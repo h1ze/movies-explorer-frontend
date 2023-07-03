@@ -3,18 +3,34 @@ import './Movies.css';
 import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import { getMoviesApi } from '../../utils/MoviesApi';
+import Preloader from '../Preloader/Preloader';
 
 const Movies = () => {
   const [movies, setMovies] = useState([]);
   const [findedMovies, setFindedMovies] = useState([]);
   const [cards, setCards] = useState([]);
   const [isShorts, setIsShorts] = useState(false);
+  const [isSearching, setIsSearching] = useState(false);
+  const [isNotFound, setIsNotFound] = useState(false);
 
   function getMovies() {
-    getMoviesApi().then((resMovies) => {
-      localStorage.setItem('movies', JSON.stringify(resMovies));
-      setMovies(resMovies);
-    });
+    setIsSearching(true);
+    if ('movies' in localStorage) {
+      setMovies(JSON.parse(localStorage.getItem('movies')));
+      setIsSearching(false);
+    } else {
+      getMoviesApi()
+        .then((resMovies) => {
+          localStorage.setItem('movies', JSON.stringify(resMovies));
+          setMovies(resMovies);
+        })
+        .catch((err) => {
+          console.log(err); // выведем ошибку в консоль
+        })
+        .finally(() => {
+          setIsSearching(false);
+        });
+    }
   }
 
   const toggleIsShorts = () => {
@@ -27,12 +43,24 @@ const Movies = () => {
     const finded = movies.filter((el) =>
       el.nameRU.toLowerCase().includes(search.toLowerCase())
     );
-    setFindedMovies(finded);
-    localStorage.setItem('findedMovies', JSON.stringify(finded));
+
+    if (finded.length !== 0) {
+      setIsNotFound(false);
+      localStorage.setItem('findedMovies', JSON.stringify(finded));
+      setFindedMovies(finded);
+    } else {
+      setIsNotFound(true);
+    }
+
     if (isShorts) {
       const filteredMovies = finded.filter((el) => el.duration <= 40);
-      setCards(filteredMovies);
-      localStorage.setItem('cards', JSON.stringify(filteredMovies));
+      if (filteredMovies.length !== 0) {
+        setIsNotFound(false);
+        setCards(filteredMovies);
+        localStorage.setItem('cards', JSON.stringify(filteredMovies));
+      } else {
+        setIsNotFound(true);
+      }
     } else {
       setCards(finded);
       localStorage.setItem('cards', JSON.stringify(finded));
@@ -43,15 +71,15 @@ const Movies = () => {
     if ('movies' in localStorage) {
       setMovies(JSON.parse(localStorage.getItem('movies')));
     }
-  }, []);
 
-  useEffect(() => {
     if (localStorage.getItem('isShorts') === 'true') {
       setIsShorts(true);
     }
+  }, []);
 
+  useEffect(() => {
     setRenderedCards();
-  }, [setRenderedCards, isShorts]);
+  }, [setRenderedCards]);
 
   return (
     <main className="movies">
@@ -61,7 +89,13 @@ const Movies = () => {
         isShorts={isShorts}
       />
       <section className="movies__cards">
-        <MoviesCardList cards={cards} />
+        {isSearching ? (
+          <Preloader />
+        ) : isNotFound ? (
+          <h2 className="movies__not-found">Ничего не найдено</h2>
+        ) : (
+          <MoviesCardList cards={cards} />
+        )}
       </section>
       <div className="movies__btn-container">
         <button className="movies__btn" type="button">
