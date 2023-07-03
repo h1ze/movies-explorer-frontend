@@ -20,7 +20,7 @@ import {
 } from '../../utils/MainApi';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import ProtectedRouteElement from '../ProtectedRoute/ProtectedRoute';
-import { getMoviesApi } from '../../utils/MoviesApi';
+
 
 function App() {
   const [currentUser, setCurrentUser] = useState({});

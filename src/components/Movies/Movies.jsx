@@ -4,7 +4,7 @@ import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import { getMoviesApi } from '../../utils/MoviesApi';
 
-const Movies = ({}) => {
+const Movies = () => {
   const [movies, setMovies] = useState([]);
   const [findedMovies, setFindedMovies] = useState([]);
   const [cards, setCards] = useState([]);

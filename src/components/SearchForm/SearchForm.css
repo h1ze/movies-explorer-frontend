@@ -39,6 +39,10 @@
   color: #a0a0a0;
 }
 
+.form__input_type_error::placeholder {
+  color: #ff3055;
+}
+
 .form__button {
   padding: 0;
   border: none;
@@ -54,6 +58,11 @@
 .form__button:hover {
   opacity: 0.8;
   cursor: pointer;
+}
+
+.form__button:disabled {
+  background: #f8f8f8;
+  color: #c2c2c2;
 }
 
 .form__stroke {
