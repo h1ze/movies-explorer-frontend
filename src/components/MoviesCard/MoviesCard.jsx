@@ -11,6 +11,9 @@ const MoviesCard = ({ card }) => {
     isLiked && 'item__button-like_active'
   }`;
 
+  const hoursDuration = Math.floor(card.duration / 60);
+  const minutesDuration = card.duration % 60;
+
   return (
     <li className="item">
       <a
@@ -42,7 +45,7 @@ const MoviesCard = ({ card }) => {
           ></button>
         )}
       </div>
-      <span className="item__duration">{card.duration}</span>
+      <span className="item__duration">{`${hoursDuration}ч ${minutesDuration}м`}</span>
     </li>
   );
 };
