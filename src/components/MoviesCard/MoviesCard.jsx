@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './MoviesCard.css';
+import { URL_FOR_MOVIES_IMAGES } from '../../utils/constants';
 
 const MoviesCard = ({ card }) => {
   const [isLiked, setIsLiked] = useState(false);
@@ -12,9 +13,20 @@ const MoviesCard = ({ card }) => {
 
   return (
     <li className="item">
-      <img className="item__image" src={card.link} alt={card.name} />
+      <a
+        className="item__link"
+        href={card.trailerLink}
+        target="_blank"
+        rel="noreferrer"
+      >
+        <img
+          className="item__image"
+          src={`${URL_FOR_MOVIES_IMAGES}${card.image.url}`}
+          alt={card.nameRU}
+        />
+      </a>
       <div className="item__panel">
-        <h2 className="item__title">{card.name}</h2>
+        <h2 className="item__title">{card.nameRU}</h2>
         {!!card.saved ? (
           <button
             className="item__button-delete"
