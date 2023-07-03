@@ -13,10 +13,30 @@ const Movies = () => {
   const [isSearching, setIsSearching] = useState(false);
   const [isNotFound, setIsNotFound] = useState(false);
 
+  // function getMovies() {
+  //   setIsSearching(true);
+  //   if ('movies' in localStorage) {
+  //     setMovies(JSON.parse(localStorage.getItem('movies')));
+  //     setIsSearching(false);
+  //   } else {
+  //     getMoviesApi()
+  //       .then((resMovies) => {
+  //         localStorage.setItem('movies', JSON.stringify(resMovies));
+  //         setMovies(resMovies);
+  //       })
+  //       .catch((err) => {
+  //         console.log(err); // выведем ошибку в консоль
+  //       })
+  //       .finally(() => {
+  //         setIsSearching(false);
+  //       });
+  //   }
+  // }
+
   function getMovies() {
     setIsSearching(true);
-    if ('movies' in localStorage) {
-      setMovies(JSON.parse(localStorage.getItem('movies')));
+    if (movies.length !== 0) {
+      setRenderedCards();
       setIsSearching(false);
     } else {
       getMoviesApi()
