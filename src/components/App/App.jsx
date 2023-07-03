@@ -25,7 +25,6 @@ import { getMoviesApi } from '../../utils/MoviesApi';
 function App() {
   const [currentUser, setCurrentUser] = useState({});
   const [loggedIn, setLoggedIn] = useState(false);
-  const [searchText, setSearchText] = useState(false);
   const [movies, setMovies] = useState([]);
   const [findedMovies, setFindedMovies] = useState([]);
   const [cards, setCards] = useState([]);
@@ -119,7 +118,6 @@ function App() {
     });
   }
 
-
   const setRenderedCards = useCallback(() => {
     const search = localStorage.getItem('searchText');
     const finded = movies.filter((el) =>
@@ -137,12 +135,11 @@ function App() {
     }
   }, [movies, isShortsMovies]);
 
-
-
   const toggleDuration = () => {
     setIsShortsMovies(!isShortsMovies);
     localStorage.setItem('isShortsMovies', !isShortsMovies);
   };
+
 
   useEffect(() => {
     if ('movies' in localStorage) {

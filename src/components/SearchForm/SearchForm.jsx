@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import './SearchForm.css';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 
 const SearchForm = ({ onSearch, onFilterDuration, isShortsMovies }) => {
+  const { pathname } = useLocation();
   const [text, setText] = useState('');
 
   const inputHandler = (evt) => {
@@ -11,15 +13,23 @@ const SearchForm = ({ onSearch, onFilterDuration, isShortsMovies }) => {
 
   const handleSearch = (evt) => {
     evt.preventDefault();
-    localStorage.setItem('searchText', text);
+    pathname === '/movies'
+      ? localStorage.setItem('searchText', text)
+      : localStorage.setItem('searchInSavedText', text);
     onSearch();
   };
 
   useEffect(() => {
-    if ('searchText' in localStorage) {
-      setText(localStorage.getItem('searchText'));
+    if (pathname === '/movies') {
+      if ('searchText' in localStorage) {
+        setText(localStorage.getItem('searchText'));
+      }
+    } else {
+      if ('searchInSavedText' in localStorage) {
+        setText(localStorage.getItem('searchInSavedText'));
+      }
     }
-  }, []);
+  }, [pathname]);
 
   return (
     <section className="search-form">
