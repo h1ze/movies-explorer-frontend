@@ -120,7 +120,7 @@ const Movies = ({ onSave, onDelete }) => {
         onChangeFilter={toggleIsShorts}
         isShorts={isShorts}
       />
-      <section className="movies__cards">
+      {/* <section className="movies__cards">
         {isSearching ? (
           <Preloader />
         ) : isErrorMoviesResponse ? (
@@ -134,7 +134,20 @@ const Movies = ({ onSave, onDelete }) => {
         ) : (
           <MoviesCardList cards={cards} onSave={onSave} onDelete={onDelete} />
         )}
-      </section>
+      </section> */}
+      <>
+        {isSearching ? (
+          <Preloader />
+        ) : (
+          <MoviesCardList
+            cards={cards}
+            onSave={onSave}
+            onDelete={onDelete}
+            isErrorMoviesResponse={isErrorMoviesResponse}
+            isNotFoundMovies={isNotFoundMovies}
+          />
+        )}
+      </>
       <div className="movies__btn-container">
         <button className="movies__btn" type="button">
           Ещё

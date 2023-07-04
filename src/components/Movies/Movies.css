@@ -1,17 +1,3 @@
-.movies__cards {
-  display: flex;
-  padding: 70px 70px 10px;
-}
-
-.movies__message {
-  margin: 0 auto;
-  font-family: 'Inter', 'Arial', sans-serif;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 20px;
-  text-align: center;
-}
-
 .movies__btn-container {
   padding: 50px 70px 80px;
 }
@@ -36,9 +22,6 @@
 }
 
 @media screen and (max-width: 984px) {
-  .movies__cards {
-    padding: 70px 30px 10px;
-  }
 
   .movies__btn-container {
     padding: 50px 30px 80px;
@@ -46,13 +29,7 @@
 }
 
 @media screen and (max-width: 568px) {
-  .movies__cards {
-    padding: 40px 10px 10px;
-  }
 
-  .movies__message {
-    font-size: 16px;
-  }
 
   .movies__btn-container {
     padding: 50px 10px 80px;
