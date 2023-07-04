@@ -1,4 +1,8 @@
-import { MAIN_API_BASE_URL, REQUEST_HEADERS } from './constants';
+import {
+  MAIN_API_BASE_URL,
+  REQUEST_HEADERS,
+  URL_FOR_MOVIES_IMAGES,
+} from './constants';
 import checkResponse from './checkResponse';
 
 export function getUserApi() {
@@ -54,6 +58,26 @@ export function updateUserApi(userData) {
       // Забираем данные пользователя из формы профиля
       name: userData.name,
       email: userData.email,
+    }),
+  }).then((response) => checkResponse(response));
+}
+
+export function saveMovie(movieData) {
+  return fetch(`${MAIN_API_BASE_URL}/movies`, {
+    method: 'POST',
+    credentials: 'include',
+    headers: REQUEST_HEADERS,
+    body: JSON.stringify({
+      country: movieData.country,
+      director: movieData.director,
+      duration: movieData.duration,
+      year: movieData.year,
+      image: `${URL_FOR_MOVIES_IMAGES}${movieData.image.url}`,
+      trailerLink: movieData.trailerLink,
+      thumbnail: `${URL_FOR_MOVIES_IMAGES}${movieData.image.formats.thumbnail.url}`,
+      movieId: movieData.id,
+      nameRU: movieData.nameRU,
+      nameEN: movieData.nameEN,
     }),
   }).then((response) => checkResponse(response));
 }

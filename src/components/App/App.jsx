@@ -100,6 +100,7 @@ function App() {
       });
   }
 
+  
   useEffect(() => {
     getUser();
   }, []);
