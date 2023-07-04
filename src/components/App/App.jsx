@@ -103,7 +103,6 @@ function App() {
   }
 
   function handleSaveMovie(movieData) {
-    console.log(movieData);
     saveMovieApi(movieData)
       .then((resMovieData) => {
         setSavedCards([resMovieData.data, ...savedCards]);
@@ -113,11 +112,12 @@ function App() {
       });
   }
 
-  function handleDeleteMovie({ _id }) {
-    deleteMovieApi(_id)
+  function handleDeleteMovie({ id }) {
+    const cardForDelete = savedCards.find((card) => (card.id = id));
+    deleteMovieApi(cardForDelete._id)
       .then((res) => {
         console.log(res);
-        setSavedCards([savedCards.filter((el) => el._id !== _id)]);
+        setSavedCards([savedCards.filter((el) => el !== cardForDelete)]);
       })
       .catch((err) => {
         console.log(err); // выведем ошибку в консоль
@@ -149,6 +149,7 @@ function App() {
                     element={Movies}
                     isloggedIn={loggedIn}
                     onSave={handleSaveMovie}
+                    onDelete={handleDeleteMovie}
                   />
                 }
               />
@@ -159,6 +160,7 @@ function App() {
                     element={SavedMovies}
                     isloggedIn={loggedIn}
                     cards={savedCards}
+                    onDelete={handleDeleteMovie}
                   />
                 }
               />

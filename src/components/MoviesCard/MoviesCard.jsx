@@ -2,15 +2,19 @@ import React, { useState } from 'react';
 import './MoviesCard.css';
 import { URL_FOR_MOVIES_IMAGES } from '../../utils/constants';
 
-const MoviesCard = ({ card, onSave }) => {
+const MoviesCard = ({ card, onSave, onDelete }) => {
   const [isLiked, setIsLiked] = useState(false);
 
   const likeClickHandler = () => {
     // setIsLiked(!isLiked);
     if (!isLiked) {
       onSave(card);
-      setIsLiked('true');
+      setIsLiked(true);
       console.log('сохранили карту');
+    } else {
+      onDelete(card);
+      setIsLiked(false);
+      console.log('удалили карту');
     }
   };
 
