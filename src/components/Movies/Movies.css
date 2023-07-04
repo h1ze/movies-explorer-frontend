@@ -9,7 +9,7 @@
   font-style: normal;
   font-weight: 500;
   font-size: 20px;
-  text-align: justify;
+  text-align: center;
 }
 
 .movies__btn-container {
@@ -50,7 +50,7 @@
     padding: 40px 10px 10px;
   }
 
-  .movies__not-found {
+  .movies__message {
     font-size: 16px;
   }
 
