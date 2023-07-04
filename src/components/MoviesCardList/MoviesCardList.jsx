@@ -7,7 +7,7 @@ const MoviesCardList = ({
   onSave,
   onDelete,
   isErrorMoviesResponse,
-  isNotFoundMovies,
+  // isNotFoundMovies,
 }) => {
   return (
     <section className="movies__cards">
@@ -17,7 +17,7 @@ const MoviesCardList = ({
           с&nbsp;соединением или сервер недоступен. Подождите немного
           и&nbsp;попробуйте ещё раз
         </h2>
-      ) : isNotFoundMovies ? (
+      ) : !cards.length ? (
         <h2 className="movies__message">Ничего не найдено</h2>
       ) : (
         <ul className="items">

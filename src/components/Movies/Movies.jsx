@@ -8,6 +8,7 @@ import Preloader from '../Preloader/Preloader';
 const Movies = ({ onSave, onDelete }) => {
   const [movies, setMovies] = useState([]);
   const [findedMovies, setFindedMovies] = useState([]);
+  const [filteredMovies, setFilteredMovies] = useState([]);
   const [cards, setCards] = useState([]);
   const [isShorts, setIsShorts] = useState(false);
   const [isSearching, setIsSearching] = useState(false);
@@ -43,6 +44,7 @@ const Movies = ({ onSave, onDelete }) => {
       getMoviesApi()
         .then((resMovies) => {
           setIsErrorMoviesResponse(false);
+          localStorage.setItem('isErrorMoviesResponse', JSON.stringify(false));
           setMovies(resMovies);
           localStorage.setItem('movies', JSON.stringify(resMovies));
         })
@@ -62,32 +64,47 @@ const Movies = ({ onSave, onDelete }) => {
     localStorage.setItem('isShorts', !isShorts);
   };
 
+  // const setRenderedCards = useCallback(() => {
+  //   const search = localStorage.getItem('searchText');
+  //   const finded = movies.filter((el) =>
+  //     el.nameRU.toLowerCase().includes(search.toLowerCase())
+  //   );
+
+  //   if (finded.length !== 0) {
+  //     setIsNotFoundMovies(false);
+  //     localStorage.setItem('findedMovies', JSON.stringify(finded));
+  //     setFindedMovies(finded);
+  //   } else {
+  //     setIsNotFoundMovies(true);
+  //   }
+
+  //   if (isShorts) {
+  //     const filteredMovies = finded.filter((el) => el.duration <= 40);
+  //     if (filteredMovies.length !== 0) {
+  //       setIsNotFoundMovies(false);
+  //       setCards(filteredMovies);
+  //       localStorage.setItem('cards', JSON.stringify(filteredMovies));
+  //     } else {
+  //       setIsNotFoundMovies(true);
+  //     }
+  //   } else {
+  //     setCards(finded);
+  //     localStorage.setItem('cards', JSON.stringify(finded));
+  //   }
+  // }, [movies, isShorts]);
+
   const setRenderedCards = useCallback(() => {
     const search = localStorage.getItem('searchText');
     const finded = movies.filter((el) =>
       el.nameRU.toLowerCase().includes(search.toLowerCase())
     );
-
-    if (finded.length !== 0) {
-      setIsNotFoundMovies(false);
-      localStorage.setItem('findedMovies', JSON.stringify(finded));
-      setFindedMovies(finded);
-    } else {
-      setIsNotFoundMovies(true);
-    }
+    setFindedMovies(finded);
+    localStorage.setItem('findedMovies', JSON.stringify(finded));
 
     if (isShorts) {
-      const filteredMovies = finded.filter((el) => el.duration <= 40);
-      if (filteredMovies.length !== 0) {
-        setIsNotFoundMovies(false);
-        setCards(filteredMovies);
-        localStorage.setItem('cards', JSON.stringify(filteredMovies));
-      } else {
-        setIsNotFoundMovies(true);
-      }
-    } else {
-      setCards(finded);
-      localStorage.setItem('cards', JSON.stringify(finded));
+      const filtered = finded.filter((el) => el.duration <= 40);
+      setFilteredMovies(filtered);
+      localStorage.setItem('filteredMovies', JSON.stringify(filtered));
     }
   }, [movies, isShorts]);
 
@@ -100,13 +117,32 @@ const Movies = ({ onSave, onDelete }) => {
       setIsShorts(true);
     }
 
+    // if (
+    //   localStorage.getItem('isShorts') === 'true' &&
+    //   'filteredMovies' in localStorage
+    // ) {
+    //   setIsShorts(true);
+    //   setFilteredMovies(JSON.parse(localStorage.getItem('filteredMovies')));
+    //   setFindedMovies(JSON.parse(localStorage.getItem('findedMovies')));
+    // } else if ('movies' in localStorage) {
+    //   setMovies(JSON.parse(localStorage.getItem('movies')));
+    // }
+
+    // if ('findedMovies' in localStorage) {
+    //   setFindedMovies(JSON.parse(localStorage.getItem('findedMovies')));
+    // }
+
+    // if ('filteredMovies' in localStorage) {
+    //   setFilteredMovies(JSON.parse(localStorage.getItem('filteredMovies')));
+    // }
+
     if (localStorage.getItem('isErrorMoviesResponse') === 'true') {
       setIsErrorMoviesResponse(true);
     }
 
-    if (localStorage.getItem('isNotFoundMovies') === 'true') {
-      setIsNotFoundMovies(true);
-    }
+    // if (localStorage.getItem('isNotFoundMovies') === 'true') {
+    //   setIsNotFoundMovies(true);
+    // }
   }, []);
 
   useEffect(() => {
@@ -120,31 +156,17 @@ const Movies = ({ onSave, onDelete }) => {
         onChangeFilter={toggleIsShorts}
         isShorts={isShorts}
       />
-      {/* <section className="movies__cards">
-        {isSearching ? (
-          <Preloader />
-        ) : isErrorMoviesResponse ? (
-          <h2 className="movies__message">
-            Во&nbsp;время запроса произошла ошибка. Возможно, проблема
-            с&nbsp;соединением или сервер недоступен. Подождите немного
-            и&nbsp;попробуйте ещё раз
-          </h2>
-        ) : isNotFoundMovies ? (
-          <h2 className="movies__message">Ничего не найдено</h2>
-        ) : (
-          <MoviesCardList cards={cards} onSave={onSave} onDelete={onDelete} />
-        )}
-      </section> */}
       <>
         {isSearching ? (
           <Preloader />
         ) : (
           <MoviesCardList
-            cards={cards}
+            // cards={cards}
+            cards={isShorts ? filteredMovies : findedMovies}
             onSave={onSave}
             onDelete={onDelete}
             isErrorMoviesResponse={isErrorMoviesResponse}
-            isNotFoundMovies={isNotFoundMovies}
+            // isNotFoundMovies={isNotFoundMovies}
           />
         )}
       </>
