@@ -2,11 +2,18 @@ import React, { useState } from 'react';
 import './MoviesCard.css';
 import { URL_FOR_MOVIES_IMAGES } from '../../utils/constants';
 
-const MoviesCard = ({ card }) => {
+const MoviesCard = ({ card, onSave }) => {
   const [isLiked, setIsLiked] = useState(false);
+
   const likeClickHandler = () => {
-    setIsLiked(!isLiked);
+    // setIsLiked(!isLiked);
+    if (!isLiked) {
+      onSave(card);
+      setIsLiked('true');
+      console.log('сохранили карту');
+    }
   };
+
   const cardLikeButtonClassName = `item__button-like ${
     isLiked && 'item__button-like_active'
   }`;

@@ -16,6 +16,7 @@ import {
   loginApi,
   logoutApi,
   registerUserApi,
+  saveMovieApi,
   updateUserApi,
 } from '../../utils/MainApi';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
@@ -100,7 +101,17 @@ function App() {
       });
   }
 
-  
+  function handleSaveMovie(movieData) {
+    console.log(movieData);
+    saveMovieApi(movieData)
+      .then((resMovieData) => {
+        setSavedCards([resMovieData.data, ...savedCards]);
+      })
+      .catch((err) => {
+        console.log(err); // выведем ошибку в консоль
+      });
+  }
+
   useEffect(() => {
     getUser();
   }, []);
@@ -125,6 +136,7 @@ function App() {
                   <ProtectedRouteElement
                     element={Movies}
                     isloggedIn={loggedIn}
+                    onSave={handleSaveMovie}
                   />
                 }
               />

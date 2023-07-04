@@ -5,7 +5,7 @@ import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import { getMoviesApi } from '../../utils/MoviesApi';
 import Preloader from '../Preloader/Preloader';
 
-const Movies = () => {
+const Movies = ({ onSave }) => {
   const [movies, setMovies] = useState([]);
   const [findedMovies, setFindedMovies] = useState([]);
   const [cards, setCards] = useState([]);
@@ -114,7 +114,7 @@ const Movies = () => {
         ) : isNotFound ? (
           <h2 className="movies__not-found">Ничего не найдено</h2>
         ) : (
-          <MoviesCardList cards={cards} />
+          <MoviesCardList cards={cards} onSave={onSave} />
         )}
       </section>
       <div className="movies__btn-container">

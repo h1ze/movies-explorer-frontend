@@ -62,13 +62,14 @@ export function updateUserApi(userData) {
   }).then((response) => checkResponse(response));
 }
 
-export function saveMovie(movieData) {
+export function saveMovieApi(movieData) {
   return fetch(`${MAIN_API_BASE_URL}/movies`, {
     method: 'POST',
     credentials: 'include',
     headers: REQUEST_HEADERS,
     body: JSON.stringify({
       country: movieData.country,
+      description: movieData.description,
       director: movieData.director,
       duration: movieData.duration,
       year: movieData.year,
