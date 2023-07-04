@@ -82,3 +82,11 @@ export function saveMovieApi(movieData) {
     }),
   }).then((response) => checkResponse(response));
 }
+
+export function deleteMovieApi(savedMovieID) {
+  return fetch(`${MAIN_API_BASE_URL}/movies/${savedMovieID}`, {
+    method: 'DELETE',
+    credentials: 'include',
+    headers: REQUEST_HEADERS,
+  }).then((response) => checkResponse(response));
+}

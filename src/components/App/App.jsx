@@ -12,6 +12,7 @@ import Layout from '../Layout/Layout';
 import Menu from '../Menu/Menu';
 import Preloader from '../Preloader/Preloader';
 import {
+  deleteMovieApi,
   getUserApi,
   loginApi,
   logoutApi,
@@ -106,6 +107,17 @@ function App() {
     saveMovieApi(movieData)
       .then((resMovieData) => {
         setSavedCards([resMovieData.data, ...savedCards]);
+      })
+      .catch((err) => {
+        console.log(err); // выведем ошибку в консоль
+      });
+  }
+
+  function handleDeleteMovie({ _id }) {
+    deleteMovieApi(_id)
+      .then((res) => {
+        console.log(res);
+        setSavedCards([savedCards.filter((el) => el._id !== _id)]);
       })
       .catch((err) => {
         console.log(err); // выведем ошибку в консоль
