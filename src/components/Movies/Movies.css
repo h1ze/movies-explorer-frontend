@@ -3,12 +3,13 @@
   padding: 70px 70px 10px;
 }
 
-.movies__not-found {
+.movies__message {
   margin: 0 auto;
   font-family: 'Inter', 'Arial', sans-serif;
   font-style: normal;
   font-weight: 500;
   font-size: 20px;
+  text-align: justify;
 }
 
 .movies__btn-container {

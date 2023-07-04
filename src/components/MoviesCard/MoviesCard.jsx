@@ -35,9 +35,6 @@ const MoviesCard = ({ card, onSave, onDelete }) => {
       >
         <img
           className="item__image"
-          // src={`${
-          //   card.owner ? URL_FOR_MOVIES_IMAGES + card.image.url : card.image
-          // }   ${URL_FOR_MOVIES_IMAGES}${card.image.url}`}
           src={`${
             card.owner ? card.image : URL_FOR_MOVIES_IMAGES + card.image.url
           }`}

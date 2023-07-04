@@ -12,6 +12,7 @@ const Movies = ({ onSave, onDelete }) => {
   const [isShorts, setIsShorts] = useState(false);
   const [isSearching, setIsSearching] = useState(false);
   const [isNotFound, setIsNotFound] = useState(false);
+  const [isErr, setIsErr] = useState(false);
 
   // function getMovies() {
   //   setIsSearching(true);
@@ -41,11 +42,13 @@ const Movies = ({ onSave, onDelete }) => {
     } else {
       getMoviesApi()
         .then((resMovies) => {
+          setIsErr(false);
           localStorage.setItem('movies', JSON.stringify(resMovies));
           setMovies(resMovies);
         })
         .catch((err) => {
           console.log(err); // выведем ошибку в консоль
+          setIsErr(true);
         })
         .finally(() => {
           setIsSearching(false);
@@ -111,8 +114,14 @@ const Movies = ({ onSave, onDelete }) => {
       <section className="movies__cards">
         {isSearching ? (
           <Preloader />
+        ) : isErr ? (
+          <h2 className="movies__message">
+            Во&nbsp;время запроса произошла ошибка. Возможно, проблема
+            с&nbsp;соединением или сервер недоступен. Подождите немного
+            и&nbsp;попробуйте ещё раз
+          </h2>
         ) : isNotFound ? (
-          <h2 className="movies__not-found">Ничего не найдено</h2>
+          <h2 className="movies__message">Ничего не найдено</h2>
         ) : (
           <MoviesCardList cards={cards} onSave={onSave} onDelete={onDelete} />
         )}
