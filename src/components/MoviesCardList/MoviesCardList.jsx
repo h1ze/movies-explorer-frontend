@@ -17,7 +17,7 @@ const MoviesCardList = ({
           с&nbsp;соединением или сервер недоступен. Подождите немного
           и&nbsp;попробуйте ещё раз
         </h2>
-      ) : !cards.length ? (
+      ) : 'movies' in localStorage && !cards.length ? (
         <h2 className="movies__message">Ничего не найдено</h2>
       ) : (
         <ul className="items">

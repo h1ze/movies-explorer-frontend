@@ -93,6 +93,7 @@ function App() {
   function handleLogout() {
     logoutApi()
       .then(() => {
+        localStorage.clear();
         setLoggedIn(false);
         navigate('/', { replace: true });
       })
