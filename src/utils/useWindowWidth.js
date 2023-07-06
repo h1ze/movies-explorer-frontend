@@ -10,17 +10,7 @@ function useWindowWidth() {
     updateWidth();
     return () => window.removeEventListener('resize', updateWidth);
   }, []);
-  console.log(width);
   return width;
 }
 
 export default useWindowWidth;
-
-// function ShowWindowDimensions(props) {
-//   const [width, height] = useWindowSize();
-//   return (
-//     <span>
-//       Window size: {width} x {height}
-//     </span>
-//   );
-// }

@@ -8,18 +8,21 @@ import useWindowWidth from '../../utils/useWindowWidth';
 
 const Movies = ({ onSave, onDelete }) => {
   const [movies, setMovies] = useState([]);
-  const [cards, setCards] = useState([]);
+  const [foundCards, setFoundCards] = useState([]);
   const [isShorts, setIsShorts] = useState(false);
   const [isSearching, setIsSearching] = useState(false);
   const [isErrorMoviesResponse, setIsErrorMoviesResponse] = useState(false);
 
+  const [initialCount, setInitialCount] = useState(0);
+  const [lineCount, setLineCount] = useState(0);
+  const [renderedCards, setRenderedCards] = useState([]);
+
   const windowWidth = useWindowWidth();
- 
 
   function getMovies() {
     setIsSearching(true);
     if ('movies' in localStorage) {
-      setRenderedCards();
+      searchMovies();
       setIsSearching(false);
     } else {
       getMoviesApi()
@@ -45,20 +48,38 @@ const Movies = ({ onSave, onDelete }) => {
     localStorage.setItem('isShorts', !isShorts);
   };
 
-  const setRenderedCards = useCallback(() => {
+  const searchMovies = useCallback(() => {
     const search = localStorage.getItem('searchText');
     const finded = movies.filter((el) =>
       el.nameRU.toLowerCase().includes(search.toLowerCase())
     );
-    setCards(finded);
-    localStorage.setItem('cards', JSON.stringify(finded));
+    setFoundCards(finded);
+    localStorage.setItem('foundCards', JSON.stringify(finded));
 
     if (isShorts) {
       const filtered = finded.filter((el) => el.duration <= 40);
-      setCards(filtered);
-      localStorage.setItem('cards', JSON.stringify(filtered));
+      setFoundCards(filtered);
+      localStorage.setItem('foundCards', JSON.stringify(filtered));
     }
   }, [movies, isShorts]);
+
+  const calculateRenderCount = useCallback(() => {
+    if (windowWidth >= 320 && windowWidth <= 480) {
+      setInitialCount(5);
+      setLineCount(3);
+    } else if (windowWidth > 480 && windowWidth <= 768) {
+      setInitialCount(8);
+      setLineCount(2);
+    } else if (windowWidth > 768) {
+      setInitialCount(12);
+      setLineCount(3);
+    }
+  }, [windowWidth]);
+
+  const renderCards = useCallback(() => {
+    const rendered = foundCards.slice(0, initialCount);
+    setRenderedCards(rendered);
+  }, [foundCards, initialCount]);
 
   useEffect(() => {
     if ('movies' in localStorage) {
@@ -73,14 +94,19 @@ const Movies = ({ onSave, onDelete }) => {
       setIsErrorMoviesResponse(true);
     }
 
-    if ('cards' in localStorage) {
-      setCards(JSON.parse(localStorage.getItem('cards')));
+    if ('foundCards' in localStorage) {
+      setFoundCards(JSON.parse(localStorage.getItem('foundCards')));
     }
   }, []);
 
   useEffect(() => {
-    setRenderedCards();
-  }, [setRenderedCards]);
+    searchMovies();
+  }, [searchMovies]);
+
+  useEffect(() => {
+    calculateRenderCount();
+    renderCards();
+  }, [renderCards, calculateRenderCount]);
 
   return (
     <main className="movies">
@@ -94,7 +120,7 @@ const Movies = ({ onSave, onDelete }) => {
           <Preloader />
         ) : (
           <MoviesCardList
-            cards={cards}
+            cards={foundCards}
             onSave={onSave}
             onDelete={onDelete}
             isErrorMoviesResponse={isErrorMoviesResponse}
