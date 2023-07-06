@@ -4,6 +4,7 @@ import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import { getMoviesApi } from '../../utils/MoviesApi';
 import Preloader from '../Preloader/Preloader';
+import useWindowWidth from '../../utils/useWindowWidth';
 
 const Movies = ({ onSave, onDelete }) => {
   const [movies, setMovies] = useState([]);
@@ -11,6 +12,9 @@ const Movies = ({ onSave, onDelete }) => {
   const [isShorts, setIsShorts] = useState(false);
   const [isSearching, setIsSearching] = useState(false);
   const [isErrorMoviesResponse, setIsErrorMoviesResponse] = useState(false);
+
+  const windowWidth = useWindowWidth();
+ 
 
   function getMovies() {
     setIsSearching(true);
