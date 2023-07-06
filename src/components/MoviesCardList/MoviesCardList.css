@@ -15,12 +15,13 @@
 }
 
 .items {
+  justify-content: center;
   margin: 0;
   padding: 0;
   width: 100%;
   list-style: none;
   display: grid;
-  grid-template-columns: repeat(auto-fit, 270px);
+  grid-template-columns: repeat(3, 270px);
   grid-template-rows: repeat(auto-fit, 230px);
   column-gap: 20px;
   row-gap: 38px;
@@ -32,7 +33,6 @@
   }
 
   .items {
-    justify-content: center;
     grid-template-columns: repeat(auto-fit, 339px);
     grid-template-rows: repeat(auto-fit, 269px);
     column-gap: 30px;

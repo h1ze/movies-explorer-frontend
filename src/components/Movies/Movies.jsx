@@ -14,7 +14,7 @@ const Movies = ({ onSave, onDelete }) => {
   const [isErrorMoviesResponse, setIsErrorMoviesResponse] = useState(false);
 
   const [initialCount, setInitialCount] = useState(0);
-  const [lineCount, setLineCount] = useState(0);
+  const [addedCount, setAddedCount] = useState(0);
   const [renderedCards, setRenderedCards] = useState([]);
 
   const windowWidth = useWindowWidth();
@@ -66,20 +66,30 @@ const Movies = ({ onSave, onDelete }) => {
   const calculateRenderCount = useCallback(() => {
     if (windowWidth >= 320 && windowWidth <= 480) {
       setInitialCount(5);
-      setLineCount(3);
+      setAddedCount(2);
     } else if (windowWidth > 480 && windowWidth <= 768) {
       setInitialCount(8);
-      setLineCount(2);
+      setAddedCount(2);
     } else if (windowWidth > 768) {
       setInitialCount(12);
-      setLineCount(3);
+      setAddedCount(3);
     }
   }, [windowWidth]);
 
   const renderCards = useCallback(() => {
     const rendered = foundCards.slice(0, initialCount);
     setRenderedCards(rendered);
-  }, [foundCards, initialCount]);
+  }, [foundCards]);
+
+  const handleAddCards = () => {
+    console.log(initialCount, addedCount, initialCount + addedCount);
+    let sum = 0;
+    sum = +initialCount + addedCount;
+    console.log(sum);
+    setInitialCount(sum);
+    const rendered = foundCards.slice(0, sum);
+    setRenderedCards(rendered);
+  };
 
   useEffect(() => {
     if ('movies' in localStorage) {
@@ -106,7 +116,7 @@ const Movies = ({ onSave, onDelete }) => {
   useEffect(() => {
     calculateRenderCount();
     renderCards();
-  }, [renderCards, calculateRenderCount]);
+  }, [calculateRenderCount, renderCards]);
 
   return (
     <main className="movies">
@@ -120,7 +130,7 @@ const Movies = ({ onSave, onDelete }) => {
           <Preloader />
         ) : (
           <MoviesCardList
-            cards={foundCards}
+            cards={renderedCards}
             onSave={onSave}
             onDelete={onDelete}
             isErrorMoviesResponse={isErrorMoviesResponse}
@@ -128,7 +138,7 @@ const Movies = ({ onSave, onDelete }) => {
         )}
       </>
       <div className="movies__btn-container">
-        <button className="movies__btn" type="button">
+        <button className="movies__btn" type="button" onClick={handleAddCards}>
           Ещё
         </button>
       </div>
