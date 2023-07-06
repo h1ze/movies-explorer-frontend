@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import AuthForm from '../AuthForm/AuthForm';
 
-const Login = ({ onLogin, isErrorResponse }) => {
+const Login = ({ onLogin, isErrorResponse, isloggedIn }) => {
   const loginFormData = {
     name: 'login',
     title: 'Рады видеть!',
@@ -15,6 +15,7 @@ const Login = ({ onLogin, isErrorResponse }) => {
       formData={loginFormData}
       onSubmit={onLogin}
       isErrorResponse={isErrorResponse}
+      isloggedIn={isloggedIn}
     />
   );
 };

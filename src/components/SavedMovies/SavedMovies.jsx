@@ -7,9 +7,9 @@ const SavedMovies = ({ cards, onDelete }) => {
   return (
     <main className="saved">
       <SearchForm />
-      <section className="saved__movies">
-        <MoviesCardList cards={cards} onDelete={onDelete} />
-      </section>
+      {/* <section className="saved__movies"> */}
+      <MoviesCardList cards={cards} onDelete={onDelete} />
+      {/* </section> */}
       <div className="saved__placeholder"></div>
     </main>
   );

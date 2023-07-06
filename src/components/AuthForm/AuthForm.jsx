@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 
 import Logo from '../Logo/Logo';
 import './AuthForm.css';
@@ -7,16 +7,22 @@ import { REGEX_CHECK_NAME } from '../../utils/constants';
 import { useFormWithValidation } from '../../utils/useFormWithValidation';
 import ReqError from '../ReqError/ReqError';
 
-const AuthForm = ({ formData, onSubmit, isErrorResponse }) => {
+const AuthForm = ({ formData, onSubmit, isErrorResponse, isloggedIn }) => {
   const isRegister = formData.name === 'register';
-  const { values, handleChange, errors, isValid, resetForm } =
-    useFormWithValidation();
+  const { values, handleChange, errors, isValid } = useFormWithValidation();
 
   function handleSubmit(evt) {
     evt.preventDefault();
 
     onSubmit(values);
   }
+
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (isloggedIn) {
+      navigate('/', { replace: true });
+    }
+  });
 
   return (
     <main className="auth-form">

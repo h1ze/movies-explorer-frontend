@@ -200,6 +200,7 @@ function App() {
                   <Register
                     onRegister={handleRegister}
                     isErrorResponse={isErrorResponse}
+                    isloggedIn={loggedIn}
                   />
                 }
               />
@@ -209,6 +210,7 @@ function App() {
                   <Login
                     onLogin={handleLogin}
                     isErrorResponse={isErrorResponse}
+                    isloggedIn={loggedIn}
                   />
                 }
               />

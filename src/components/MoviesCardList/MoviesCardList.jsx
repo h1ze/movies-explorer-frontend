@@ -7,18 +7,17 @@ const MoviesCardList = ({
   onSave,
   onDelete,
   isErrorMoviesResponse,
-  // isNotFoundMovies,
 }) => {
   return (
-    <section className="movies__cards">
+    <section className="content">
       {isErrorMoviesResponse ? (
-        <h2 className="movies__message">
+        <h2 className="content__message">
           Во&nbsp;время запроса произошла ошибка. Возможно, проблема
           с&nbsp;соединением или сервер недоступен. Подождите немного
           и&nbsp;попробуйте ещё раз
         </h2>
       ) : 'movies' in localStorage && !cards.length ? (
-        <h2 className="movies__message">Ничего не найдено</h2>
+        <h2 className="content__message">Ничего не найдено</h2>
       ) : (
         <ul className="items">
           {cards.map((card) => {

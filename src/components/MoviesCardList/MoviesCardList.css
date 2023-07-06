@@ -1,9 +1,11 @@
-.movies__cards {
+.content {
   display: flex;
+  box-sizing: border-box;
   padding: 70px 70px 10px;
+  min-height: 400px;
 }
 
-.movies__message {
+.content__message {
   margin: 0 auto;
   font-family: 'Inter', 'Arial', sans-serif;
   font-style: normal;
@@ -25,7 +27,7 @@
 }
 
 @media screen and (max-width: 984px) {
-  .movies__cards {
+  .content {
     padding: 70px 30px 10px;
   }
 
@@ -39,14 +41,14 @@
 }
 
 @media screen and (max-width: 568px) {
-  .movies__cards {
+  .content {
     padding: 40px 10px 10px;
   }
 
-  .movies__message {
+  .content__message {
     font-size: 16px;
   }
-  
+
   .items {
     grid-template-columns: repeat(auto-fit, 300px);
     grid-template-rows: repeat(auto-fit, 246px);
