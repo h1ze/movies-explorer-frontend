@@ -72,7 +72,7 @@ const Movies = ({ onSave, onDelete }) => {
       setAddedCount(2);
     } else if (windowWidth > 768) {
       setInitialCount(12);
-      setAddedCount(3);
+      setAddedCount(4);
     }
   }, [windowWidth]);
 
