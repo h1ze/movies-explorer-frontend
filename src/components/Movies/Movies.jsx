@@ -16,6 +16,7 @@ const Movies = ({ onSave, onDelete }) => {
   const [initialCount, setInitialCount] = useState(0);
   const [addedCount, setAddedCount] = useState(0);
   const [renderedCards, setRenderedCards] = useState([]);
+  const [isCardsEnded, setIsCardsEnded] = useState(false);
 
   const windowWidth = useWindowWidth();
 
@@ -82,11 +83,12 @@ const Movies = ({ onSave, onDelete }) => {
   }, [foundCards]);
 
   const handleAddCards = () => {
-    console.log(initialCount, addedCount, initialCount + addedCount);
     let sum = 0;
     sum = +initialCount + addedCount;
-    console.log(sum);
     setInitialCount(sum);
+    if (sum >= foundCards.length) {
+      setIsCardsEnded(true);
+    }
     const rendered = foundCards.slice(0, sum);
     setRenderedCards(rendered);
   };
@@ -138,7 +140,12 @@ const Movies = ({ onSave, onDelete }) => {
         )}
       </>
       <div className="movies__btn-container">
-        <button className="movies__btn" type="button" onClick={handleAddCards}>
+        <button
+          className="movies__btn"
+          type="button"
+          onClick={handleAddCards}
+          disabled={isCardsEnded}
+        >
           Ещё
         </button>
       </div>
