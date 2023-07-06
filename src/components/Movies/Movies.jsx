@@ -5,14 +5,12 @@ import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import { getMoviesApi } from '../../utils/MoviesApi';
 import Preloader from '../Preloader/Preloader';
 
-
 const Movies = ({ onSave, onDelete }) => {
   const [movies, setMovies] = useState([]);
   const [cards, setCards] = useState([]);
   const [isShorts, setIsShorts] = useState(false);
   const [isSearching, setIsSearching] = useState(false);
   const [isErrorMoviesResponse, setIsErrorMoviesResponse] = useState(false);
-
 
   function getMovies() {
     setIsSearching(true);
@@ -42,7 +40,6 @@ const Movies = ({ onSave, onDelete }) => {
     setIsShorts(!isShorts);
     localStorage.setItem('isShorts', !isShorts);
   };
-
 
   const setRenderedCards = useCallback(() => {
     const search = localStorage.getItem('searchText');
@@ -84,9 +81,9 @@ const Movies = ({ onSave, onDelete }) => {
   return (
     <main className="movies">
       <SearchForm
+        isChecked={isShorts}
         onSearch={getMovies}
         onChangeFilter={toggleIsShorts}
-        isShorts={isShorts}
       />
       <>
         {isSearching ? (
