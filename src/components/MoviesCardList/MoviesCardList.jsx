@@ -25,7 +25,7 @@ const MoviesCardList = ({
             return (
               <MoviesCard
                 card={card}
-                key={card.id}
+                key={card.id || card.movieId}
                 onSave={onSave}
                 onDelete={onDelete}
               />

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './MoviesCard.css';
 import { URL_FOR_MOVIES_IMAGES } from '../../utils/constants';
 
@@ -18,12 +18,25 @@ const MoviesCard = ({ card, onSave, onDelete }) => {
     }
   };
 
+  const deleteClickHandler = () => {
+    onDelete(card);
+  };
+
   const cardLikeButtonClassName = `item__button-like ${
     isLiked && 'item__button-like_active'
   }`;
 
   const hoursDuration = Math.floor(card.duration / 60);
   const minutesDuration = card.duration % 60;
+
+  useEffect(() => {
+    const liked = JSON.parse(localStorage.getItem('savedCards'));
+    if (liked !== null) {
+      if (liked.some((el) => el.movieId === card.id)) {
+        setIsLiked(true);
+      }
+    }
+  }, [card.id]);
 
   return (
     <li className="item">
@@ -43,11 +56,12 @@ const MoviesCard = ({ card, onSave, onDelete }) => {
       </a>
       <div className="item__panel">
         <h2 className="item__title">{card.nameRU}</h2>
-        {!!card.saved ? (
+        {card.owner ? (
           <button
             className="item__button-delete"
             type="button"
             aria-label="Удалить"
+            onClick={deleteClickHandler}
           ></button>
         ) : (
           <button

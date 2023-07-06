@@ -63,6 +63,7 @@ const SearchForm = ({ onSearch, onChangeFilter, isShorts }) => {
             }`}
             required
             onChange={handleChangeInput}
+            autoComplete="off"
           />
           <button
             className="form__button"

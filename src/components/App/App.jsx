@@ -107,6 +107,10 @@ function App() {
     saveMovieApi(movieData)
       .then((resMovieData) => {
         setSavedCards([resMovieData.data, ...savedCards]);
+        localStorage.setItem(
+          'savedCards',
+          JSON.stringify([resMovieData.data, ...savedCards])
+        );
       })
       .catch((err) => {
         console.log(err); // выведем ошибку в консоль
@@ -114,16 +118,29 @@ function App() {
   }
 
   function handleDeleteMovie({ id }) {
-    const cardForDelete = savedCards.find((card) => (card.movieId = id));
+    const cardForDelete = savedCards.find(
+      (card) => card.movieId || card.id === id
+    );
     deleteMovieApi(cardForDelete._id)
       .then((res) => {
         console.log(res);
         setSavedCards(savedCards.filter((el) => el !== cardForDelete));
+        localStorage.setItem(
+          'savedCards',
+          JSON.stringify(savedCards.filter((el) => el !== cardForDelete))
+        );
       })
       .catch((err) => {
         console.log(err); // выведем ошибку в консоль
       });
   }
+
+  useEffect(() => {
+    const saved = JSON.parse(localStorage.getItem('savedCards'));
+    if (saved !== null) {
+      setSavedCards(saved);
+    }
+  }, []);
 
   useEffect(() => {
     getUser();
