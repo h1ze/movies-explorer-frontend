@@ -14,15 +14,32 @@ const SearchForm = ({ onSearch, onChangeFilter, isChecked }) => {
     localStorage.setItem('isEmptyInput', false);
   };
 
+  // const handleSearch = (evt) => {
+  //   evt.preventDefault();
+
+  //   if (!text) {
+  //     setIsEmptyInput(true);
+  //     localStorage.setItem('isEmptyInput', true);
+  //   } else {
+  //     pathname === '/movies'
+  //       ? localStorage.setItem('searchText', text)
+  //       : localStorage.setItem('searchInSavedText', text);
+  //     onSearch();
+  //   }
+  // };
+
   const handleSearch = (evt) => {
     evt.preventDefault();
-    if (!text) {
-      setIsEmptyInput(true);
-      localStorage.setItem('isEmptyInput', true);
+    if (pathname === '/movies') {
+      if (!text) {
+        setIsEmptyInput(true);
+        localStorage.setItem('isEmptyInput', true);
+      } else {
+        localStorage.setItem('searchText', text);
+        onSearch();
+      }
     } else {
-      pathname === '/movies'
-        ? localStorage.setItem('searchText', text)
-        : localStorage.setItem('searchInSavedText', text);
+      localStorage.setItem('searchInSavedText', text);
       onSearch();
     }
   };
