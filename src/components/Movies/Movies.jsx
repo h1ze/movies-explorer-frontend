@@ -5,6 +5,17 @@ import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import { getMoviesApi } from '../../utils/MoviesApi';
 import Preloader from '../Preloader/Preloader';
 import useWindowWidth from '../../utils/useWindowWidth';
+import {
+  ADDED_COUNT_MAX,
+  ADDED_COUNT_MIN,
+  INITIAL_CARDS_LARGE,
+  INITIAL_CARDS_MEDIUM,
+  INITIAL_CARDS_SMALL,
+  LARGE_WIDTH,
+  MEDIUM_WIDTH,
+  SHORTS_DURATION,
+  SMALL_WIDTH,
+} from '../../utils/constants';
 
 const Movies = ({ onSave, onDelete }) => {
   const [movies, setMovies] = useState([]);
@@ -58,22 +69,22 @@ const Movies = ({ onSave, onDelete }) => {
     localStorage.setItem('foundCards', JSON.stringify(finded));
 
     if (isShorts) {
-      const filtered = finded.filter((el) => el.duration <= 40);
+      const filtered = finded.filter((el) => el.duration <= SHORTS_DURATION);
       setFoundCards(filtered);
       localStorage.setItem('foundCards', JSON.stringify(filtered));
     }
   }, [movies, isShorts]);
 
   const calculateRenderCount = useCallback(() => {
-    if (windowWidth >= 320 && windowWidth <= 480) {
-      setInitialCount(5);
-      setAddedCount(2);
-    } else if (windowWidth > 480 && windowWidth <= 768) {
-      setInitialCount(8);
-      setAddedCount(2);
-    } else if (windowWidth > 768) {
-      setInitialCount(12);
-      setAddedCount(4);
+    if (windowWidth >= SMALL_WIDTH && windowWidth <= MEDIUM_WIDTH) {
+      setInitialCount(INITIAL_CARDS_SMALL);
+      setAddedCount(ADDED_COUNT_MIN);
+    } else if (windowWidth > MEDIUM_WIDTH && windowWidth <= LARGE_WIDTH) {
+      setInitialCount(INITIAL_CARDS_MEDIUM);
+      setAddedCount(ADDED_COUNT_MIN);
+    } else if (windowWidth > LARGE_WIDTH) {
+      setInitialCount(INITIAL_CARDS_LARGE);
+      setAddedCount(ADDED_COUNT_MAX);
     }
   }, [windowWidth]);
 
