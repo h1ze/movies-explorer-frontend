@@ -11,3 +11,7 @@ https://disk.yandex.ru/d/9CpJsjaYpptlzA
 ## Ссылка на пул реквест
 
 https://github.com/h1ze/movies-explorer-frontend/pull/2
+
+## Ссылка на фронтенд
+
+https://burnovdiplom.nomoredomains.rocks
