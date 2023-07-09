@@ -15,7 +15,6 @@ const SavedMovies = ({ cards, getCards, onDelete }) => {
 
   const searchSavedMovies = useCallback(() => {
     const search = localStorage.getItem('searchInSavedText') || '';
-    console.log(search);
     let finded;
     if (!search) {
       finded = cards;
