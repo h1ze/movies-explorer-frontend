@@ -6,7 +6,6 @@ const MoviesCard = ({ card, onSave, onDelete }) => {
   const [isLiked, setIsLiked] = useState(false);
 
   const likeClickHandler = () => {
-    // setIsLiked(!isLiked);
     if (!isLiked) {
       onSave(card);
       setIsLiked(true);

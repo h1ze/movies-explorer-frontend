@@ -56,9 +56,7 @@ function App() {
   const getSavedCards = useCallback(() => {
     if ('savedCards' in localStorage) {
       setSavedCards(JSON.parse(localStorage.getItem('savedCards')));
-      console.log('есть в хранилище');
     } else {
-      console.log('нет в хранилище');
       getMoviesApi().then((responseSavedMovies) => {
         setSavedCards(responseSavedMovies.data);
         localStorage.setItem(

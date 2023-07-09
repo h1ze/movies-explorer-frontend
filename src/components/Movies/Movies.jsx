@@ -88,18 +88,10 @@ const Movies = ({ onSave, onDelete }) => {
     }
   }, [windowWidth]);
 
-  // const renderCards = useCallback(() => {
-  //   const rendered = foundCards.slice(0, initialCount);
-  //   setRenderedCards(rendered);
-  // }, [foundCards]);
-
   const handleAddCards = () => {
     let sum = 0;
     sum = +initialCount + addedCount;
     setInitialCount(sum);
-    // if (sum >= foundCards.length) {
-    //   setIsCardsEnded(true);
-    // }
     renderCards(sum);
   };
 
@@ -162,16 +154,6 @@ const Movies = ({ onSave, onDelete }) => {
         )}
       </>
       <div className="movies__btn-container">
-        {/* {!isCardsEnded && (
-          <button
-            className="movies__btn"
-            type="button"
-            onClick={handleAddCards}
-            // disabled={isCardsEnded}
-          >
-            Ещё
-          </button>
-        )} */}
         <button
           className="movies__btn"
           type="button"
