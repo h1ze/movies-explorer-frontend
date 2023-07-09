@@ -11,7 +11,6 @@ const Profile = ({ OnUpdateUser, onSignout, isErrorResponse }) => {
 
   const handleEdit = () => {
     setIsDisable(!isDisable);
-    resetForm();
   };
 
   const { values, handleChange, errors, isValid, resetForm, setValues } =
