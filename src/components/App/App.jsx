@@ -39,6 +39,7 @@ function App() {
   };
 
   function getUser() {
+    setLoading(true);
     getUserApi()
       .then((responseUserData) => {
         setCurrentUser(responseUserData.data);
@@ -83,7 +84,6 @@ function App() {
   }
 
   function handleLogin(loginData) {
-    setLoading(true);
     loginApi(loginData)
       .then(() => {
         getUser();
