@@ -13,12 +13,20 @@ const SavedMovies = ({ cards, onDelete }) => {
   };
 
   const searchSavedMovies = useCallback(() => {
-    const search = localStorage.getItem('searchInSavedText');
-    const finded = cards.filter((el) =>
-      el.nameRU.toLowerCase().includes(search.toLowerCase())
-    );
-    setFoundSavedCards(finded);
-    localStorage.setItem('foundSavedCards', JSON.stringify(finded));
+    const search = localStorage.getItem('searchInSavedText') || '';
+    console.log(search);
+    let finded;
+    if (!search) {
+      finded = cards;
+      setFoundSavedCards(cards);
+      localStorage.setItem('foundSavedCards', JSON.stringify(finded));
+    } else {
+      finded = cards.filter((el) =>
+        el.nameRU.toLowerCase().includes(search.toLowerCase())
+      );
+      setFoundSavedCards(finded);
+      localStorage.setItem('foundSavedCards', JSON.stringify(finded));
+    }
 
     if (isShortsSaved) {
       const filtered = finded.filter((el) => el.duration <= 40);

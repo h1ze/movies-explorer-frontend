@@ -136,9 +136,12 @@ function App() {
   }
 
   useEffect(() => {
-    const saved = JSON.parse(localStorage.getItem('savedCards'));
-    if (saved !== null) {
-      setSavedCards(saved);
+    // const saved = JSON.parse(localStorage.getItem('savedCards'));
+    // if (saved !== null) {
+    //   setSavedCards(saved);
+    // }
+    if ('savedCards' in localStorage) {
+      setSavedCards(JSON.parse(localStorage.getItem('savedCards')));
     }
   }, []);
 
