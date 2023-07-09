@@ -88,21 +88,32 @@ const Movies = ({ onSave, onDelete }) => {
     }
   }, [windowWidth]);
 
-  const renderCards = useCallback(() => {
-    const rendered = foundCards.slice(0, initialCount);
-    setRenderedCards(rendered);
-  }, [foundCards]);
+  // const renderCards = useCallback(() => {
+  //   const rendered = foundCards.slice(0, initialCount);
+  //   setRenderedCards(rendered);
+  // }, [foundCards]);
 
   const handleAddCards = () => {
     let sum = 0;
     sum = +initialCount + addedCount;
     setInitialCount(sum);
-    if (sum >= foundCards.length) {
-      setIsCardsEnded(true);
-    }
-    const rendered = foundCards.slice(0, sum);
-    setRenderedCards(rendered);
+    // if (sum >= foundCards.length) {
+    //   setIsCardsEnded(true);
+    // }
+    renderCards(sum);
   };
+
+  const renderCards = useCallback(
+    (count) => {
+      if (count >= foundCards.length) {
+        setIsCardsEnded(true);
+      } else {
+        setIsCardsEnded(false);
+      }
+      setRenderedCards(foundCards.slice(0, count));
+    },
+    [foundCards]
+  );
 
   useEffect(() => {
     if ('movies' in localStorage) {
@@ -128,7 +139,7 @@ const Movies = ({ onSave, onDelete }) => {
 
   useEffect(() => {
     calculateRenderCount();
-    renderCards();
+    renderCards(initialCount);
   }, [calculateRenderCount, renderCards]);
 
   return (
@@ -151,11 +162,21 @@ const Movies = ({ onSave, onDelete }) => {
         )}
       </>
       <div className="movies__btn-container">
+        {/* {!isCardsEnded && (
+          <button
+            className="movies__btn"
+            type="button"
+            onClick={handleAddCards}
+            // disabled={isCardsEnded}
+          >
+            Ещё
+          </button>
+        )} */}
         <button
           className="movies__btn"
           type="button"
           onClick={handleAddCards}
-          disabled={isCardsEnded}
+          disabled={isCardsEnded || !movies.length}
         >
           Ещё
         </button>
