@@ -15,6 +15,13 @@ export function getUserApi() {
   }).then((response) => checkResponse(response));
 }
 
+export function getMoviesApi() {
+  return fetch(`${MAIN_API_BASE_URL}/movies`, {
+    credentials: 'include', // отправляем куки вместе с запросом
+    headers: REQUEST_HEADERS,
+  }).then((response) => checkResponse(response));
+}
+
 export function registerUserApi(registerData) {
   return fetch(`${MAIN_API_BASE_URL}/signup`, {
     method: 'POST',

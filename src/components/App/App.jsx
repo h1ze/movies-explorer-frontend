@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import './App.css';
 import Main from '../Main/Main';
@@ -19,6 +19,7 @@ import {
   registerUserApi,
   saveMovieApi,
   updateUserApi,
+  getMoviesApi,
 } from '../../utils/MainApi';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import ProtectedRouteElement from '../ProtectedRoute/ProtectedRoute';
@@ -51,6 +52,22 @@ function App() {
       });
   }
 
+  const getSavedCards = useCallback(() => {
+    if ('savedCards' in localStorage) {
+      setSavedCards(JSON.parse(localStorage.getItem('savedCards')));
+      console.log('есть в хранилище');
+    } else {
+      console.log('нет в хранилище');
+      getMoviesApi().then((responseSavedMovies) => {
+        setSavedCards(responseSavedMovies.data);
+        localStorage.setItem(
+          'savedCards',
+          JSON.stringify(responseSavedMovies.data)
+        );
+      });
+    }
+  }, []);
+
   function handleRegister(registerData) {
     registerUserApi(registerData)
       .then((responseUserData) => {
@@ -70,6 +87,7 @@ function App() {
     loginApi(loginData)
       .then(() => {
         getUser();
+        getSavedCards();
         navigate('/movies', { replace: true });
       })
       .catch((err) => {
@@ -136,16 +154,6 @@ function App() {
   }
 
   useEffect(() => {
-    // const saved = JSON.parse(localStorage.getItem('savedCards'));
-    // if (saved !== null) {
-    //   setSavedCards(saved);
-    // }
-    if ('savedCards' in localStorage) {
-      setSavedCards(JSON.parse(localStorage.getItem('savedCards')));
-    }
-  }, []);
-
-  useEffect(() => {
     getUser();
   }, []);
 
@@ -181,6 +189,7 @@ function App() {
                     element={SavedMovies}
                     isloggedIn={loggedIn}
                     cards={savedCards}
+                    getCards={getSavedCards}
                     onDelete={handleDeleteMovie}
                   />
                 }
