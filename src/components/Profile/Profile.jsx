@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import './Profile.css';
 import ReqError from '../ReqError/ReqError';
 import { useFormWithValidation } from '../../utils/useFormWithValidation';
@@ -8,18 +8,16 @@ import { CurrentUserContext } from '../contexts/CurrentUserContext';
 const Profile = ({ OnUpdateUser, onSignout, isErrorResponse }) => {
   const [isDisable, setIsDisable] = useState(true);
   const [isChanged, setIsChanged] = useState(false);
-  const currentUser = React.useContext(CurrentUserContext);
+  const currentUser = useContext(CurrentUserContext);
 
   const handleEdit = () => {
     setIsDisable(!isDisable);
   };
 
-  const { values, handleChange, errors, isValid, resetForm, setValues } =
+  const { values, handleChange, errors, isValid, setValues } =
     useFormWithValidation();
 
   const handleSubmit = () => {
-    console.log(currentUser, values);
-    console.log(isChanged);
     OnUpdateUser(values);
     if (!isErrorResponse) {
       handleEdit();
@@ -93,7 +91,6 @@ const Profile = ({ OnUpdateUser, onSignout, isErrorResponse }) => {
           <button
             className="profile__save"
             onClick={handleSubmit}
-            // disabled={!!errors.email || !!errors.name || !isChanged}
             disabled={!isValid || !isChanged}
           >
             Сохранить
