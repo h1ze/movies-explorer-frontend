@@ -7,6 +7,7 @@ import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
 const Profile = ({ OnUpdateUser, onSignout, isErrorResponse }) => {
   const [isDisable, setIsDisable] = useState(true);
+  const [isChanged, setIsChanged] = useState(false);
   const currentUser = React.useContext(CurrentUserContext);
 
   const handleEdit = () => {
@@ -17,11 +18,22 @@ const Profile = ({ OnUpdateUser, onSignout, isErrorResponse }) => {
     useFormWithValidation();
 
   const handleSubmit = () => {
+    console.log(currentUser, values);
+    console.log(isChanged);
     OnUpdateUser(values);
     if (!isErrorResponse) {
       handleEdit();
     }
   };
+
+  React.useEffect(() => {
+    if (
+      currentUser.email !== values.email ||
+      currentUser.name !== values.name
+    ) {
+      setIsChanged(true);
+    } else setIsChanged(false);
+  }, [currentUser, values]);
 
   React.useEffect(() => {
     setValues({ name: currentUser.name, email: currentUser.email });
@@ -81,7 +93,7 @@ const Profile = ({ OnUpdateUser, onSignout, isErrorResponse }) => {
           <button
             className="profile__save"
             onClick={handleSubmit}
-            disabled={isErrorResponse || !isValid}
+            disabled={isErrorResponse || !isValid || !isChanged}
           >
             Сохранить
           </button>
