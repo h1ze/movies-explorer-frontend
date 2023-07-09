@@ -66,10 +66,10 @@ function App() {
   }
 
   function handleLogin(loginData) {
+    setLoading(true);
     loginApi(loginData)
       .then(() => {
         getUser();
-        setLoggedIn(true);
         navigate('/movies', { replace: true });
       })
       .catch((err) => {
