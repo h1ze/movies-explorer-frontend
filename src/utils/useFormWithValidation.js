@@ -14,6 +14,7 @@ export function useFormWithValidation() {
     setValues({ ...values, [name]: value });
 
     if (name === 'email' && !isEmail(value)) {
+      target.setCustomValidity('Проверка'); // Активируем срабатывание checkValidity() при проверке !isEmail
       setErrors({
         ...errors,
         email: 'Поле email должно соответствовать шаблону электронной почты',
@@ -24,12 +25,14 @@ export function useFormWithValidation() {
         name: 'Поле name должно содержать только латиницу, кириллицу, пробел или дефис.',
       });
     } else {
+      target.setCustomValidity('');
       setErrors({
         ...errors,
         [name]: target.validationMessage,
       });
     }
 
+    console.log(target.closest('form').checkValidity());
     setIsValid(target.closest('form').checkValidity());
   };
 

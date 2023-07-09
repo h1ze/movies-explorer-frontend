@@ -93,7 +93,8 @@ const Profile = ({ OnUpdateUser, onSignout, isErrorResponse }) => {
           <button
             className="profile__save"
             onClick={handleSubmit}
-            disabled={isErrorResponse || !isValid || !isChanged}
+            // disabled={!!errors.email || !!errors.name || !isChanged}
+            disabled={!isValid || !isChanged}
           >
             Сохранить
           </button>
