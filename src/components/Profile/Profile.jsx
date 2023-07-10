@@ -8,6 +8,7 @@ import { CurrentUserContext } from '../contexts/CurrentUserContext';
 const Profile = ({ OnUpdateUser, onSignout, isErrorResponse }) => {
   const [isDisable, setIsDisable] = useState(true);
   const [isChanged, setIsChanged] = useState(false);
+  const [isSending, setIsSending] = useState(false);
   const currentUser = useContext(CurrentUserContext);
 
   const handleEdit = () => {
@@ -18,6 +19,7 @@ const Profile = ({ OnUpdateUser, onSignout, isErrorResponse }) => {
     useFormWithValidation();
 
   const handleSubmit = () => {
+    setIsSending(true);
     OnUpdateUser(values);
     if (!isErrorResponse) {
       handleEdit();
@@ -55,7 +57,7 @@ const Profile = ({ OnUpdateUser, onSignout, isErrorResponse }) => {
               name="name"
               value={values.name || ''}
               placeholder="Укажите имя"
-              disabled={isDisable}
+              disabled={isDisable || isSending}
               onChange={handleChange}
               required
               pattern={REGEX_CHECK_NAME}
@@ -76,7 +78,7 @@ const Profile = ({ OnUpdateUser, onSignout, isErrorResponse }) => {
               name="email"
               value={values.email || ''}
               placeholder="Укажите почту"
-              disabled={isDisable}
+              disabled={isDisable || isSending}
               onChange={handleChange}
               required
               autoComplete="off"
@@ -91,7 +93,7 @@ const Profile = ({ OnUpdateUser, onSignout, isErrorResponse }) => {
           <button
             className="profile__save"
             onClick={handleSubmit}
-            disabled={!isValid || !isChanged}
+            disabled={!isValid || !isChanged || isSending}
           >
             Сохранить
           </button>

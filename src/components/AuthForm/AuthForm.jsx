@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 import Logo from '../Logo/Logo';
@@ -10,10 +10,11 @@ import ReqError from '../ReqError/ReqError';
 const AuthForm = ({ formData, onSubmit, isErrorResponse, isloggedIn }) => {
   const isRegister = formData.name === 'register';
   const { values, handleChange, errors, isValid } = useFormWithValidation();
+  const [isSending, setIsSending] = useState(false);
 
   function handleSubmit(evt) {
     evt.preventDefault();
-
+    setIsSending(true);
     onSubmit(values);
   }
 
@@ -53,6 +54,7 @@ const AuthForm = ({ formData, onSubmit, isErrorResponse, isloggedIn }) => {
                 pattern={REGEX_CHECK_NAME}
                 onChange={handleChange}
                 autoComplete="off"
+                disabled={isSending}
               />
               <span
                 className={`auth-form__error ${
@@ -78,6 +80,7 @@ const AuthForm = ({ formData, onSubmit, isErrorResponse, isloggedIn }) => {
               required
               onChange={handleChange}
               autoComplete="off"
+              disabled={isSending}
             />
             <span
               className={`auth-form__error ${
@@ -105,6 +108,7 @@ const AuthForm = ({ formData, onSubmit, isErrorResponse, isloggedIn }) => {
               placeholder="Введите пароль"
               required
               onChange={handleChange}
+              disabled={isSending}
             />
             <span
               className={`auth-form__error ${
@@ -118,7 +122,7 @@ const AuthForm = ({ formData, onSubmit, isErrorResponse, isloggedIn }) => {
           <button
             className="auth-form__button"
             type="submit"
-            disabled={!isValid}
+            disabled={!isValid || isSending}
           >
             {formData.buttonTitle}
           </button>

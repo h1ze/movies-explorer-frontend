@@ -42,6 +42,7 @@ function App() {
     setLoading(true);
     if ('currentUser' in localStorage) {
       setCurrentUser(JSON.parse(localStorage.getItem('currentUser')));
+      setLoggedIn(true);
       setLoading(false);
     } else {
       getUserApi()

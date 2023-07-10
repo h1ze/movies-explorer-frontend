@@ -32,7 +32,6 @@ export function useFormWithValidation() {
       });
     }
 
-    console.log(target.closest('form').checkValidity());
     setIsValid(target.closest('form').checkValidity());
   };
 
