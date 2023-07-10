@@ -105,6 +105,7 @@ function App() {
   }
 
   function handleUpdateUser(userData) {
+    setLoading(true);
     updateUserApi(userData)
       .then((responseUserData) => {
         console.log(responseUserData);
@@ -117,6 +118,9 @@ function App() {
       .catch((err) => {
         console.log(err); // выведем ошибку в консоль
         setIsErrorResponse(err);
+      })
+      .finally(() => {
+        setLoading(false);
       });
   }
 

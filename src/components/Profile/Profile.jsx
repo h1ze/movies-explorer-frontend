@@ -24,6 +24,7 @@ const Profile = ({ OnUpdateUser, onSignout, isErrorResponse }) => {
     if (!isErrorResponse) {
       handleEdit();
     }
+    setIsSending(false);
   };
 
   React.useEffect(() => {
