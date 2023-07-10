@@ -40,17 +40,26 @@ function App() {
 
   function getUser() {
     setLoading(true);
-    getUserApi()
-      .then((responseUserData) => {
-        setCurrentUser(responseUserData.data);
-        setLoggedIn(true);
-      })
-      .catch((err) => {
-        console.log(err); // выведем ошибку в консоль
-      })
-      .finally(() => {
-        setLoading(false);
-      });
+    if ('currentUser' in localStorage) {
+      setCurrentUser(JSON.parse(localStorage.getItem('currentUser')));
+      setLoading(false);
+    } else {
+      getUserApi()
+        .then((responseUserData) => {
+          setCurrentUser(responseUserData.data);
+          localStorage.setItem(
+            'currentUser',
+            JSON.stringify(responseUserData.data)
+          );
+          setLoggedIn(true);
+        })
+        .catch((err) => {
+          console.log(err); // выведем ошибку в консоль
+        })
+        .finally(() => {
+          setLoading(false);
+        });
+    }
   }
 
   const getSavedCards = useCallback(() => {
@@ -99,6 +108,10 @@ function App() {
       .then((responseUserData) => {
         console.log(responseUserData);
         setCurrentUser(responseUserData.data);
+        localStorage.setItem(
+          'currentUser',
+          JSON.stringify(responseUserData.data)
+        );
       })
       .catch((err) => {
         console.log(err); // выведем ошибку в консоль
