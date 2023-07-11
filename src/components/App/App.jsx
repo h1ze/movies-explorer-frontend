@@ -32,6 +32,8 @@ function App() {
   const [loading, setLoading] = useState(true);
   const [isErrorResponse, setIsErrorResponse] = useState('');
 
+  const [isCardsError, setIsCardsError] = useState(false);
+
   const navigate = useNavigate();
 
   const toggleMenu = () => {
@@ -67,13 +69,19 @@ function App() {
     if ('savedCards' in localStorage) {
       setSavedCards(JSON.parse(localStorage.getItem('savedCards')));
     } else {
-      getMoviesApi().then((responseSavedMovies) => {
-        setSavedCards(responseSavedMovies.data);
-        localStorage.setItem(
-          'savedCards',
-          JSON.stringify(responseSavedMovies.data)
-        );
-      });
+      getMoviesApi()
+        .then((responseSavedMovies) => {
+          setIsCardsError(false);
+          setSavedCards(responseSavedMovies.data);
+          localStorage.setItem(
+            'savedCards',
+            JSON.stringify(responseSavedMovies.data)
+          );
+        })
+        .catch((err) => {
+          console.log(err); // выведем ошибку в консоль
+          setIsCardsError(true);
+        });
     }
   }, []);
 
@@ -140,6 +148,7 @@ function App() {
   function handleSaveMovie(movieData) {
     saveMovieApi(movieData)
       .then((resMovieData) => {
+        setIsCardsError(false);
         setSavedCards([resMovieData.data, ...savedCards]);
         localStorage.setItem(
           'savedCards',
@@ -148,6 +157,7 @@ function App() {
       })
       .catch((err) => {
         console.log(err); // выведем ошибку в консоль
+        setIsCardsError(true);
       });
   }
 
@@ -169,6 +179,7 @@ function App() {
     deleteMovieApi(cardForDelete._id)
       .then((res) => {
         console.log(res);
+        setIsCardsError(false);
         localStorage.setItem(
           'savedCards',
           JSON.stringify(
@@ -179,6 +190,7 @@ function App() {
       })
       .catch((err) => {
         console.log(err); // выведем ошибку в консоль
+        setIsCardsError(true);
       });
   }
 
@@ -209,6 +221,7 @@ function App() {
                     onSave={handleSaveMovie}
                     onDelete={handleDeleteMovie}
                     getSavedCards={getSavedCards}
+                    isCardsError={isCardsError}
                   />
                 }
               />
@@ -221,6 +234,7 @@ function App() {
                     cards={savedCards}
                     getSavedCards={getSavedCards}
                     onDelete={handleDeleteMovie}
+                    isCardsError={isCardsError}
                   />
                 }
               />

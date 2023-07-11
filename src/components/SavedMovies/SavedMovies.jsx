@@ -4,7 +4,7 @@ import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import './SavedMovies.css';
 import { SHORTS_DURATION } from '../../utils/constants';
 
-const SavedMovies = ({ cards, getSavedCards, onDelete }) => {
+const SavedMovies = ({ cards, getSavedCards, onDelete, isCardsError }) => {
   const [isShortsSaved, setIsShortsSaved] = useState(false);
   const [foundSavedCards, setFoundSavedCards] = useState([]);
 
@@ -53,7 +53,11 @@ const SavedMovies = ({ cards, getSavedCards, onDelete }) => {
         onSearch={searchSavedMovies}
         onChangeFilter={toggleIsShortsSaved}
       />
-      <MoviesCardList cards={foundSavedCards} onDelete={onDelete} />
+      <MoviesCardList
+        cards={foundSavedCards}
+        onDelete={onDelete}
+        isError={isCardsError}
+      />
       <div className="saved__placeholder"></div>
     </main>
   );

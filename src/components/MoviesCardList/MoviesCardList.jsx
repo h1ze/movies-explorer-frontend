@@ -3,7 +3,7 @@ import MoviesCard from '../MoviesCard/MoviesCard';
 import { useLocation } from 'react-router-dom';
 import('./MoviesCardList.css');
 
-const MoviesCardList = ({ cards, onSave, onDelete, isErrorMoviesResponse }) => {
+const MoviesCardList = ({ cards, onSave, onDelete, isError }) => {
   const [isNotFound, setIsNotFound] = useState(false);
   const { pathname } = useLocation();
 
@@ -19,7 +19,7 @@ const MoviesCardList = ({ cards, onSave, onDelete, isErrorMoviesResponse }) => {
 
   return (
     <section className="content">
-      {isErrorMoviesResponse ? (
+      {isError ? (
         <h2 className="content__message">
           Во&nbsp;время запроса произошла ошибка. Возможно, проблема
           с&nbsp;соединением или сервер недоступен. Подождите немного

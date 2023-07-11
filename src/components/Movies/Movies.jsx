@@ -17,7 +17,7 @@ import {
   SMALL_WIDTH,
 } from '../../utils/constants';
 
-const Movies = ({ onSave, onDelete, getSavedCards }) => {
+const Movies = ({ onSave, onDelete, getSavedCards, isCardsError }) => {
   const [movies, setMovies] = useState([]);
   const [foundCards, setFoundCards] = useState([]);
   const [isShorts, setIsShorts] = useState(false);
@@ -150,7 +150,7 @@ const Movies = ({ onSave, onDelete, getSavedCards }) => {
             cards={renderedCards}
             onSave={onSave}
             onDelete={onDelete}
-            isErrorMoviesResponse={isErrorMoviesResponse}
+            isError={isErrorMoviesResponse || isCardsError}
           />
         )}
       </>
