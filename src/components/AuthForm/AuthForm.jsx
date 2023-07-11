@@ -7,14 +7,19 @@ import { REGEX_CHECK_NAME } from '../../utils/constants';
 import { useFormWithValidation } from '../../utils/useFormWithValidation';
 import ReqError from '../ReqError/ReqError';
 
-const AuthForm = ({ formData, onSubmit, isErrorResponse, isloggedIn }) => {
+const AuthForm = ({
+  formData,
+  onSubmit,
+  isErrorResponse,
+  isloggedIn,
+  isSending,
+}) => {
   const isRegister = formData.name === 'register';
   const { values, handleChange, errors, isValid } = useFormWithValidation();
-  const [isSending, setIsSending] = useState(false);
+  // const [isSending, setIsSending] = useState(false);
 
   function handleSubmit(evt) {
     evt.preventDefault();
-    setIsSending(true);
     onSubmit(values);
   }
 

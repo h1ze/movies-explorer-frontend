@@ -27,6 +27,8 @@ import ProtectedRouteElement from '../ProtectedRoute/ProtectedRoute';
 function App() {
   const [currentUser, setCurrentUser] = useState({});
   const [loggedIn, setLoggedIn] = useState(false);
+  const [isSending, setIsSending] = useState(false);
+
   const [savedCards, setSavedCards] = useState([]);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -86,6 +88,7 @@ function App() {
   }, []);
 
   function handleRegister(registerData) {
+    setIsSending(true);
     registerUserApi(registerData)
       .then((responseUserData) => {
         // Здесь мы получаем данные зарегистрированного пользователя
@@ -96,19 +99,27 @@ function App() {
       .catch((err) => {
         console.log(err); // выведем ошибку в консоль
         setIsErrorResponse(err);
+      })
+      .finally(() => {
+        setIsSending(false);
       });
   }
 
   function handleLogin(loginData) {
+    setIsSending(true);
     loginApi(loginData)
       .then(() => {
         getUser();
         getSavedCards();
         navigate('/movies', { replace: true });
+        setIsErrorResponse(false);
       })
       .catch((err) => {
         console.log(err); // выведем ошибку в консоль
         setIsErrorResponse(err);
+      })
+      .finally(() => {
+        setIsSending(false);
       });
   }
 
@@ -257,6 +268,7 @@ function App() {
                     onRegister={handleRegister}
                     isErrorResponse={isErrorResponse}
                     isloggedIn={loggedIn}
+                    isSending={isSending}
                   />
                 }
               />
@@ -267,6 +279,7 @@ function App() {
                     onLogin={handleLogin}
                     isErrorResponse={isErrorResponse}
                     isloggedIn={loggedIn}
+                    isSending={isSending}
                   />
                 }
               />
