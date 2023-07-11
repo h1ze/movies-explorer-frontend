@@ -125,9 +125,11 @@ function App() {
 
   function handleUpdateUser(userData) {
     setLoading(true);
+    setIsSending(true);
     updateUserApi(userData)
       .then((responseUserData) => {
         console.log(responseUserData);
+        setIsErrorResponse(false);
         setCurrentUser(responseUserData.data);
         localStorage.setItem(
           'currentUser',
@@ -140,6 +142,7 @@ function App() {
       })
       .finally(() => {
         setLoading(false);
+        setIsSending(false);
       });
   }
 
@@ -258,6 +261,7 @@ function App() {
                     onSignout={handleLogout}
                     isErrorResponse={isErrorResponse}
                     OnUpdateUser={handleUpdateUser}
+                    isSending={isSending}
                   />
                 }
               />
