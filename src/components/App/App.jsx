@@ -133,7 +133,7 @@ function App() {
       })
       .catch((err) => {
         console.log(err); // выведем ошибку в консоль
-        setIsErrorResponse(err.message);
+        setIsErrorResponse(err);
       });
   }
 
@@ -151,18 +151,31 @@ function App() {
       });
   }
 
-  function handleDeleteMovie({ id }) {
-    const cardForDelete = savedCards.find(
-      (card) => card.movieId || card.id === id
-    );
+  function handleDeleteMovie(card) {
+    // const cardForDelete = savedCards.find((card) => {
+    //   console.log(console.log(card.movieId || card.id, id));
+    //   return card.movieId || card.id === id;
+    // });
+
+    const searchID = card.id ? card.id : card.movieId;
+    const cardForDelete = savedCards.find((savedCard) => {
+      console.log(
+        `savedCard.movieId ${savedCard.movieId}  card.id ${card.id} card.movieId ${card.movieId}, searchID ${searchID}`
+      );
+
+      return savedCard.movieId === searchID;
+    });
+
     deleteMovieApi(cardForDelete._id)
       .then((res) => {
         console.log(res);
-        setSavedCards(savedCards.filter((el) => el !== cardForDelete));
         localStorage.setItem(
           'savedCards',
-          JSON.stringify(savedCards.filter((el) => el !== cardForDelete))
+          JSON.stringify(
+            savedCards.filter((el) => el._id !== cardForDelete._id)
+          )
         );
+        setSavedCards(savedCards.filter((el) => el._id !== cardForDelete._id));
       })
       .catch((err) => {
         console.log(err); // выведем ошибку в консоль
@@ -195,6 +208,7 @@ function App() {
                     isloggedIn={loggedIn}
                     onSave={handleSaveMovie}
                     onDelete={handleDeleteMovie}
+                    getSavedCards={getSavedCards}
                   />
                 }
               />
@@ -205,7 +219,7 @@ function App() {
                     element={SavedMovies}
                     isloggedIn={loggedIn}
                     cards={savedCards}
-                    getCards={getSavedCards}
+                    getSavedCards={getSavedCards}
                     onDelete={handleDeleteMovie}
                   />
                 }

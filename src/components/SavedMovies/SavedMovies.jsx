@@ -4,7 +4,7 @@ import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import './SavedMovies.css';
 import { SHORTS_DURATION } from '../../utils/constants';
 
-const SavedMovies = ({ cards, getCards, onDelete }) => {
+const SavedMovies = ({ cards, getSavedCards, onDelete }) => {
   const [isShortsSaved, setIsShortsSaved] = useState(false);
   const [foundSavedCards, setFoundSavedCards] = useState([]);
 
@@ -36,11 +36,11 @@ const SavedMovies = ({ cards, getCards, onDelete }) => {
   }, [isShortsSaved, cards]);
 
   useEffect(() => {
-    getCards();
+    getSavedCards();
     if ('isShortsSaved' in localStorage) {
       setIsShortsSaved(JSON.parse(localStorage.getItem('isShortsSaved')));
     }
-  }, [getCards]);
+  }, [getSavedCards]);
 
   useEffect(() => {
     searchSavedMovies();

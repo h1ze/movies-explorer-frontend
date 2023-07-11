@@ -17,7 +17,7 @@ import {
   SMALL_WIDTH,
 } from '../../utils/constants';
 
-const Movies = ({ onSave, onDelete }) => {
+const Movies = ({ onSave, onDelete, getSavedCards }) => {
   const [movies, setMovies] = useState([]);
   const [foundCards, setFoundCards] = useState([]);
   const [isShorts, setIsShorts] = useState(false);
@@ -126,8 +126,9 @@ const Movies = ({ onSave, onDelete }) => {
   }, []);
 
   useEffect(() => {
+    getSavedCards();
     searchMovies();
-  }, [searchMovies]);
+  }, [searchMovies, getSavedCards]);
 
   useEffect(() => {
     calculateRenderCount();
