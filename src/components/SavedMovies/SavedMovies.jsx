@@ -7,22 +7,21 @@ import { SHORTS_DURATION } from '../../utils/constants';
 const SavedMovies = ({ cards, getSavedCards, onDelete, isCardsError }) => {
   const [isShortsSaved, setIsShortsSaved] = useState(false);
   const [foundSavedCards, setFoundSavedCards] = useState([]);
+  const [searchString, setSearchString] = useState('');
 
   const toggleIsShortsSaved = () => {
     setIsShortsSaved(!isShortsSaved);
-    localStorage.setItem('isShortsSaved', !isShortsSaved);
   };
 
   const searchSavedMovies = useCallback(() => {
-    const search = localStorage.getItem('searchInSavedText') || '';
     let finded;
-    if (!search) {
+    if (!searchString) {
       finded = cards;
       setFoundSavedCards(finded);
       localStorage.setItem('foundSavedCards', JSON.stringify(finded));
     } else {
       finded = cards.filter((el) =>
-        el.nameRU.toLowerCase().includes(search.toLowerCase())
+        el.nameRU.toLowerCase().includes(searchString.toLowerCase())
       );
       setFoundSavedCards(finded);
       localStorage.setItem('foundSavedCards', JSON.stringify(finded));
@@ -33,7 +32,7 @@ const SavedMovies = ({ cards, getSavedCards, onDelete, isCardsError }) => {
       setFoundSavedCards(filtered);
       localStorage.setItem('foundSavedCards', JSON.stringify(filtered));
     }
-  }, [isShortsSaved, cards]);
+  }, [isShortsSaved, cards, searchString]);
 
   useEffect(() => {
     getSavedCards();
@@ -52,6 +51,7 @@ const SavedMovies = ({ cards, getSavedCards, onDelete, isCardsError }) => {
         isChecked={isShortsSaved}
         onSearch={searchSavedMovies}
         onChangeFilter={toggleIsShortsSaved}
+        setSearchString={setSearchString}
       />
       <MoviesCardList
         cards={foundSavedCards}

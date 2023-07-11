@@ -3,7 +3,12 @@ import { useLocation } from 'react-router-dom';
 import './SearchForm.css';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 
-const SearchForm = ({ onSearch, onChangeFilter, isChecked }) => {
+const SearchForm = ({
+  onSearch,
+  onChangeFilter,
+  isChecked,
+  setSearchString,
+}) => {
   const { pathname } = useLocation();
   const [text, setText] = useState('');
   const [isEmptyInput, setIsEmptyInput] = useState(false);
@@ -13,20 +18,6 @@ const SearchForm = ({ onSearch, onChangeFilter, isChecked }) => {
     setIsEmptyInput(false);
     localStorage.setItem('isEmptyInput', false);
   };
-
-  // const handleSearch = (evt) => {
-  //   evt.preventDefault();
-
-  //   if (!text) {
-  //     setIsEmptyInput(true);
-  //     localStorage.setItem('isEmptyInput', true);
-  //   } else {
-  //     pathname === '/movies'
-  //       ? localStorage.setItem('searchText', text)
-  //       : localStorage.setItem('searchInSavedText', text);
-  //     onSearch();
-  //   }
-  // };
 
   const handleSearch = (evt) => {
     evt.preventDefault();
@@ -39,7 +30,7 @@ const SearchForm = ({ onSearch, onChangeFilter, isChecked }) => {
         onSearch();
       }
     } else {
-      localStorage.setItem('searchInSavedText', text);
+      setSearchString(text);
       onSearch();
     }
   };
@@ -53,10 +44,6 @@ const SearchForm = ({ onSearch, onChangeFilter, isChecked }) => {
         setIsEmptyInput(true);
       } else if ('searchText' in localStorage) {
         setText(localStorage.getItem('searchText'));
-      }
-    } else {
-      if ('searchInSavedText' in localStorage) {
-        setText(localStorage.getItem('searchInSavedText'));
       }
     }
   }, [pathname]);
