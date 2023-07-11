@@ -128,7 +128,6 @@ function App() {
     setIsSending(true);
     updateUserApi(userData)
       .then((responseUserData) => {
-        console.log(responseUserData);
         setIsErrorResponse(false);
         setCurrentUser(responseUserData.data);
         localStorage.setItem(
@@ -176,17 +175,8 @@ function App() {
   }
 
   function handleDeleteMovie(card) {
-    // const cardForDelete = savedCards.find((card) => {
-    //   console.log(console.log(card.movieId || card.id, id));
-    //   return card.movieId || card.id === id;
-    // });
-
     const searchID = card.id ? card.id : card.movieId;
     const cardForDelete = savedCards.find((savedCard) => {
-      console.log(
-        `savedCard.movieId ${savedCard.movieId}  card.id ${card.id} card.movieId ${card.movieId}, searchID ${searchID}`
-      );
-
       return savedCard.movieId === searchID;
     });
 

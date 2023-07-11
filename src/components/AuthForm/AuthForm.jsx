@@ -16,7 +16,6 @@ const AuthForm = ({
 }) => {
   const isRegister = formData.name === 'register';
   const { values, handleChange, errors, isValid } = useFormWithValidation();
-  // const [isSending, setIsSending] = useState(false);
 
   function handleSubmit(evt) {
     evt.preventDefault();

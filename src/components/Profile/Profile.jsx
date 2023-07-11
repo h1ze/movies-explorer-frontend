@@ -8,7 +8,6 @@ import { CurrentUserContext } from '../contexts/CurrentUserContext';
 const Profile = ({ OnUpdateUser, onSignout, isErrorResponse, isSending }) => {
   const [isDisable, setIsDisable] = useState(true);
   const [isChanged, setIsChanged] = useState(false);
-  // const [isSending, setIsSending] = useState(false);
   const currentUser = useContext(CurrentUserContext);
 
   const handleEdit = () => {
