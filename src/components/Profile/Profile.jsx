@@ -1,58 +1,97 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import './Profile.css';
 import ReqError from '../ReqError/ReqError';
+import { useFormWithValidation } from '../../utils/useFormWithValidation';
+import { REGEX_CHECK_NAME } from '../../utils/constants';
+import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
-const Profile = () => {
-  const [isEdit, setIsEdit] = useState(false);
-  const [isError, setIsError] = useState(false);
+const Profile = ({ OnUpdateUser, onSignout, isErrorResponse, isSending }) => {
+  const [isDisable, setIsDisable] = useState(true);
+  const [isChanged, setIsChanged] = useState(false);
+  const currentUser = useContext(CurrentUserContext);
 
-  const editHandler = () => {
-    setIsEdit(!isEdit);
+  const handleEdit = () => {
+    setIsDisable(!isDisable);
   };
 
-  const errorHandler = () => {
-    setIsError(!isError);
-    resetStates();
+  const { values, handleChange, errors, isValid, setValues } =
+    useFormWithValidation();
+
+  const handleSubmit = () => {
+    OnUpdateUser(values);
+    if (!isErrorResponse && !isSending) {
+      handleEdit();
+    }
   };
 
-  const resetStates = () => {
-    setTimeout(() => {
-      setIsError(false);
-      setIsEdit(false);
-    }, 5000);
-  };
+  React.useEffect(() => {
+    if (
+      currentUser.email !== values.email ||
+      currentUser.name !== values.name
+    ) {
+      setIsChanged(true);
+    } else setIsChanged(false);
+  }, [currentUser, values]);
+
+  React.useEffect(() => {
+    setValues({ name: currentUser.name, email: currentUser.email });
+  }, [currentUser, setValues]);
 
   return (
     <main className="profile">
       <div className="profile__container">
-        <h1 className="profile__title">Привет, Виталий!</h1>
+        <h1 className="profile__title">{`Привет, ${currentUser.name}!`}</h1>
         <form className="profile__form" name="profile-form">
           <label className="profile__label">
             Имя
             <input
-              className="profile__input"
-              placeholder="Виталий"
-              disabled={isEdit}
+              id="profile-name"
+              className={`profile__input ${
+                !!errors.name ? 'profile__input_type_error' : ''
+              } `}
+              type="text"
+              minLength="2"
+              maxLength="30"
+              name="name"
+              value={values.name || ''}
+              placeholder="Укажите имя"
+              disabled={isDisable || isSending}
+              onChange={handleChange}
+              required
+              pattern={REGEX_CHECK_NAME}
+              autoComplete="off"
             ></input>
+            {!!errors.name && (
+              <span className="profile-input__error">{errors.name}</span>
+            )}
           </label>
           <div className="profile__line"></div>
           <label className="profile__label">
             E-mail
             <input
-              className="profile__input"
-              placeholder="pochta@yandex.ru"
-              disabled={isEdit}
+              id="profile-email"
+              className={`profile__input ${
+                !!errors.email ? 'profile__input_type_error' : ''
+              } `}
+              name="email"
+              value={values.email || ''}
+              placeholder="Укажите почту"
+              disabled={isDisable || isSending}
+              onChange={handleChange}
+              required
+              autoComplete="off"
             ></input>
+            {!!errors.email && (
+              <span className="profile-input__error">{errors.email}</span>
+            )}
           </label>
         </form>
-        {isError && (
-          <ReqError>При обновлении профиля произошла ошибка.</ReqError>
-        )}
-        {!!isEdit ? (
+        <ReqError isErrorResponse={isErrorResponse}></ReqError>
+        {!isDisable ? (
           <button
             className="profile__save"
-            onClick={errorHandler}
-            disabled={isError}
+            onClick={handleSubmit}
+            disabled={!isValid || !isChanged || isSending}
           >
             Сохранить
           </button>
@@ -62,7 +101,7 @@ const Profile = () => {
               <button
                 className="profile__button"
                 type="button"
-                onClick={editHandler}
+                onClick={handleEdit}
               >
                 Редактировать
               </button>
@@ -71,6 +110,7 @@ const Profile = () => {
               <button
                 className="profile__button profile__button_type_exit"
                 type="button"
+                onClick={onSignout}
               >
                 Выйти из аккаунта
               </button>

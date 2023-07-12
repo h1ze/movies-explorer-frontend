@@ -1,6 +1,24 @@
 .request-error {
-  margin: 189px 0 20px 0;
+  margin: 0 0 20px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  text-align: center;
   font-family: 'Inter', 'Arial', sans-serif;
   color: #ff004c;
   font-size: 11px;
+  min-height: 28px;
+  max-width: 410px;
+  visibility: hidden;
+}
+
+.request-error_active {
+  visibility: visible;
+}
+
+@media screen and (max-width: 568px) {
+  .request-error {
+    max-width: 260px;
+    min-height: 38px;
+  }
 }

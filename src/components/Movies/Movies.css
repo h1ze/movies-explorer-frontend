@@ -1,8 +1,3 @@
-.movies__cards {
-  display: flex;
-  padding: 70px 70px 10px;
-}
-
 .movies__btn-container {
   padding: 50px 70px 80px;
 }
@@ -26,21 +21,17 @@
   cursor: pointer;
 }
 
-@media screen and (max-width: 984px) {
-  .movies__cards {
-    padding: 70px 30px 10px;
-  }
+.movies__btn:disabled {
+  visibility: hidden;
+}
 
+@media screen and (max-width: 984px) {
   .movies__btn-container {
     padding: 50px 30px 80px;
   }
 }
 
 @media screen and (max-width: 568px) {
-  .movies__cards {
-    padding: 40px 10px 10px;
-  }
-
   .movies__btn-container {
     padding: 50px 10px 80px;
   }

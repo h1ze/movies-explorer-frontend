@@ -1,104 +1,136 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+
 import Logo from '../Logo/Logo';
 import './AuthForm.css';
+import { REGEX_CHECK_NAME } from '../../utils/constants';
+import { useFormWithValidation } from '../../utils/useFormWithValidation';
+import ReqError from '../ReqError/ReqError';
 
-const AuthForm = ({ formData }) => {
+const AuthForm = ({
+  formData,
+  onSubmit,
+  isErrorResponse,
+  isloggedIn,
+  isSending,
+}) => {
   const isRegister = formData.name === 'register';
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const { values, handleChange, errors, isValid } = useFormWithValidation();
 
-  const inputNameHandler = (evt) => {
-    setName(evt.target.value);
-  };
+  function handleSubmit(evt) {
+    evt.preventDefault();
+    onSubmit(values);
+  }
 
-  const inputEmailHandler = (evt) => {
-    setEmail(evt.target.value);
-  };
-
-  const inputPasswordlHandler = (evt) => {
-    setPassword(evt.target.value);
-  };
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (isloggedIn) {
+      navigate('/', { replace: true });
+    }
+  });
 
   return (
     <main className="auth-form">
       <div className="auth-form__container">
         <Logo />
         <h1 className="auth-form__title">{formData.title}</h1>
-        <form className="auth-form__form" name={`${formData.name}-form`}>
+        <form
+          className="auth-form__form"
+          name={`${formData.name}-form`}
+          onSubmit={handleSubmit}
+        >
           {isRegister && (
             <label className="auth-form__label">
               Имя
               <input
-                id="profile-name"
-                className="auth-form__input"
+                id="auth-name"
+                className={`auth-form__input ${
+                  !!errors.name ? 'auth-form__input_type_error' : ''
+                } `}
                 type="text"
-                value={name}
+                minLength="2"
+                maxLength="30"
+                value={values.name || ''}
                 name="name"
                 tabIndex="1"
-                placeholder="Виталий"
+                placeholder="Введите имя"
                 required
-                onChange={inputNameHandler}
+                pattern={REGEX_CHECK_NAME}
+                onChange={handleChange}
+                autoComplete="off"
+                disabled={isSending}
               />
+              <span
+                className={`auth-form__error ${
+                  !!errors.name ? 'auth-form__error_active' : ''
+                } `}
+              >
+                {errors.name}
+              </span>
             </label>
           )}
           <label className="auth-form__label">
             E-mail
             <input
-              id="profile-email"
-              className="auth-form__input"
+              id="auth-email"
+              className={`auth-form__input ${
+                !!errors.email ? 'auth-form__input_type_error' : ''
+              } `}
               type="email"
-              value={email}
+              value={values.email || ''}
               name="email"
               tabIndex="2"
-              placeholder="pochta@yandex.ru|"
+              placeholder="Введите почту"
               required
-              onChange={inputEmailHandler}
+              onChange={handleChange}
+              autoComplete="off"
+              disabled={isSending}
             />
+            <span
+              className={`auth-form__error ${
+                !!errors.email ? 'auth-form__error_active' : ''
+              } `}
+            >
+              {errors.email}
+            </span>
           </label>
-          {isRegister ? (
-            <label className="auth-form__label">
-              Пароль
-              <input
-                id="profile-password"
-                className="auth-form__input auth-form__input_type_error"
-                type="password"
-                value={password}
-                name="password"
-                tabIndex="3"
-                placeholder="••••••••••••••"
-                required
-                onChange={inputPasswordlHandler}
-              />
-              <span className="auth-form__error">Что-то пошло не так...</span>
-            </label>
-          ) : (
-            <label className="auth-form__label">
-              Пароль
-              <input
-                id="profile-password"
-                className="auth-form__input"
-                type="password"
-                value={password}
-                name="password"
-                tabIndex="3"
-                required
-                onChange={inputPasswordlHandler}
-              />
-            </label>
-          )}
+          <label
+            className={`auth-form__label auth-form__label_type_${formData.name}`}
+          >
+            Пароль
+            <input
+              id="auth-password"
+              className={`auth-form__input ${
+                !!errors.password ? 'auth-form__input_type_error' : ''
+              } `}
+              type="password"
+              minLength="2"
+              maxLength="30"
+              value={values.password || ''}
+              name="password"
+              tabIndex="3"
+              placeholder="Введите пароль"
+              required
+              onChange={handleChange}
+              disabled={isSending}
+            />
+            <span
+              className={`auth-form__error ${
+                !!errors.password ? 'auth-form__error_active' : ''
+              } `}
+            >
+              {errors.password}
+            </span>
+          </label>
+          <ReqError isErrorResponse={isErrorResponse}></ReqError>
           <button
-            className={`auth-form__button auth-form__button_type_${formData.name}`}
+            className="auth-form__button"
             type="submit"
+            disabled={!isValid || isSending}
           >
             {formData.buttonTitle}
           </button>
         </form>
-        {/* При получении ошибки от сервера текст ошибки будет передаваться в ReqError
-          {isError && (
-          <ReqError></ReqError>
-        )} */}
         <div className="auth-form__link-block">
           <p className="auth-form__text">{formData.text}</p>
           <Link className="auth-form__link" to={formData.link}>
