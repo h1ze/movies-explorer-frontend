@@ -4,7 +4,12 @@ import './Menu.css';
 
 const Menu = ({ isOpen, onClose }) => {
   return (
-    <div className={`popup ${isOpen ? 'popup_opened' : ''}`}>
+    <div
+      className={`popup ${isOpen ? 'popup_opened' : ''}`}
+      onMouseDown={(evt) => {
+        evt.target === evt.currentTarget && onClose();
+      }}
+    >
       <div className="popup__content">
         <button
           className="popup__close"
