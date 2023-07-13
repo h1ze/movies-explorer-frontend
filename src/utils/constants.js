@@ -25,3 +25,5 @@ export const ADDED_COUNT_MIN = 2;
 export const ADDED_COUNT_MAX = 5;
 
 export const SHORTS_DURATION = 40;
+
+export const ESCAPE_KEY = 'Escape';
