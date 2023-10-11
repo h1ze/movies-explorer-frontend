@@ -4,7 +4,9 @@
 
 Репозиторий для  фронтенд части дипломного проекта `MoviesExplorer`.
 
+## Ссылка на макет проекта
 
+https://disk.yandex.ru/d/9CpJsjaYpptlzA
 
 ## В проекте использовались:
 
@@ -12,14 +14,6 @@
 - CSS
 - JS
 - React
-
-## Ссылка на макет проекта
-
-https://disk.yandex.ru/d/9CpJsjaYpptlzA
-
-## Ссылка на макет проекта
-
-https://disk.yandex.ru/d/9CpJsjaYpptlzA
 
 ## Директории проекта
 
