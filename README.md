@@ -11,7 +11,7 @@
 - HTML
 - CSS
 - JS
-= React
+- React
 
 ## Ссылка на макет проекта
 
